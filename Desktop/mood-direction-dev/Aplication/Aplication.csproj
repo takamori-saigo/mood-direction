@@ -31,6 +31,7 @@
       <_ContentIncludedByDefault Remove="Views\Main\Main.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Registration\Registration.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Auth\Main\main.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\DiscussionItem\Details.cshtml" />
     </ItemGroup>
 
 </Project>

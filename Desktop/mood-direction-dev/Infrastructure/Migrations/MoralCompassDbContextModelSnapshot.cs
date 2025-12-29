@@ -42,6 +42,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("DiscussionItemId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("ParentCommentId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
@@ -103,7 +106,7 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<Guid>("TopicId")
+                    b.Property<Guid?>("TopicId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Type")
@@ -249,8 +252,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("MoralCompass.Infrastructure.Domain.Topic", "Topic")
                         .WithMany("DiscussionItems")
                         .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Author");
 

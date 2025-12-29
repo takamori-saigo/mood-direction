@@ -11,4 +11,5 @@ public class Comment : AuditableEntity
 
     public Guid AuthorId { get; set; }
     public User Author { get; set; } = null!;
+    public Guid? ParentCommentId { get; set; }
 }

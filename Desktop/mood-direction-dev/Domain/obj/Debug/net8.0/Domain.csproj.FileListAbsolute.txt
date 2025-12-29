@@ -21,3 +21,4 @@
 /Users/gats/Desktop/mood-direction-dev/Domain/obj/Debug/net8.0/refint/Domain.dll
 /Users/gats/Desktop/mood-direction-dev/Domain/obj/Debug/net8.0/Domain.pdb
 /Users/gats/Desktop/mood-direction-dev/Domain/obj/Debug/net8.0/ref/Domain.dll
+/Users/gats/Desktop/mood-direction-dev/Domain/obj/Debug/net8.0/Domain.sourcelink.json

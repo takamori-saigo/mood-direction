@@ -7,7 +7,8 @@ using MoralCompass.Infrastructure.Domain.Enums;
 
 namespace Aplication.Controllers
 {
-    public class MainController : Controller
+    [Authorize]
+    public class IndexController : Controller
     {
         private readonly MoralCompassDbContext _context;
 
@@ -17,9 +18,14 @@ namespace Aplication.Controllers
             public List<DiscussionItem> TopDilemmas { get; set; } = new();
         }
         
-        public MainController(MoralCompassDbContext context)
+        public IndexController(MoralCompassDbContext context)
         {
             _context = context;
+        }
+        
+        public IActionResult Stats()
+        {
+            return View();
         }
     
         public async Task<IActionResult> Index()
@@ -30,12 +36,12 @@ namespace Aplication.Controllers
                 .Take(6)
                 .ToListAsync();
 
-            // 2. ТОП-3 дилеммы по сумме реакций
-            var topDilemmaIds = await _context.Reactions
-                .Where(r => r.TargetType == ReactionTargetType.DiscussionItem)
-                .GroupBy(r => r.TargetId)
-                .Select(g => new { Id = g.Key, Score = g.Sum(x => x.Value) })
-                .OrderByDescending(x => x.Score)
+            var topDilemmaIds = await _context.Comments
+                .Where(c => c.DiscussionItem != null)
+                .GroupBy(c => c.DiscussionItemId)
+                .Select(g => new { Id = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count)
+                .ThenByDescending(x => x.Id) // стабильность: новее — выше при равных
                 .Take(3)
                 .Select(x => x.Id)
                 .ToListAsync();
@@ -44,7 +50,6 @@ namespace Aplication.Controllers
                 .Where(di => di.Type == DiscussionItemType.Dilemma && topDilemmaIds.Contains(di.Id))
                 .ToListAsync();
 
-            // Сортируем в памяти по порядку из topDilemmaIds (чтобы сохранить рейтинг)
             topDilemmas = topDilemmaIds
                 .Select(id => topDilemmas.FirstOrDefault(di => di.Id == id))
                 .Where(di => di != null)
@@ -59,5 +64,5 @@ namespace Aplication.Controllers
             return View(model);
         }
     }
+    
 }
-

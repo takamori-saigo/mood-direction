@@ -1,0 +1,52 @@
+@model Aplication.Controllers.IndexController.HomeIndexModel
+@{
+    ViewData["Title"] = "Моральный Компас";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">🧭 Моральный Компас</h1>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+        @foreach (var thesis in Model.Theses)
+        {
+            <div class="col">
+                <a href="@Url.Action("Details", "Thesis", new { id = thesis.Id })"
+                   class="text-decoration-none text-dark d-block h-100">
+                    <div class="card shadow-sm border-0 h-100">
+                        <div class="card-body text-center p-3">
+                            <h5 class="card-title fw-bold m-0">@thesis.Title</h5>
+                            <p class="card-text text-muted small mt-2 mb-0">@thesis.Description</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+    @if (Model.TopDilemmas.Any())
+    {
+        <div class="card mb-4">
+            <div class="card-header bg-light fw-bold">
+                🔥 Самые обсуждаемые дилеммы
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var di in Model.TopDilemmas)
+                {
+                    <li class="list-group-item">
+                        <a href="@Url.Action("Details", "DiscussionItem", new { id = di.Id })"
+                           class="text-body text-decoration-none">
+                            @di.Title
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
+    <!-- 🔹 Меню -->
+    <div class="d-flex justify-content-around py-3 border-top small">
+        <a href="#" class="text-muted">Поиск</a>
+        <a href="#" class="text-muted">Статистика</a>
+        <a href="#" class="text-muted">Не мудак ли я?</a>
+    </div>
+</div>

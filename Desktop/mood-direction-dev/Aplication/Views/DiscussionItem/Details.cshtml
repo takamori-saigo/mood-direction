@@ -1,0 +1,128 @@
+@model MoralCompass.Web.Controllers.DiscussionItemController.DiscussionItemDetailModel
+@{
+    ViewData["Title"] = Model.Item?.Title ?? "Дилемма";
+}
+
+<div class="container mt-3">
+    <!-- 🔹 Хлебные крошки -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Index")">Главная</a>
+            </li>
+            @if (Model.Topic?.CoreThesis != null)
+            {
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Details", "Thesis", new { id = Model.Topic.CoreThesis.Id })">
+                        @Model.Topic.CoreThesis.Title
+                    </a>
+                </li>
+            }
+            @if (Model.Topic != null)
+            {
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Details", "Topic", new { id = Model.Topic.Id })">
+                        @Model.Topic.Title
+                    </a>
+                </li>
+            }
+            <li class="breadcrumb-item active" aria-current="page">
+                @Model.Item?.Title
+            </li>
+        </ol>
+    </nav>
+
+    <!-- 🔹 Дилемма -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4>@Model.Item?.Title</h4>
+            <p class="text-muted small">
+                @Model.Author.Nickname · 
+                @Model.Item?.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                @if (Model.Topic != null)
+                {
+                    <text> · в теме <strong>@Model.Topic.Title</strong></text>
+                }
+            </p>
+            <div class="mt-2">@Model.Item?.Content</div>
+        </div>
+    </div>
+
+    <!-- 🔹 Форма комментария (только для авторизованных) -->
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5>Ваше мнение</h5>
+                <form method="post" asp-action="AddComment" asp-route-id="@Model.Item?.Id">
+                    <div class="mb-3">
+                        <textarea name="content" class="form-control" rows="3" 
+                                  placeholder="Напишите аргумент, мысль, контрвопрос..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Опубликовать</button>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info small">
+            Чтобы участвовать в обсуждении, <a href="@Url.Action("Login", "Auth")">войдите</a> или <a href="@Url.Action("Register", "Auth")">зарегистрируйтесь</a>.
+        </div>
+    }
+
+    <hr />
+
+    <!-- 🔹 Список комментариев -->
+    <h5>@Model.Comments.Count комментариев</h5>
+
+    @if (!Model.Comments.Any())
+    {
+        <p class="text-muted fst-italic">Пока никто не прокомментировал. Станьте первым.</p>
+    }
+    else
+    {
+        @foreach (var c in Model.Comments)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <strong>@c.AuthorNickname</strong>
+                        <small class="text-muted">@c.Comment.CreatedAt.ToString("dd.MM HH:mm")</small>
+                    </div>
+                    <div class="mt-2">@c.Comment.Content</div>
+
+                    <!-- 🔹 Реакции -->
+                    <div class="mt-2 d-flex gap-2">
+                        <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="1" class="d-inline">
+                            <button type="submit" class="btn btn-sm @(c.UserReaction == 1 ? "btn-primary" : "btn-outline-primary")">
+                                👍 @c.Likes
+                            </button>
+                        </form>
+
+                        <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="-1" class="d-inline">
+                            <button type="submit" class="btn btn-sm @(c.UserReaction == -1 ? "btn-secondary" : "btn-outline-secondary")">
+                                👎 @c.Dislikes
+                            </button>
+                        </form>
+
+                        @if (c.UserReaction != 0)
+                        {
+                            <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="0" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-dark">×</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<style>
+    body { background-color: #fafafa; color: #222; }
+    .card { border: 1px solid #e0e0e0; }
+    .btn-outline-primary:hover { background-color: #e3f2fd; }
+    .btn-outline-secondary:hover { background-color: #f5f5f5; }
+    .text-muted { color: #777 !important; }
+</style>

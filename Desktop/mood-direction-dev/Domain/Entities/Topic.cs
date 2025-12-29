@@ -12,5 +12,5 @@ public class Topic : AuditableEntity
     public ICollection<DiscussionItem> DiscussionItems { get; set; }
     public CoreThesis CoreThesis { get; set; }
     
-    public User Author { get; set; }    
+    public User Author { get; set; }
 }

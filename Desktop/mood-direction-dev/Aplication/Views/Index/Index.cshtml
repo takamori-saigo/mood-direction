@@ -1,4 +1,4 @@
-@model Aplication.Controllers.MainController.HomeIndexModel
+@model Aplication.Controllers.IndexController.HomeIndexModel
 @{
     ViewData["Title"] = "Моральный Компас";
 }
@@ -45,8 +45,21 @@
 
     <!-- 🔹 Меню -->
     <div class="d-flex justify-content-around py-3 border-top small">
-        <a href="#" class="text-muted">Поиск</a>
-        <a href="#" class="text-muted">Статистика</a>
-        <a href="#" class="text-muted">Не мудак ли я?</a>
+        <a href="@Url.Action("Index", "Confession")" class="text-muted">❓ Не мудак ли я?</a>
+        <a href="@Url.Action("Stats", "Index")" class="text-muted">📊 Статистика</a>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
+                <button type="submit" class="btn btn-link text-muted p-0"
+                        onclick="return confirm('Выйти из аккаунта?')">
+                    🚪 Выйти
+                </button>
+            </form>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Auth")" class="text-muted">🔐 Войти</a>
+        }
     </div>
 </div>

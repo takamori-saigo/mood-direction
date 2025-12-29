@@ -13,13 +13,11 @@ public class AuthService
 {
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
-    private readonly IConfiguration _configuration;
 
     public AuthService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher, IConfiguration configuration)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
-        _configuration = configuration;
     }
 
     public async Task<User> RegisterAsync(RegisterRequest request)
@@ -42,7 +40,7 @@ public class AuthService
         return user;
     }
     
-    public async Task<LoginResponse> LoginAsync(LoginRequest request)
+    public async Task<User> LoginAsync(LoginRequest request)
     {
         var user = await _userRepository.GetByEmailAsync(request.Email);
         if (user == null)
@@ -52,29 +50,6 @@ public class AuthService
         if (result == PasswordVerificationResult.Failed)
             throw new Exception("Неверный пароль");
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim("nickname", user.Nickname)
-            }),
-            Expires = DateTime.UtcNow.AddHours(6),
-            Issuer = _configuration["Jwt:Issuer"],
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        };
-
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-
-        return new LoginResponse
-        {
-            Token = tokenHandler.WriteToken(token),
-            UserId = user.Id,
-            Nickname = user.Nickname,
-            Email = user.Email
-        };
+        return user; 
     }
 }

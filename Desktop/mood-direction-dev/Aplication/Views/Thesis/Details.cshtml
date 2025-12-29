@@ -1,0 +1,74 @@
+@model MoralCompass.Web.Controllers.ThesisController.ThesisDetailModel
+@{
+    ViewData["Title"] = Model.Thesis?.Title ?? "Заповедь";
+}
+
+<div class="container mt-4">
+    <!-- 🔹 Заголовок заповеди -->
+    <div class="text-center mb-4">
+        <h2>@(Model.Thesis?.Title ?? "—")</h2>
+        <p class="text-muted">@Model.Thesis?.Description</p>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a href="@Url.Action("CreateTopic", "Thesis", new { thesisId = Model.Thesis?.Id })"
+               class="btn btn-sm btn-outline-primary mt-2">
+                ➕ Добавить тему
+            </a>
+        }
+
+        <a href="@Url.Action("Index", "Index")" class="btn btn-outline-secondary btn-sm mt-2 ms-2">
+            ← Все заповеди
+        </a>
+    </div>
+
+    <hr />
+
+    <!-- 🔹 Список ТОЛЬКО тем -->
+    @if (!Model.Topics.Any())
+    {
+        <div class="text-center text-muted py-5">
+            <p>Пока нет тем.</p>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <a href="@Url.Action("CreateTopic", "Thesis", new { thesisId = Model.Thesis?.Id })"
+                   class="btn btn-sm btn-outline-primary">
+                    ➕ Стать первым → добавить тему
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="list-group">
+            @foreach (var topicGroup in Model.Topics)
+            {
+                <a href="@Url.Action("Details", "Topic", new { id = topicGroup.Topic.Id })"
+                   class="list-group-item list-group-item-action">
+                    <!-- Заглушка: пока нет страницы темы → делаем ссылку неактивной -->
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="mb-1">@topicGroup.Topic.Title</h5>
+                            <small class="text-muted">
+                                @topicGroup.Topic.Author.Nickname · 
+                                @topicGroup.Topic.CreatedAt.ToString("dd.MM.yyyy")
+                            </small>
+                        </div>
+                        <!-- 🔹 Позже: сюда прикрутим → -->
+                        <!-- <span class="badge bg-secondary">12 дилемм</span> -->
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    body { background-color: #fafafa; color: #222; }
+    .list-group-item { border-left: 0; border-right: 0; }
+    .list-group-item:first-child { border-top: 0; }
+    .list-group-item:last-child { border-bottom: 0; }
+    .btn-outline-primary { border-color: #555; color: #555; }
+    .btn-outline-primary:hover { background-color: #f0f0f0; }
+    .text-muted { color: #777 !important; }
+</style>

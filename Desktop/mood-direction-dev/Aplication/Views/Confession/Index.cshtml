@@ -1,0 +1,76 @@
+@{
+    var confessions = ViewBag.Confessions as List<MoralCompass.Infrastructure.Domain.DiscussionItem>;
+    var commentCounts = ViewBag.CommentCounts as Dictionary<Guid, int> ?? new();
+    ViewData["Title"] = "Не мудак ли я?";
+}
+
+<div class="container mt-3">
+    <div class="text-center mb-4">
+        <h2>❓ Не мудак ли я?</h2>
+        <p class="text-muted">Личные дилеммы. Честные вопросы. Поддержка без осуждения.</p>
+        
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a href="@Url.Action("Create", "Confession")" class="btn btn-primary">
+                ➕ Задать свой вопрос
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Auth")" class="btn btn-outline-primary">
+                Войдите, чтобы задать вопрос
+            </a>
+        }
+    </div>
+
+    <hr />
+
+    @if (confessions == null || !confessions.Any())
+    {
+        <div class="text-center text-muted py-5">
+            <p>Пока никто не поделился своей дилеммой.</p>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <a href="@Url.Action("Create", "Confession")" class="btn btn-sm btn-outline-primary">
+                    Стать первым →
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        @foreach (var di in confessions)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="card-title mb-1">@di.Title</h5>
+                        <span class="badge bg-warning text-dark">Личное</span>
+                    </div>
+
+                    <p class="text-muted small mb-2">
+                        @(di.Author?.Nickname ?? "Аноним") · 
+                        @di.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                    </p>
+
+                    <div class="mb-2">@di.Content</div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            @commentCounts.GetValueOrDefault(di.Id, 0) коммент.
+                        </small>
+                        <a href="@Url.Action("Details", "DiscussionItem", new { id = di.Id })"
+                           class="btn btn-sm btn-outline-primary">
+                            Обсудить
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<style>
+    .card { border-left: 4px solid #ffc107; }
+    .badge.bg-warning { font-weight: 500; }
+</style>

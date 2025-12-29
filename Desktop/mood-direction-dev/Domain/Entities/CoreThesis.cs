@@ -10,4 +10,5 @@ public class CoreThesis: AuditableEntity
     public bool IsActive { get; set; } = true;
 
     public ICollection<Topic> Topics { get; set; } = new List<Topic>();
+    
 }

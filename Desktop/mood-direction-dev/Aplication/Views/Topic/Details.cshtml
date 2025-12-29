@@ -1,0 +1,137 @@
+@model MoralCompass.Web.Controllers.TopicController.TopicDetailModel
+@{
+    ViewData["Title"] = Model.Topic?.Title ?? "Тема";
+}
+
+<div class="container mt-3">
+    <!-- 🔹 Хлебные крошки -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Index")">Главная</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Details", "Thesis", new { id = Model.CoreThesis.Id })">
+                    @Model.CoreThesis.Title
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                @Model.Topic.Title
+            </li>
+        </ol>
+    </nav>
+
+    <!-- 🔹 Заголовок темы + кнопка -->
+    <div class="d-flex justify-content-between align-items-baseline mb-4">
+        <div>
+            <h3>@Model.Topic.Title</h3>
+            <p class="text-muted">
+                @Model.Topic.Author.Nickname · 
+                @Model.Topic.CreatedAt.ToString("dd.MM.yyyy")
+            </p>
+        </div>
+        <!-- 🔹 Модальное окно: добавить дилемму -->
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <div class="modal fade" id="addDilemmaModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Новая дилемма</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form method="post" asp-action="AddDilemma" asp-controller="Topic">
+                            <input type="hidden" name="id" value="@Model.Topic.Id" />
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Заголовок</label>
+                                    <input name="title" class="form-control" placeholder="Например: «Можно ли врать во благо?»" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Описание / кейс</label>
+                                    <textarea name="content" class="form-control" rows="4" 
+                                      placeholder="Опишите ситуацию, аргументы 'за' и 'против'..." required></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                <button type="submit" class="btn btn-primary">Опубликовать</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr />
+
+    <!-- 🔹 Список дилемм -->
+    @if (!Model.Dilemmas.Any())
+    {
+        <div class="text-center text-muted py-5">
+            <p>В этой теме пока нет дилемм.</p>
+            @* Кнопка уже есть сверху → не дублируем *@
+        </div>
+    }
+
+    @foreach (var dilemma in Model.Dilemmas)
+    {
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title mb-1">@dilemma.Item.Title</h5>
+                    <span class="badge bg-secondary">@dilemma.Item.Type</span>
+                </div>
+
+                <p class="text-muted small mb-2">
+                    @dilemma.Author.Nickname · 
+                    @dilemma.Item.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                </p>
+
+                <div class="mb-3">@dilemma.Item.Content</div>
+
+                <!-- 🔹 Топ-5 комментариев -->
+                @if (dilemma.TopComments.Any())
+                {
+                    <div class="small mb-2">
+                        <div class="text-muted">ТОП комментариев:</div>
+                        @foreach (var c in dilemma.TopComments)
+                        {
+                            <div class="mt-2 p-2 border rounded">
+                                <div class="d-flex justify-content-between">
+                                    <strong>@c.AuthorNickname</strong>
+                                    <span class="badge bg-secondary">@c.Score</span>
+                                </div>
+                                <div>@c.Comment.Content</div>
+                            </div>
+                        }
+                    </div>
+                }
+
+                <!-- 🔹 Кнопки -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small">
+                        @dilemma.TotalCommentCount комментариев
+                    </span>
+                    <a href="@Url.Action("Details", "DiscussionItem", new { id = dilemma.Item.Id })"
+                       class="btn btn-sm btn-outline-primary">
+                        Обсудить
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<style>
+    body { background-color: #fafafa; color: #222; }
+    .card { border: 1px solid #e0e0e0; }
+    .badge { font-weight: normal; }
+    .btn-outline-primary { border-color: #555; color: #555; }
+    .btn-outline-primary:hover { background-color: #f0f0f0; }
+    .text-muted { color: #777 !important; }
+</style>
+

@@ -287,3 +287,4 @@
 /Users/gats/Desktop/mood-direction-dev/Aplication/obj/Debug/net8.0/Aplication.pdb
 /Users/gats/Desktop/mood-direction-dev/Aplication/obj/Debug/net8.0/Aplication.genruntimeconfig.cache
 /Users/gats/Desktop/mood-direction-dev/Aplication/obj/Debug/net8.0/ref/Aplication.dll
+/Users/gats/Desktop/mood-direction-dev/Aplication/obj/Debug/net8.0/Aplication.sourcelink.json

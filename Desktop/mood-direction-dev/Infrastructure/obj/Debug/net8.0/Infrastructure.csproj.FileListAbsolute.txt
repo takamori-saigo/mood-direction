@@ -29,3 +29,4 @@
 /Users/gats/Desktop/mood-direction-dev/Infrastructure/obj/Debug/net8.0/refint/Infrastructure.dll
 /Users/gats/Desktop/mood-direction-dev/Infrastructure/obj/Debug/net8.0/Infrastructure.pdb
 /Users/gats/Desktop/mood-direction-dev/Infrastructure/obj/Debug/net8.0/ref/Infrastructure.dll
+/Users/gats/Desktop/mood-direction-dev/Infrastructure/obj/Debug/net8.0/Infrastructure.sourcelink.json

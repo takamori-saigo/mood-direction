@@ -5,7 +5,7 @@ namespace MoralCompass.Infrastructure.Domain;
 
 public class DiscussionItem : AuditableEntity
 {
-    public Guid TopicId { get; set; }
+    public Guid? TopicId { get; set; }
     public DiscussionItemType Type { get; set; }
 
     public string Title { get; set; }
