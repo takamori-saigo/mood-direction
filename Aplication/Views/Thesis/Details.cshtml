@@ -1,0 +1,77 @@
+@model MoralCompass.Web.Controllers.ThesisController.ThesisDetailModel
+@{
+    ViewData["Title"] = Model.Thesis?.Title ?? "Заповедь";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/details.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация -->
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    <!-- 🔸 Заголовок и описание -->
+    <header class="thesis-header">
+        <h1 class="thesis-title">@Model.Thesis?.Title</h1>
+        <p class="thesis-description">@Model.Thesis?.Description</p>
+
+        <div class="thesis-actions">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <a href="@Url.Action("CreateTopic", "Thesis", new { thesisId = Model.Thesis?.Id })"
+                   class="btn btn-primary">
+                    Добавить тему
+                </a>
+            }
+            <a href="@Url.Action("Index", "Index")" class="btn btn-secondary">
+                Все заповеди
+            </a>
+        </div>
+    </header>
+
+    <!-- 🔹 Список тем -->
+    <main class="topics-scroll">
+        @if (!Model.Topics.Any())
+        {
+            <div class="empty-state">
+                <p>Пока нет тем.</p>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a href="@Url.Action("CreateTopic", "Thesis", new { thesisId = Model.Thesis?.Id })"
+                       class="btn btn-primary mt-2">
+                        Стать первым → добавить тему
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            @foreach (var topicGroup in Model.Topics)
+            {
+                <div class="theme-item">
+                    <div class="icon">
+                        <img src="~/images/favorite.png" alt="Избранное">
+                    </div>
+                    <p class="theme-title">@topicGroup.Topic.Title</p>
+                    <div class="icon">
+                        <a href="@Url.Action("Details", "Topic", new { id = topicGroup.Topic.Id })">
+                            <img src="~/images/arrow_right.png" alt="→">
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </main>
+
+</body>
+</html>

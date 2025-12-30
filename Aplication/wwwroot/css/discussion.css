@@ -1,0 +1,227 @@
+/* --- Сброс и базовые стили --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+/* --- Навигация --- */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    padding: 0 16px;
+    color: #737373;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #737373;
+    text-decoration: none;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+/* --- Заголовок заповеди --- */
+.thesis-header {
+    text-align: center;
+    max-width: 900px;
+    width: 100%;
+    padding: 0 20px;
+    margin: 30px 0;
+}
+
+.thesis-title {
+    font-size: 32px;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+.thesis-description {
+    font-size: 20px;
+    margin: 0;
+    line-height: 1.4;
+    color: #555;
+}
+
+/* --- Основной блок дилеммы --- */
+.discussion-main {
+    width: 100%;
+    max-width: 950px;
+    padding: 0 20px;
+    margin-top:35px;
+}
+
+.login-info {
+    font-size: 18px;
+    color: #898989;
+    margin: 0 0 12px 0;
+}
+
+.discussion-content {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.comments-title {
+    font-size: 22px;
+    color: #898989;
+    margin: 24px 0 16px 0;
+}
+
+/* --- Скролл комментариев --- */
+.comments-scroll {
+    height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* --- Форма комментария --- */
+.comment-form {
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.comment-input {
+    width: 100%;
+    max-width: 575px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.guest-message {
+    padding: 0 20px;
+    font-size: 16px;
+    color: #777;
+    margin: 20px 0;
+}
+
+.auth-link {
+    color: #555;
+    text-decoration: underline;
+}
+
+.empty-comments {
+    padding: 0 20px;
+    font-style: italic;
+    color: #777;
+    margin: 20px 0;
+}
+
+/* --- Комментарий --- */
+.comment-item {
+    min-height: 100px;
+    max-width: 580px;
+    margin: 20px 0;
+    padding: 12px 20px;
+    background-color: white;
+    border-left: 2px solid #eee;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.comment-text {
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 8px 0 12px 0;
+}
+
+/* --- Реакции --- */
+.reactions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.reaction-btn {
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #555;
+}
+
+.reaction-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.reaction-btn.liked {
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+.reaction-btn.disliked {
+    color: #6c757d;
+    font-weight: bold;
+}
+
+.reaction-btn.cancel {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* --- Адаптив --- */
+
+@media (max-width: 1024px) {
+    .thesis-title { font-size: 28px; }
+    .thesis-description { font-size: 18px; }
+    .discussion-content { font-size: 16px; }
+    .login-info { font-size: 16px; }
+    .comment-text { font-size: 16px; }
+    .comments-scroll { height: 450px; }
+}
+
+@media (max-width: 768px) {
+    .nav { gap: 16px; margin-top: 15px; }
+    .thesis-header { margin: 20px 0; padding: 0 16px; }
+    .thesis-title { font-size: 24px; }
+    .thesis-description { font-size: 16px; }
+    .discussion-main { padding: 0 16px; }
+    .discussion-content { font-size: 15px; }
+    .comments-title { font-size: 20px; }
+    .comments-scroll {
+        height: 400px;
+        padding-right: 0;
+    }
+    .comment-item {
+        max-width: 100%;
+        padding: 12px;
+        margin: 16px 0;
+    }
+    .comment-text { font-size: 15px; }
+    .reaction-btn { font-size: 15px; padding: 3px 6px; }
+    .comment-input { max-width: 100%; font-size: 15px; }
+    .guest-message, .empty-comments { padding: 0; font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+    .thesis-title { font-size: 22px; }
+    .comments-scroll { height: 350px; }
+    .login-info, .comment-text { font-size: 14px; }
+    .reaction-btn { font-size: 14px; }
+    .comments-title { font-size: 18px; }
+}

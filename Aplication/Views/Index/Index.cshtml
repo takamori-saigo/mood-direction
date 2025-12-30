@@ -1,0 +1,69 @@
+@model Aplication.Controllers.IndexController.HomeIndexModel
+@{
+    ViewData["Title"] = "Моральный Компас";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/index.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация -->
+    <div class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </div>
+
+    <!-- 🔸 Круги тезисов -->
+    <div class="circle-grid">
+        @foreach (var thesis in Model.Theses.Take(6))
+        {
+            <a href="@Url.Action("Details", "Thesis", new { id = thesis.Id })"
+               class="circle-item">
+                @thesis.Title
+            </a>
+        }
+    </div>
+
+    <!-- 🔹 Самые обсуждаемые дилеммы -->
+    @if (Model.TopDilemmas.Any())
+    {
+        <div class="dilemmas-section">
+            <h2 class="titul-p">Самые обсуждаемые дилеммы</h2>
+            <div class="dilemmas-list">
+                @foreach (var di in Model.TopDilemmas)
+                {
+                    <a href="@Url.Action("Details", "DiscussionItem", new { id = di.Id })"
+                       class="dilemma-item">
+                        @di.Title
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- 🔹 Нижнее меню -->
+    <footer class="auth-footer">
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-controller="Auth" asp-action="Logout" method="post">
+                <button type="submit" class="footer-link"
+                        onclick="return confirm('Выйти из аккаунта?')">
+                    Выйти
+                </button>
+            </form>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Auth")" class="footer-link">Войти</a>
+        }
+    </footer>
+
+</body>
+</html>

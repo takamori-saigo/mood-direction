@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Не мудак ли я? — Новый вопрос";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/confession.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация -->
+    <div class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link" style="font-weight: bold;">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </div>
+
+    <!-- 🔸 Форма -->
+    <div class="form-container">
+        <h2 class="section-title">Не мудак ли я?</h2>
+        <p class="section-subtitle">Опишите ситуацию честно. Люди помогут взглянуть со стороны.</p>
+
+        <form method="post" class="confession-form">
+            <div class="form-group">
+                <label class="form-label">Заголовок (необязательно)</label>
+                <input name="title" class="form-input" 
+                       placeholder="Например: «Я обманул друга ради пользы»" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Ваша дилемма <span class="required">*</span></label>
+                <textarea name="content" class="form-textarea" rows="6" required
+                          placeholder="Что случилось? Что вы сделали? В чём сомневаетесь?"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Опубликовать</button>
+                <a href="@Url.Action("Index", "Confession")" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

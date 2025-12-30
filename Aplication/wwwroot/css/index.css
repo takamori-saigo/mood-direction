@@ -1,0 +1,244 @@
+/* --- Сброс и базовые стили --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    padding-bottom: 70px; /* место под фиксированный футер */
+}
+
+/* --- Навигация --- */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    padding: 0 16px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #737373;
+    text-decoration: none;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+/* --- Круги с тезисами --- */
+.circle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 40px auto;
+    padding: 0 16px;
+    max-width: 1200px;
+    width: 100%;
+    justify-items: center;
+}
+
+.circle-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 200px;       /* максимальный размер на десктопе */
+    aspect-ratio: 1 / 1;     /* ← КЛЮЧЕВОЕ: ширина = высота */
+    border: 2px solid #737373;
+    border-radius: 50%;      /* работает, только если w = h */
+    font-size: 20px;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.circle-item:hover {
+    background-color: #f5f5f5;
+    border-color: #000;
+    transform: scale(1.03);
+}
+
+/* --- Блок дилемм --- */
+.dilemmas-section {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin-top: 40px;
+}
+
+.titul-p {
+    font-size: 32px;
+    margin: 0 0 24px 0;
+    text-align: center;
+    color: #000;
+}
+
+.dilemmas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 8px;
+    border-radius: 15px;
+    background: #fff;
+}
+
+.dilemma-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 60px;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 15px;
+    background-color: white;
+    transition: background-color 0.2s ease;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.dilemma-item:hover {
+    background-color: #f9f9f9;
+    color: #000;
+}
+
+/* --- Футер --- */
+.auth-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 16px;
+}
+
+.footer-link {
+    color: #777;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.footer-link:hover {
+    color: #000;
+}
+
+/* --- Адаптив: планшеты и мобильные --- */
+@media (max-width: 1024px) {
+    .circle-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin: 30px auto;
+    }
+
+    .circle-item {
+        min-height: 140px;
+        font-size: 18px;
+    }
+
+    .titul-p {
+        font-size: 28px;
+    }
+
+    .dilemma-item {
+        font-size: 16px;
+        min-height: 50px;
+    }
+
+    .dilemmas-list {
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        gap: 16px;
+        margin-top: 15px;
+    }
+
+    .circle-grid {
+        grid-template-columns: 1fr;
+        justify-items: center; /* центрирует круг */
+        padding: 0 20px;
+    }
+
+    .circle-item {
+        max-width: 220px; /* меньше на мобильных */
+        font-size: 18px;
+    }
+
+    .dilemmas-section {
+        padding: 0 20px;
+    }
+
+    .dilemmas-list {
+        max-height: 350px;
+        border-radius: 12px;
+    }
+
+    .dilemma-item {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .titul-p {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    body {
+        padding-bottom: 80px;
+    }
+
+    .auth-footer {
+        font-size: 16px;
+        padding: 14px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .circle-item {
+        max-width: 180px;
+        font-size: 16px;
+    }
+
+    .dilemma-item {
+        font-size: 15px;
+        min-height: 45px;
+    }
+
+    .nav-link {
+        font-size: 15px;
+    }
+}

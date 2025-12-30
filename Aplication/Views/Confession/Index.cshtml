@@ -1,0 +1,78 @@
+@{
+    var confessions = ViewBag.Confessions as List<MoralCompass.Infrastructure.Domain.DiscussionItem>;
+    var commentCounts = ViewBag.CommentCounts as Dictionary<Guid, int> ?? new();
+    ViewData["Title"] = "Не мудак ли я?";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/confession.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация (как в Topic/Thesis) -->
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link active">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    <!-- 🔸 Заголовок и кнопка -->
+    <div class="header-section">
+        <h1 class="section-title">Не мудак ли я?</h1>
+        <p class="section-subtitle">Личные дилеммы. Честные вопросы. Поддержка без осуждения.</p>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a href="@Url.Action("Create", "Confession")" class="btn btn-primary">Задать свой вопрос</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Auth")" class="btn btn-outline-primary">Войдите, чтобы задать вопрос</a>
+        }
+    </div>
+
+    <!-- 🔹 Список дилемм -->
+    <div class="confessions-container">
+        @if (confessions == null || !confessions.Any())
+        {
+            <div class="empty-state">
+                <p>Пока никто не поделился своей дилеммой.</p>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a href="@Url.Action("Create", "Confession")" class="btn btn-sm btn-outline-primary">
+                        Стать первым →
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            @foreach (var di in confessions)
+            {
+                <div class="confession-item">
+                    <div class="confession-title">
+                        <span class="confession-text">@di.Title</span>
+                        <span class="badge">Личное</span>
+                    </div>
+                    <p class="confession-meta">
+                        @(di.Author?.Nickname ?? "Аноним") · @di.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                    </p>
+                    <p class="confession-content">@di.Content</p>
+                    <div class="confession-footer">
+                        <span class="comment-count">@commentCounts.GetValueOrDefault(di.Id, 0) коммент.</span>
+                        <a href="@Url.Action("Details", "DiscussionItem", new { id = di.Id })" class="btn btn-outline-primary">
+                            Обсудить →
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+</body>
+</html>
