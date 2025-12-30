@@ -1,0 +1,97 @@
+@model MoralCompass.Web.Controllers.DiscussionItemController.DiscussionItemDetailModel
+@{
+    ViewData["Title"] = Model.Item?.Title ?? "Дилемма";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/discussion.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация -->
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    <!-- 🔸 Заголовок заповеди -->
+    @if (Model.Topic?.CoreThesis != null)
+    {
+        <header class="thesis-header">
+            <h1 class="thesis-title">@Model.Topic.CoreThesis.Title</h1>
+            <p class="thesis-description">@Model.Topic.CoreThesis.Description</p>
+        </header>
+    }
+
+    <!-- 🔹 Дилемма -->
+    <main class="discussion-main">
+        <p class="login-info">
+            @Model.Author.Nickname · @Model.Item?.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+        </p>
+        <p class="discussion-content">@Model.Item?.Content</p>
+
+        <h2 class="comments-title">Комментарии (@Model.Comments.Count)</h2>
+
+        <!-- 🔸 Скролл-контейнер -->
+        <div class="comments-scroll">
+            <!-- 🔹 Форма комментария -->
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <form method="post" asp-action="AddComment" asp-route-id="@Model.Item?.Id" class="comment-form">
+                    <input type="text" name="content" class="comment-input" placeholder="Оставить комментарий" required />
+                </form>
+            }
+            else
+            {
+                <p class="guest-message">
+                    Чтобы участвовать в обсуждении, 
+                    <a href="@Url.Action("Login", "Auth")" class="auth-link">войдите</a>.
+                </p>
+            }
+
+            <!-- 🔹 Комментарии -->
+            @if (!Model.Comments.Any())
+            {
+                <p class="empty-comments">Пока никто не прокомментировал. Станьте первым.</p>
+            }
+            else
+            {
+                @foreach (var c in Model.Comments)
+                {
+                    <div class="comment-item">
+                        <p class="login-info">@c.AuthorNickname · @c.Comment.CreatedAt.ToString("dd.MM HH:mm")</p>
+                        <p class="comment-text">@c.Comment.Content</p>
+
+                        <!-- 🔹 Реакции -->
+                        <div class="reactions">
+                            <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="1">
+                                <button type="submit" class="reaction-btn @(c.UserReaction == 1 ? "liked" : "")">
+                                    👍 @c.Likes
+                                </button>
+                            </form>
+                            <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="-1">
+                                <button type="submit" class="reaction-btn @(c.UserReaction == -1 ? "disliked" : "")">
+                                    👎 @c.Dislikes
+                                </button>
+                            </form>
+                            @if (c.UserReaction != 0)
+                            {
+                                <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="0">
+                                    <button type="submit" class="reaction-btn cancel">✕</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </main>
+
+</body>
+</html>

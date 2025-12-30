@@ -1,0 +1,34 @@
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/appsettings.Development.json
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/appsettings.json
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/global.json
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/Aplication .staticwebassets.endpoints.json
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/Aplication 
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/Aplication .deps.json
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/Aplication .runtimeconfig.json
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/Aplication .dll
+/Users/gats/RiderProjects/mood-direction/Aplication /bin/Debug/net8.0/Aplication .pdb
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .csproj.AssemblyReference.cache
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .GeneratedMSBuildEditorConfig.editorconfig
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .AssemblyInfoInputs.cache
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .AssemblyInfo.cs
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .csproj.CoreCompileInputs.cache
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .MvcApplicationPartsAssemblyInfo.cache
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .RazorAssemblyInfo.cache
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .RazorAssemblyInfo.cs
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .sourcelink.json
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/scopedcss/bundle/Aplication .styles.css
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets.build.json
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets.development.json
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets/msbuild.Aplication .Microsoft.AspNetCore.StaticWebAssets.props
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets/msbuild.Aplication .Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets/msbuild.build.Aplication .props
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.Aplication .props
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Aplication .props
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/staticwebassets.pack.json
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplicati.560DB3CD.Up2Date
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .dll
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/refint/Aplication .dll
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .pdb
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/Aplication .genruntimeconfig.cache
+/Users/gats/RiderProjects/mood-direction/Aplication /obj/Debug/net8.0/ref/Aplication .dll

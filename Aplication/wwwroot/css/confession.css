@@ -1,0 +1,255 @@
+/* --- Общие стили --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 30px;
+}
+
+/* --- Навигация (единая со всеми страницами) --- */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    padding: 0 16px;
+    color: #737373;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #737373;
+    text-decoration: none;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #000;
+    font-weight: bold;
+}
+
+/* --- Заголовок секции --- */
+.header-section {
+    text-align: center;
+    margin: 40px 0;
+    max-width: 800px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 32px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    color: #000;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    color: #777;
+    margin: 0 0 25px 0;
+    line-height: 1.4;
+}
+
+/* --- Кнопки --- */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #555;
+    color: #555;
+    background: transparent;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-primary {
+    background-color: #000;
+    color: white;
+    border-color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    color: white;
+}
+
+.btn-outline-primary {
+    border-color: #555;
+    color: #555;
+}
+
+.btn-outline-primary:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.btn-sm {
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+/* --- Список дилемм --- */
+.confessions-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.confession-item {
+    background: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.confession-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.confession-text {
+    font-size: 20px;
+    font-weight: bold;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    flex: 1 1 300px;
+}
+
+.badge {
+    background-color: #ffc107;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.confession-meta {
+    color: #898989;
+    font-size: 16px;
+    margin: 0 0 12px 0;
+}
+
+.confession-content {
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.confession-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.comment-count {
+    color: #898989;
+    font-size: 16px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #777;
+    font-size: 18px;
+}
+
+/* --- Адаптив --- */
+
+@media (max-width: 768px) {
+    .nav {
+        gap: 16px;
+        margin-top: 15px;
+    }
+
+    .header-section {
+        margin: 30px 0;
+        padding: 0 16px;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+    }
+
+    .confession-item {
+        padding: 16px;
+    }
+
+    .confession-text {
+        font-size: 18px;
+    }
+
+    .confession-meta,
+    .confession-content,
+    .comment-count {
+        font-size: 15px;
+    }
+
+    .btn {
+        font-size: 15px;
+        padding: 7px 14px;
+    }
+
+    .btn-sm {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 24px;
+    }
+
+    .confession-title {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .confession-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .comment-count {
+        order: 2;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
