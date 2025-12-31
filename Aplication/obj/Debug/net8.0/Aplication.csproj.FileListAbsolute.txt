@@ -575,3 +575,4 @@ D:\mood-direction-main\Aplication\obj\Debug\net8.0\Aplication.pdb
 D:\mood-direction-main\Aplication\obj\Debug\net8.0\Aplication.genruntimeconfig.cache
 D:\mood-direction-main\Aplication\obj\Debug\net8.0\ref\Aplication.dll
 D:\mood-direction-main\Aplication\bin\Debug\net8.0\Aplication.staticwebassets.runtime.json
+D:\mood-direction-main\Aplication\obj\Debug\net8.0\Aplication.sourcelink.json

@@ -3,28 +3,50 @@
     ViewData["Title"] = "Новая тема";
 }
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h5>Добавить тему к заповеди: <strong>@thesis?.Title</strong></h5>
-        </div>
-        <div class="card-body">
-            <form asp-action="CreateTopic" asp-controller="Thesis" method="post">
-                <input type="hidden" name="thesisId" value="@thesis?.Id" />
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/create-topic.css" rel="stylesheet" />
+</head>
+<body>
 
-                <div class="mb-3">
-                    <label class="form-label">Название темы</label>
-                    <input type="text" name="title" class="form-control" 
-                           placeholder="Например: «Можно ли врать во благо?»" 
-                           required />
-                </div>
+<!-- 🔹 Навигация -->
+<nav class="nav">
+    <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+    <a href="#" class="nav-link">Поиск</a>
+    <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+</nav>
 
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Создать тему</button>
-                    <a href="@Url.Action("Details", "Thesis", new { id = thesis?.Id })"
-                       class="btn btn-secondary">Отмена</a>
-                </div>
-            </form>
-        </div>
-    </div>
+<!-- 🔸 Заголовок -->
+<div class="header-section">
+    <h1 class="page-title">Добавить тему к заповеди:</h1>
+    <p class="thesis-title">«@thesis?.Title»</p>
 </div>
+
+<!-- 🔹 Форма -->
+<div class="form-container">
+    <form asp-action="CreateTopic" asp-controller="Thesis" method="post">
+        <input type="hidden" name="thesisId" value="@thesis?.Id" />
+
+        <div class="form-group">
+            <label class="form-label">Название темы</label>
+            <input type="text"
+                   name="title"
+                   class="form-input"
+                   placeholder="Например: «Можно ли врать во благо?»"
+                   required />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Создать тему</button>
+            <a href="@Url.Action("Details", "Thesis", new { id = thesis?.Id })"
+               class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

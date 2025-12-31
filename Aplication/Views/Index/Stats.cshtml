@@ -2,40 +2,53 @@
     ViewData["Title"] = "Статистика";
 }
 
-<div class="container mt-5">
-    <div class="text-center">
-        <div class="mb-4">
-            <div class="d-inline-block bg-light rounded-circle p-3 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-                    <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2z"/>
-                </svg>
-            </div>
-            <h2>Статистика</h2>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/stats.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация -->
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link active">Статистика</a>
+    </nav>
+
+    <!-- 🔸 Заголовок -->
+    <div class="header-section">
+        <div class="icon-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000" viewBox="0 0 16 16">
+                <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2z"/>
+            </svg>
+        </div>
+        <h1 class="page-title">Статистика</h1>
+    </div>
+
+    <!-- 🔹 Контент -->
+    <div class="content-card">
+        <p class="stats-categories">
+            Гендерный баланс • Возрастные группы • География • Активность по темам
+        </p>
+
+        <div class="coming-soon">
+            <h2>В скором обновлении</h2>
+            <p class="coming-soon-text">
+                Мы работаем над аналитикой: кто и как участвует в обсуждениях.  
+                Скоро вы сможете видеть статистику в реальном времени.
+            </p>
         </div>
 
-        <div class="card mx-auto" style="max-width: 500px;">
-            <div class="card-body">
-                <p class="lead text-muted">
-                    📊 Гендерный баланс • Возрастные группы • География • Активность по темам
-                </p>
-                <h3 class="text-primary mt-4">В скором обновлении</h3>
-                <p class="text-muted small mt-3">
-                    Мы работаем над аналитикой: кто и как участвует в обсуждениях.  
-                    Скоро вы сможете видеть статистику в реальном времени.
-                </p>
-            </div>
-        </div>
-
-        <div class="mt-4">
-            <a href="@Url.Action("Index", "Index")" class="btn btn-outline-secondary">
-                ← Назад на главную
+        <div class="back-link">
+            <a href="@Url.Action("Index", "Index")" class="btn btn-secondary">
+                Назад на главную
             </a>
         </div>
     </div>
-</div>
 
-<style>
-    body { background-color: #fafafa; color: #222; }
-    .card { border-color: #e0e0e0; }
-    .text-muted { color: #777 !important; }
-</style>
+</body>
+</html>
