@@ -1,28 +1,74 @@
 @model Domain.DTO.LoginRequest
-<h2>Логин</h2>
-
-<form asp-action="Login" method="post">
-    <div>
-        <label>Email:</label>
-        <input asp-for="Email" />
-    </div>
-    <div>
-        <label>Password:</label>
-        <input asp-for="Password" type="password"/>
-    </div>
-    <button type="submit">Войти</button>
-</form>
-
-<div class="mt-3">
-    <p>Нет аккаунта? <a asp-action="Register">Зарегистрируйтесь</a></p>
-</div>
-
-@if(ViewBag.Message != null)
-{
-    <p style="color:green">@ViewBag.Message</p>
+@{
+    ViewData["Title"] = "Вход";
 }
 
-@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-{
-    <p style="color:red">@error.ErrorMessage</p>
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/registration.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация -->
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    <!-- 🔸 Заголовок -->
+    <div class="header-section">
+        <h1 class="page-title">Вход</h1>
+    </div>
+
+    <!-- 🔹 Форма входа -->
+    <div class="form-card">
+        <form asp-action="Login" method="post">
+            <!-- Email -->
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" type="email" class="form-input" placeholder="example@mail.ru" />
+                <span asp-validation-for="Email" class="text-error"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label class="form-label">Пароль</label>
+                <input asp-for="Password" type="password" class="form-input" placeholder="●●●●●●●●" />
+                <span asp-validation-for="Password" class="text-error"></span>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+
+        <!-- Сообщения -->
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">
+                @ViewBag.Message
+            </div>
+        }
+
+        @if (ViewData.ModelState.ErrorCount > 0)
+        {
+            <div class="alert alert-error">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+
+        <!-- Ссылка на регистрацию -->
+        <div class="auth-link">
+            Нет аккаунта? <a href="@Url.Action("Register", "Auth")">Зарегистрируйтесь</a>
+        </div>
+    </div>
+
+</body>
+</html>

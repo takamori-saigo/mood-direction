@@ -1,44 +1,100 @@
 @model Domain.DTO.RegisterRequest
-<h2>Регистрация</h2>
-
-<form asp-action="Register" method="post">
-    <div>
-        <label>Nickname:</label>
-        <input asp-for="Nickname" />
-    </div>
-    <div>
-        <label>Email:</label>
-        <input asp-for="Email" />
-    </div>
-    <div>
-        <label>Password:</label>
-        <input asp-for="Password" type="password"/>
-    </div>
-    <div>
-        <label>Age:</label>
-        <input asp-for="Age" type="number"/>
-    </div>
-    <div>
-        <label>Gender:</label>
-        <select asp-for="Gender">
-            <option value="0">Male</option>
-            <option value="1">Female</option>
-            <option value="2">Other</option>
-        </select>
-    </div>
-    <button type="submit">Зарегистрироваться</button>
-</form>
-
-<div class="mt-3">
-    <p>Уже есть аккаунт? <a asp-action="Login">Войдите</a></p>
-</div>
-
-@if(ViewBag.Message != null)
-{
-    <p style="color:green">@ViewBag.Message</p>
+@{
+    ViewData["Title"] = "Регистрация";
 }
 
-@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-{
-    <p style="color:red">@error.ErrorMessage</p>
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/registration.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- 🔹 Навигация -->
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="#" class="nav-link">Поиск</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    <!-- 🔸 Заголовок -->
+    <div class="header-section">
+        <h1 class="page-title">Регистрация</h1>
+    </div>
+
+    <!-- 🔹 Форма регистрации -->
+    <div class="form-card">
+        <form asp-action="Register" method="post">
+            <!-- Nickname -->
+            <div class="form-group">
+                <label class="form-label">Никнейм</label>
+                <input asp-for="Nickname" class="form-input" placeholder="Введите никнейм" />
+                <span asp-validation-for="Nickname" class="text-error"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" type="email" class="form-input" placeholder="example@mail.ru" />
+                <span asp-validation-for="Email" class="text-error"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label class="form-label">Пароль</label>
+                <input asp-for="Password" type="password" class="form-input" placeholder="●●●●●●●●" />
+                <span asp-validation-for="Password" class="text-error"></span>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label class="form-label">Возраст</label>
+                <input asp-for="Age" type="number" min="13" max="120" class="form-input" placeholder="18" />
+                <span asp-validation-for="Age" class="text-error"></span>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label class="form-label">Пол</label>
+                <select asp-for="Gender" class="form-select">
+                    <option value="">— Выберите —</option>
+                    <option value="0">Мужской</option>
+                    <option value="1">Женский</option>
+                    <option value="2">Другое</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-error"></span>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </form>
+
+        <!-- Сообщения -->
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">
+                @ViewBag.Message
+            </div>
+        }
+
+        @if (ViewData.ModelState.ErrorCount > 0)
+        {
+            <div class="alert alert-error">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+
+        <!-- Ссылка на вход -->
+        <div class="auth-link">
+            Уже есть аккаунт? <a href="@Url.Action("Login", "Auth")">Войдите</a>
+        </div>
+    </div>
+
+</body>
+</html>
