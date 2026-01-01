@@ -8,20 +8,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link href="~/css/confession.css" rel="stylesheet" />
+    <link href="~/css/confessionCreate.css" rel="stylesheet" />
 </head>
 <body>
 
     <!-- 🔹 Навигация -->
-    <div class="nav">
-        <a href="@Url.Action("Index", "Confession")" class="nav-link" style="font-weight: bold;">Не мудак ли я?</a>
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link active">Не мудак ли я?</a>
         <a href="#" class="nav-link">Поиск</a>
         <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
-    </div>
+    </nav>
 
     <!-- 🔸 Форма -->
-    <div class="form-container">
-        <h2 class="section-title">Не мудак ли я?</h2>
+    <main class="form-container">
+        <h1 class="section-title">Не мудак ли я?</h1>
         <p class="section-subtitle">Опишите ситуацию честно. Люди помогут взглянуть со стороны.</p>
 
         <form method="post" class="confession-form">
@@ -32,7 +32,9 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Ваша дилемма <span class="required">*</span></label>
+                <label class="form-label">
+                    Ваша дилемма <span class="required">*</span>
+                </label>
                 <textarea name="content" class="form-textarea" rows="6" required
                           placeholder="Что случилось? Что вы сделали? В чём сомневаетесь?"></textarea>
             </div>
@@ -42,7 +44,7 @@
                 <a href="@Url.Action("Index", "Confession")" class="btn btn-secondary">Отмена</a>
             </div>
         </form>
-    </div>
+    </main>
 
 </body>
 </html>
