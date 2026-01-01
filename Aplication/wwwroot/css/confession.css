@@ -294,3 +294,222 @@ body {
 .btn-secondary:hover {
     background-color: #f5f5f5;
 }
+
+
+
+
+
+
+
+/* ======================
+   Общие стили (если ещё не подключены)
+   ====================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 30px;
+}
+
+/* --- Навигация (единая со всеми страницами) --- */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    padding: 0 16px;
+    color: #737373;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #737373;
+    text-decoration: none;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #000;
+    font-weight: bold;
+}
+
+/* --- Заголовок секции --- */
+.form-container {
+    text-align: center;
+    margin: 40px 0;
+    max-width: 700px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 32px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    color: #000;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    color: #777;
+    margin: 0 0 30px 0;
+    line-height: 1.4;
+}
+
+/* --- Форма --- */
+.confession-form {
+    background: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 24px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.required {
+    color: #d32f2f;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+}
+
+.form-textarea {
+    min-height: 140px;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #000;
+}
+
+/* --- Кнопки --- */
+.form-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    transition: background 0.15s ease;
+}
+
+.btn-primary {
+    background-color: #000;
+    color: white;
+    border: 2px solid #000;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+.btn-secondary {
+    background: white;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.btn-secondary:hover {
+    background-color: #f5f5f5;
+}
+
+/* --- Адаптив --- */
+
+@media (max-width: 768px) {
+    .nav {
+        gap: 16px;
+        margin-top: 15px;
+    }
+
+    .form-container {
+        margin: 30px 0;
+        padding: 0 16px;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+
+    .confession-form {
+        padding: 20px;
+    }
+
+    .form-input,
+    .form-textarea {
+        font-size: 15px;
+        padding: 9px 12px;
+    }
+
+    .btn {
+        padding: 9px 18px;
+        font-size: 15px;
+    }
+
+    .form-actions {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 24px;
+    }
+
+    .confession-form {
+        border-radius: 12px;
+        padding: 18px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
