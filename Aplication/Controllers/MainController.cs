@@ -35,11 +35,11 @@ namespace Aplication.Controllers
                 var seedTheses = new List<CoreThesis>
                 {
                     new() { Title = "Чти жизнь", Description = "Жизнь — главная ценность. Не посягай на чужую и защищай свою.", Order = 1, IsActive = true, CreatedAt = DateTime.UtcNow },
-                    new() { Title = "Уважай чужое", Description = "Не бери чужого, не нарушай личные границы.", Order = 2, IsActive = true, CreatedAt = DateTime.UtcNow },
-                    new() { Title = "Говори правду", Description = "Ложь разрушает доверие. Говори честно, но с добротой.", Order = 3, IsActive = true, CreatedAt = DateTime.UtcNow },
-                    new() { Title = "Держи слово", Description = "Обещание — долг. Выполняй, что обещал.", Order = 4, IsActive = true, CreatedAt = DateTime.UtcNow },
-                    new() { Title = "Помогай слабым", Description = "Сила — в защите тех, кто не может защитить себя.", Order = 5, IsActive = true, CreatedAt = DateTime.UtcNow },
-                    new() { Title = "Развивайся", Description = "Стремись к знаниям, добру и мудрости — каждый день.", Order = 6, IsActive = true, CreatedAt = DateTime.UtcNow }
+                    new() { Title = "Уважай чужое", Description = "Нельзя присваивать силой или обманом то, что тебе не принадлежит.", Order = 2, IsActive = true, CreatedAt = DateTime.UtcNow },
+                    new() { Title = "Не причиняй вреда", Description = "Ты свободен делать что угодно, пока твои слова и действия не ущемляют других.", Order = 3, IsActive = true, CreatedAt = DateTime.UtcNow },
+                    new() { Title = "Помогай ближнему", Description = "Не усугубляй страдания. Протяни руку, если есть возможность.", Order = 4, IsActive = true, CreatedAt = DateTime.UtcNow },
+                    new() { Title = "Будь честен", Description = "Не лги, не оговаривай, не притворяйся, не лицемерь, не вводи в заблуждение.", Order = 5, IsActive = true, CreatedAt = DateTime.UtcNow },
+                    new() { Title = "Держи слово", Description = "Отвечай за обещания. Договорённости - это ответственность. Репутация - основа доверия.", Order = 6, IsActive = true, CreatedAt = DateTime.UtcNow }
                 };
 
                 await _context.CoreTheses.AddRangeAsync(seedTheses);
