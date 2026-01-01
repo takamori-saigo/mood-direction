@@ -1,4 +1,6 @@
-/* --- Общие стили --- */
+/* ======================
+   Общие стили
+   ====================== */
 * {
     box-sizing: border-box;
 }
@@ -14,7 +16,7 @@ body {
     padding-bottom: 30px;
 }
 
-/* --- Навигация (единая со всеми страницами) --- */
+/* --- Навигация (единая для всех страниц) --- */
 .nav {
     display: flex;
     justify-content: center;
@@ -38,8 +40,9 @@ body {
     font-weight: bold;
 }
 
-/* --- Заголовок секции --- */
-.header-section {
+/* --- Заголовки секций --- */
+.header-section,
+.form-container {
     text-align: center;
     margin: 40px 0;
     max-width: 800px;
@@ -61,22 +64,24 @@ body {
     line-height: 1.4;
 }
 
-/* --- Кнопки --- */
+/* --- Кнопки (универсальные) --- */
 .btn {
     display: inline-block;
-    padding: 8px 16px;
+    padding: 10px 20px;
     font-size: 16px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     text-align: center;
-    border: 1px solid #555;
-    color: #555;
-    background: transparent;
+    font-weight: bold;
+    transition: background 0.15s ease;
+    border: 2px solid #000;
+    background: white;
+    color: #000;
 }
 
 .btn:hover {
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
 }
 
 .btn-primary {
@@ -91,8 +96,9 @@ body {
 }
 
 .btn-outline-primary {
-    border-color: #555;
+    background: transparent;
     color: #555;
+    border-color: #555;
 }
 
 .btn-outline-primary:hover {
@@ -105,7 +111,26 @@ body {
     padding: 6px 12px;
 }
 
-/* --- Список дилемм --- */
+/* --- Кнопки в шапке (рядом) --- */
+.header-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* --- Пустое состояние --- */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #777;
+    font-size: 18px;
+}
+
+/* ======================
+   Страница: Список дилемм
+   ====================== */
 .confessions-container {
     width: 100%;
     max-width: 800px;
@@ -175,213 +200,24 @@ body {
     font-size: 16px;
 }
 
-.empty-state {
-    text-align: center;
-    padding: 50px 20px;
-    color: #777;
-    font-size: 18px;
-}
-
-/* --- Адаптив --- */
-
-@media (max-width: 768px) {
-    .nav {
-        gap: 16px;
-        margin-top: 15px;
-    }
-
-    .header-section {
-        margin: 30px 0;
-        padding: 0 16px;
-    }
-
-    .section-title {
-        font-size: 26px;
-    }
-
-    .section-subtitle {
-        font-size: 16px;
-    }
-
-    .confession-item {
-        padding: 16px;
-    }
-
-    .confession-text {
-        font-size: 18px;
-    }
-
-    .confession-meta,
-    .confession-content,
-    .comment-count {
-        font-size: 15px;
-    }
-
-    .btn {
-        font-size: 15px;
-        padding: 7px 14px;
-    }
-
-    .btn-sm {
-        font-size: 13px;
-        padding: 5px 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .section-title {
-        font-size: 24px;
-    }
-
-    .confession-title {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .confession-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .comment-count {
-        order: 2;
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
-    }
-}
-
-/* --- Кнопки в шапке --- */
-.header-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-/* Убедимся, что .header-section не центрирует всё принудительно */
-.header-section {
-    text-align: center;
-    margin: 40px 0;
-    max-width: 800px;
-    width: 100%;
-    padding: 0 20px;
-}
-
-/* Адаптив: на мобильных — в колонку */
-@media (max-width: 480px) {
-    .header-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .header-buttons .btn {
-        width: 100%;
-        max-width: 280px;
-    }
-}
-.btn-secondary {
-    background: white;
-    color: #000;
-    border: 1px solid #000;
-}
-
-.btn-secondary:hover {
-    background-color: #f5f5f5;
-}
-
-
-
-
-
-
-
 /* ======================
-   Общие стили (если ещё не подключены)
+   Страница: Форма создания
    ====================== */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fafafa;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    padding-bottom: 30px;
-}
-
-/* --- Навигация (единая со всеми страницами) --- */
-.nav {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 20px;
-    padding: 0 16px;
-    color: #737373;
-    flex-wrap: wrap;
-}
-
-.nav-link {
-    color: #737373;
-    text-decoration: none;
-    font-size: 16px;
-    white-space: nowrap;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: #000;
-    font-weight: bold;
-}
-
-/* --- Заголовок секции --- */
-.form-container {
-    text-align: center;
-    margin: 40px 0;
-    max-width: 700px;
-    width: 100%;
-    padding: 0 20px;
-}
-
-.section-title {
-    font-size: 32px;
-    margin: 0 0 10px 0;
-    font-weight: bold;
-    color: #000;
-}
-
-.section-subtitle {
-    font-size: 18px;
-    color: #777;
-    margin: 0 0 30px 0;
-    line-height: 1.4;
-}
-
-/* --- Форма --- */
 .confession-form {
     background: white;
     border: 2px solid black;
     border-radius: 15px;
     padding: 24px;
     text-align: left;
+    margin-top: 10px;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 8px;
+    margin: 10px 0 8px 0;
     font-size: 16px;
     font-weight: bold;
     color: #333;
-    margin-top: 10px;
 }
 
 .required {
@@ -409,7 +245,6 @@ body {
     border-color: #000;
 }
 
-/* --- Кнопки --- */
 .form-actions {
     display: flex;
     gap: 16px;
@@ -418,40 +253,9 @@ body {
     flex-wrap: wrap;
 }
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-decoration: none;
-    border-radius: 6px;
-    cursor: pointer;
-    text-align: center;
-    font-weight: bold;
-    transition: background 0.15s ease;
-}
-
-.btn-primary {
-    background-color: #000;
-    color: white;
-    border: 2px solid #000;
-}
-
-.btn-primary:hover {
-    background-color: #333;
-    border-color: #333;
-}
-
-.btn-secondary {
-    background: white;
-    color: #000;
-    border: 2px solid #000;
-}
-
-.btn-secondary:hover {
-    background-color: #f5f5f5;
-}
-
-/* --- Адаптив --- */
+/* ======================
+   Адаптив
+   ====================== */
 
 @media (max-width: 768px) {
     .nav {
@@ -459,6 +263,7 @@ body {
         margin-top: 15px;
     }
 
+    .header-section,
     .form-container {
         margin: 30px 0;
         padding: 0 16px;
@@ -470,7 +275,20 @@ body {
 
     .section-subtitle {
         font-size: 16px;
-        margin-bottom: 24px;
+    }
+
+    .confession-item {
+        padding: 16px;
+    }
+
+    .confession-text {
+        font-size: 18px;
+    }
+
+    .confession-meta,
+    .confession-content,
+    .comment-count {
+        font-size: 15px;
     }
 
     .confession-form {
@@ -488,7 +306,13 @@ body {
         font-size: 15px;
     }
 
-    .form-actions {
+    .btn-sm {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+
+    .form-actions,
+    .header-buttons {
         gap: 12px;
     }
 }
@@ -498,18 +322,39 @@ body {
         font-size: 24px;
     }
 
-    .confession-form {
-        border-radius: 12px;
-        padding: 18px;
-    }
-
+    /* Кнопки в колонку */
+    .header-buttons,
     .form-actions {
         flex-direction: column;
         align-items: center;
+        gap: 12px;
     }
 
-    .btn {
+    .header-buttons .btn,
+    .form-actions .btn {
         width: 100%;
         max-width: 280px;
+    }
+
+    /* Дилеммы */
+    .confession-title {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .confession-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .comment-count {
+        order: 2;
+    }
+
+    /* Форма */
+    .confession-form {
+        border-radius: 12px;
+        padding: 18px;
     }
 }
