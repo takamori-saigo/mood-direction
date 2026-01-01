@@ -25,15 +25,19 @@
     <div class="header-section">
         <h1 class="section-title">Не мудак ли я?</h1>
         <p class="section-subtitle">Личные дилеммы. Честные вопросы. Поддержка без осуждения.</p>
-
-        @if (User.Identity?.IsAuthenticated == true)
-        {
-            <a href="@Url.Action("Create", "Confession")" class="btn btn-primary">Задать свой вопрос</a>
-        }
-        else
-        {
-            <a href="@Url.Action("Login", "Auth")" class="btn btn-outline-primary">Войдите, чтобы задать вопрос</a>
-        }
+    
+        <div class="header-buttons">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <a href="@Url.Action("Create", "Confession")" class="btn btn-primary">Задать свой вопрос</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Auth")" class="btn btn-outline-primary">Войдите, чтобы задать вопрос</a>
+            }
+    
+            <a href="@Url.Action("Index", "Index")" class="btn btn-secondary">Назад на главную</a>
+        </div>
     </div>
 
     <!-- 🔹 Список дилемм -->
