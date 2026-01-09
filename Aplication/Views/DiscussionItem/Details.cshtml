@@ -15,19 +15,34 @@
 <body>
 
     <!-- 🔹 Навигация -->
-    <nav class="nav">
-        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
-        <a href="#" class="nav-link">Поиск</a>
-        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
-    </nav>
+    <header class="header">
+        <nav class="nav">
+            <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+            <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
+            <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+        </nav>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+        <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
+            <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
+                Выйти
+            </button>
+        </form>
+        }
+        else
+        {
+        <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
+        }
+    </header>
 
     <!-- 🔸 Заголовок заповеди -->
     @if (Model.Topic?.CoreThesis != null)
     {
-        <header class="thesis-header">
+        <div class="thesis-header">
             <h1 class="thesis-title">@Model.Topic.CoreThesis.Title</h1>
             <p class="thesis-description">@Model.Topic.CoreThesis.Description</p>
-        </header>
+        </div>
     }
 
     <!-- 🔹 Дилемма -->
@@ -44,9 +59,12 @@
             <!-- 🔹 Форма комментария -->
             @if (User.Identity?.IsAuthenticated == true)
             {
-                <form method="post" asp-action="AddComment" asp-route-id="@Model.Item?.Id" class="comment-form">
+            <form method="post" asp-action="AddComment" asp-route-id="@Model.Item?.Id" class="comment-form">
+                <div class="comment-input-wrapper">
                     <input type="text" name="content" class="comment-input" placeholder="Оставить комментарий" required />
-                </form>
+                    <button type="submit" class="comment-submit-btn">Опубликовать</button>
+                </div>
+            </form>
             }
             else
             {

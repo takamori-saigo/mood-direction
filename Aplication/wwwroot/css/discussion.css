@@ -14,14 +14,49 @@ body {
     padding-bottom: 20px;
 }
 
-/* --- Навигация --- */
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+
+.auth-btn {
+    background: none;
+    border: none;
+    color: #737373;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 4px;
+}
+
+.auth-btn:hover {
+    color: #000;
+    background-color: #f0f0f0;
+}
+
+.auth-form {
+    display: inline;
+    margin: 0;
+}
+
+.auth-form,
+.auth-btn {
+    margin-left: auto; 
+}
+
 .nav {
     display: flex;
     justify-content: center;
     gap: 24px;
-    margin-top: 20px;
+    margin: 20px auto;
     padding: 0 16px;
-    color: #737373;
+    width: 100%;
     flex-wrap: wrap;
 }
 
@@ -36,7 +71,6 @@ body {
     color: #000;
 }
 
-/* --- Заголовок заповеди --- */
 .thesis-header {
     text-align: center;
     max-width: 900px;
@@ -58,7 +92,6 @@ body {
     color: #555;
 }
 
-/* --- Основной блок дилеммы --- */
 .discussion-main {
     width: 100%;
     max-width: 950px;
@@ -86,29 +119,27 @@ body {
     margin: 24px 0 16px 0;
 }
 
-/* --- Скролл комментариев --- */
 .comments-scroll {
-    height: 500px;
-    overflow-y: auto;
+    height: auto;
     padding-right: 10px;
     margin-top: 10px;
     border-radius: 8px;
     background: #fff;
+    margin-bottom: 20px;
 }
 
-/* --- Форма комментария --- */
 .comment-form {
     margin: 20px 0;
     padding: 0 20px;
 }
 
 .comment-input {
-    width: 100%;
-    max-width: 575px;
+    flex: 1 1 200px; 
     padding: 10px 12px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    min-width: 0; 
 }
 
 .guest-message {
@@ -130,7 +161,6 @@ body {
     margin: 20px 0;
 }
 
-/* --- Комментарий --- */
 .comment-item {
     min-height: 100px;
     max-width: 580px;
@@ -148,7 +178,6 @@ body {
     margin: 8px 0 12px 0;
 }
 
-/* --- Реакции --- */
 .reactions {
     display: flex;
     gap: 12px;
@@ -184,7 +213,30 @@ body {
     font-weight: bold;
 }
 
-/* --- Адаптив --- */
+.comment-input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: stretch; 
+    max-width: 575px;
+    width: 100%;
+    flex-wrap: wrap; 
+}
+
+.comment-submit-btn {
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.comment-submit-btn:hover {
+    background-color: #333;
+}
 
 @media (max-width: 1024px) {
     .thesis-title { font-size: 28px; }
@@ -193,6 +245,18 @@ body {
     .login-info { font-size: 16px; }
     .comment-text { font-size: 16px; }
     .comments-scroll { height: 450px; }
+    .comment-input-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .comment-submit-btn {
+        align-self: flex-end; 
+        width: auto; 
+    }
+    .comment-input {
+        flex: 1 1; 
+    }
 }
 
 @media (max-width: 768px) {
@@ -216,6 +280,18 @@ body {
     .reaction-btn { font-size: 15px; padding: 3px 6px; }
     .comment-input { max-width: 100%; font-size: 15px; }
     .guest-message, .empty-comments { padding: 0; font-size: 15px; }
+    .comment-input-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .comment-submit-btn {
+        align-self: flex-end; 
+        width: auto; 
+    }
+    .comment-input {
+        flex: 1 1; 
+    }
 }
 
 @media (max-width: 480px) {
@@ -224,4 +300,16 @@ body {
     .login-info, .comment-text { font-size: 14px; }
     .reaction-btn { font-size: 14px; }
     .comments-title { font-size: 18px; }
+    .comment-input-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .comment-submit-btn {
+        align-self: flex-end; 
+        width: auto;
+    }
+    .comment-input {
+        flex: 1 1;
+    }
 }

@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AspNet.Security.OAuth.Yandex/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/AspNet.Security.OAuth.Yandex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AspNet.Security.OAuth.Yandex.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -14,6 +30,22 @@
             "related": ".xml"
           }
         }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
         "type": "package",
@@ -1073,6 +1105,21 @@
     }
   },
   "libraries": {
+    "AspNet.Security.OAuth.Yandex/8.0.0": {
+      "sha512": "6yuAnNUtBRaAPNNmP5Z1rWJC0mUTRCEhIX5lsU/xq7XGFGYQjV78NJPSDBYmmeFJ5kD65VtVHY7jks5fWAvq+Q==",
+      "type": "package",
+      "path": "aspnet.security.oauth.yandex/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "README.md",
+        "aspnet.security.oauth.yandex.8.0.0.nupkg.sha512",
+        "aspnet.security.oauth.yandex.nuspec",
+        "lib/net8.0/AspNet.Security.OAuth.Yandex.dll",
+        "lib/net8.0/AspNet.Security.OAuth.Yandex.xml"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -1089,6 +1136,21 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Google/8.0.0": {
+      "sha512": "dPE/IiHhBqnJ7WrD72T20+DcHGCaR9F4RmIFap83W1Ts/ze5gBVe4Ii02qJdJzkUniQy5S/v42zpRIgJTPzPqQ==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.google/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll",
+        "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.xml",
+        "microsoft.aspnetcore.authentication.google.8.0.0.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.google.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
@@ -3162,8 +3224,10 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AspNet.Security.OAuth.Yandex >= 8.0.0",
       "Domain >= 1.0.0",
       "Infrastructure >= 1.0.0",
+      "Microsoft.AspNetCore.Authentication.Google >= 8.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.0",
       "Microsoft.EntityFrameworkCore.Relational >= 9.0.0",
@@ -3174,35 +3238,36 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lavri\\.nuget\\packages\\": {}
+    "/Users/gats/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\mood-direction-main\\Aplication\\Aplication.csproj",
+      "projectUniqueName": "/Users/gats/Desktop/projects/Aplication/Aplication.csproj",
       "projectName": "Aplication",
-      "projectPath": "D:\\mood-direction-main\\Aplication\\Aplication.csproj",
-      "packagesPath": "C:\\Users\\lavri\\.nuget\\packages\\",
-      "outputPath": "D:\\mood-direction-main\\Aplication\\obj\\",
+      "projectPath": "/Users/gats/Desktop/projects/Aplication/Aplication.csproj",
+      "packagesPath": "/Users/gats/.nuget/packages/",
+      "outputPath": "/Users/gats/Desktop/projects/Aplication/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lavri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/gats/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\mood-direction-main\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\mood-direction-main\\Domain\\Domain.csproj"
+            "/Users/gats/Desktop/projects/Domain/Domain.csproj": {
+              "projectPath": "/Users/gats/Desktop/projects/Domain/Domain.csproj"
             },
-            "D:\\mood-direction-main\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\mood-direction-main\\Infrastructure\\Infrastructure.csproj"
+            "/Users/gats/Desktop/projects/Infrastructure/Infrastructure.csproj": {
+              "projectPath": "/Users/gats/Desktop/projects/Infrastructure/Infrastructure.csproj"
             }
           }
         }
@@ -3215,14 +3280,22 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
+        "auditMode": "all"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AspNet.Security.OAuth.Yandex": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.AspNetCore.Authentication.Google": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[9.0.0, )"
@@ -3270,19 +3343,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.17, 8.0.17]"
+            "version": "[8.0.5, 8.0.5]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.17, 8.0.17]"
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[8.0.5, 8.0.5]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.17, 8.0.17]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.17, 8.0.17]"
+            "version": "[8.0.5, 8.0.5]"
           }
         ],
         "frameworkReferences": {
@@ -3293,7 +3362,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.100-preview.6.24328.19/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

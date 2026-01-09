@@ -14,19 +14,16 @@
 </head>
 <body>
 
-    <!-- 🔹 Навигация -->
     <nav class="nav">
         <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
         <a href="#" class="nav-link">Поиск</a>
         <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
     </nav>
 
-    <!-- 🔸 Заголовок -->
     <div class="header-section">
         <h1 class="page-title">Вход</h1>
     </div>
 
-    <!-- 🔹 Форма входа -->
     <div class="form-card">
         <form asp-action="Login" method="post">
             <!-- Email -->
@@ -36,18 +33,15 @@
                 <span asp-validation-for="Email" class="text-error"></span>
             </div>
 
-            <!-- Password -->
             <div class="form-group">
                 <label class="form-label">Пароль</label>
                 <input asp-for="Password" type="password" class="form-input" placeholder="●●●●●●●●" />
                 <span asp-validation-for="Password" class="text-error"></span>
             </div>
 
-            <!-- Submit -->
             <button type="submit" class="btn btn-primary">Войти</button>
         </form>
 
-        <!-- Сообщения -->
         @if (ViewBag.Message != null)
         {
             <div class="alert alert-success">
@@ -64,8 +58,15 @@
                 }
             </div>
         }
+        <div class="oauth-buttons">
+            <a class="btn btn-google" href="/Auth/ExternalLogin?provider=Google" style="color: black; text-decoration: none;">
+                Войти через Google
+            </a>
 
-        <!-- Ссылка на регистрацию -->
+            <a class="btn btn-yandex" href="/Auth/ExternalLogin?provider=Yandex" style="color: black; text-decoration: none;">
+                Войти через Яндекс
+            </a>
+        </div>
         <div class="auth-link">
             Нет аккаунта? <a href="@Url.Action("Register", "Auth")">Зарегистрируйтесь</a>
         </div>

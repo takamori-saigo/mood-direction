@@ -13,15 +13,27 @@
     <link rel="icon" type="image/png" sizes="16x16" href="~/images/icon.png" />
 </head>
 <body>
+    <header class="header">
+        <nav class="nav">
+            <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+            <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
+            <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+        </nav>
 
-    <!-- 🔹 Навигация -->
-    <div class="nav">
-        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
-        <a href="#" class="nav-link">Поиск</a>
-        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
-    </div>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+        <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
+            <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
+                Выйти
+            </button>
+        </form>
+        }
+        else
+        {
+        <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
+        }
+    </header>
 
-    <!-- 🔸 Круги тезисов -->
     <div class="circle-grid">
         @foreach (var thesis in Model.Theses.Take(6))
         {
@@ -32,39 +44,25 @@
         }
     </div>
 
-    <!-- 🔹 Самые обсуждаемые дилеммы -->
     @if (Model.TopDilemmas.Any())
     {
         <div class="dilemmas-section">
-            <h2 class="titul-p">Самые обсуждаемые дилеммы</h2>
+            <h2 class="titul-p">Горячее</h2>
             <div class="dilemmas-list">
                 @foreach (var di in Model.TopDilemmas)
                 {
-                    <a href="@Url.Action("Details", "DiscussionItem", new { id = di.Id })"
-                       class="dilemma-item">
-                        @di.Title
-                    </a>
+                <a href="@Url.Action("Details", "DiscussionItem", new { id = di.Id })"
+                   class="dilemma-item">
+                    <div class="dilemma-content">
+                        <p class="login-info">
+                            @di.Author.Nickname · @di.CreatedAt.ToString("dd.MM.yyyy")
+                        </p>
+                        <p class="comment-info">@di.Title</p>
+                    </div>
+                </a>
                 }
             </div>
         </div>
     }
-
-    <!-- 🔹 Нижнее меню -->
-    <footer class="auth-footer">
-        @if (User.Identity?.IsAuthenticated == true)
-        {
-            <form asp-controller="Auth" asp-action="Logout" method="post">
-                <button type="submit" class="footer-link"
-                        onclick="return confirm('Выйти из аккаунта?')">
-                    Выйти
-                </button>
-            </form>
-        }
-        else
-        {
-            <a href="@Url.Action("Login", "Auth")" class="footer-link">Войти</a>
-        }
-    </footer>
-
 </body>
 </html>

@@ -14,50 +14,42 @@
 </head>
 <body>
 
-    <!-- 🔹 Навигация -->
     <nav class="nav">
         <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
         <a href="#" class="nav-link">Поиск</a>
         <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
     </nav>
 
-    <!-- 🔸 Заголовок -->
     <div class="header-section">
         <h1 class="page-title">Регистрация</h1>
     </div>
 
-    <!-- 🔹 Форма регистрации -->
     <div class="form-card">
         <form asp-action="Register" method="post">
-            <!-- Nickname -->
             <div class="form-group">
                 <label class="form-label">Никнейм</label>
                 <input asp-for="Nickname" class="form-input" placeholder="Введите никнейм" />
                 <span asp-validation-for="Nickname" class="text-error"></span>
             </div>
 
-            <!-- Email -->
             <div class="form-group">
                 <label class="form-label">Email</label>
                 <input asp-for="Email" type="email" class="form-input" placeholder="example@mail.ru" />
                 <span asp-validation-for="Email" class="text-error"></span>
             </div>
 
-            <!-- Password -->
             <div class="form-group">
                 <label class="form-label">Пароль</label>
                 <input asp-for="Password" type="password" class="form-input" placeholder="●●●●●●●●" />
                 <span asp-validation-for="Password" class="text-error"></span>
             </div>
 
-            <!-- Age -->
             <div class="form-group">
                 <label class="form-label">Возраст</label>
                 <input asp-for="Age" type="number" min="13" max="120" class="form-input" placeholder="18" />
                 <span asp-validation-for="Age" class="text-error"></span>
             </div>
 
-            <!-- Gender -->
             <div class="form-group">
                 <label class="form-label">Пол</label>
                 <select asp-for="Gender" class="form-select">
@@ -69,11 +61,9 @@
                 <span asp-validation-for="Gender" class="text-error"></span>
             </div>
 
-            <!-- Submit -->
             <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
         </form>
 
-        <!-- Сообщения -->
         @if (ViewBag.Message != null)
         {
             <div class="alert alert-success">
@@ -91,7 +81,6 @@
             </div>
         }
 
-        <!-- Ссылка на вход -->
         <div class="auth-link">
             Уже есть аккаунт? <a href="@Url.Action("Login", "Auth")">Войдите</a>
         </div>

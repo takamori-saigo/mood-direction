@@ -20,17 +20,32 @@
 <body>
 
     <!-- 🔹 Навигация в стиле "Не мудак ли я?" -->
-    <div class="nav">
-        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
-        <a href="#" class="nav-link">Поиск</a>
-        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
-    </div>
+    <header class="header">
+        <nav class="nav">
+            <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+            <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
+            <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+        </nav>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+        <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
+            <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
+                Выйти
+            </button>
+        </form>
+        }
+        else
+        {
+        <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
+        }
+    </header>
 
     <!-- 🔸 Описание родительской заповеди -->
     <div style="text-align: center; margin: 30px 0;">
         <h2 style="font-size: 36px; margin-bottom: 5px;">@Model.CoreThesis.Title</h2>
         <p class="description-p">
-            @Model.CoreThesis.Description
+            @Model.Topic.Title
         </p>
     </div>
 
@@ -93,7 +108,7 @@
                     </p>
 
                     <!-- Текст дилеммы -->
-                    <p class="comment-info">@dilemma.Item.Content</p>
+                    <p class="comment-info">@dilemma.Item.Title</p>
 
                     <!-- Комментарии -->
                     <div class="top-comment">
@@ -119,7 +134,7 @@
                     <div class="card-actions">
                         <a href="@Url.Action("Details", "DiscussionItem", new { id = dilemma.Item.Id })"
                            class="btn btn-sm btn-outline-primary">
-                            Обсудить →
+                            Обсудить
                         </a>
                     </div>
                 </div>

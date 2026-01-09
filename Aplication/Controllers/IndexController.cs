@@ -11,16 +11,16 @@ namespace Aplication.Controllers
     public class IndexController : Controller
     {
         private readonly MoralCompassDbContext _context;
+        
+        public IndexController(MoralCompassDbContext context)
+        {
+            _context = context;
+        }
 
         public class HomeIndexModel
         {
             public List<CoreThesis> Theses { get; set; } = new();
             public List<DiscussionItem> TopDilemmas { get; set; } = new();
-        }
-        
-        public IndexController(MoralCompassDbContext context)
-        {
-            _context = context;
         }
         
         public IActionResult Stats()
@@ -46,7 +46,6 @@ namespace Aplication.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            // 🔸 Загружаем данные для отображения
             var theses = await _context.CoreTheses
                 .Where(ct => ct.IsActive)
                 .OrderBy(ct => ct.Order)
@@ -63,8 +62,9 @@ namespace Aplication.Controllers
                 .Select(x => x.Id)
                 .ToListAsync();
 
-            var topDilemmas = await _context.DiscussionItems
+            List<DiscussionItem?> topDilemmas = await _context.DiscussionItems
                 .Where(di => di.Type == DiscussionItemType.Dilemma && topDilemmaIds.Contains(di.Id))
+                .Include(di => di.Author) 
                 .ToListAsync();
 
             topDilemmas = topDilemmaIds

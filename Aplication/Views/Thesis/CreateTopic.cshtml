@@ -15,11 +15,26 @@
 <body>
 
 <!-- 🔹 Навигация -->
-<nav class="nav">
-    <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
-    <a href="#" class="nav-link">Поиск</a>
-    <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
-</nav>
+<header class="header">
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+    <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
+        <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
+            Выйти
+        </button>
+    </form>
+    }
+    else
+    {
+    <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
+    }
+</header>
 
 <!-- 🔸 Заголовок -->
 <div class="header-section">

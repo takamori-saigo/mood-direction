@@ -8,8 +8,10 @@
     ".NETCoreApp,Version=v8.0": {
       "Aplication/1.0.0": {
         "dependencies": {
+          "AspNet.Security.OAuth.Yandex": "8.0.0",
           "Domain": "1.0.0",
           "Infrastructure": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Google": "8.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.0",
           "Microsoft.EntityFrameworkCore.Design": "9.0.0",
           "Microsoft.EntityFrameworkCore.Relational": "9.0.0",
@@ -22,11 +24,27 @@
           "Aplication.dll": {}
         }
       },
+      "AspNet.Security.OAuth.Yandex/8.0.0": {
+        "runtime": {
+          "lib/net8.0/AspNet.Security.OAuth.Yandex.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.56464"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/8.0.0": {
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53112"
           }
         }
       },
@@ -717,7 +735,7 @@
       "Domain/1.0.0": {
         "runtime": {
           "Domain.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -731,7 +749,7 @@
         },
         "runtime": {
           "Infrastructure.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -744,12 +762,26 @@
       "serviceable": false,
       "sha512": ""
     },
+    "AspNet.Security.OAuth.Yandex/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6yuAnNUtBRaAPNNmP5Z1rWJC0mUTRCEhIX5lsU/xq7XGFGYQjV78NJPSDBYmmeFJ5kD65VtVHY7jks5fWAvq+Q==",
+      "path": "aspnet.security.oauth.yandex/8.0.0",
+      "hashPath": "aspnet.security.oauth.yandex.8.0.0.nupkg.sha512"
+    },
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dPE/IiHhBqnJ7WrD72T20+DcHGCaR9F4RmIFap83W1Ts/ze5gBVe4Ii02qJdJzkUniQy5S/v42zpRIgJTPzPqQ==",
+      "path": "microsoft.aspnetcore.authentication.google/8.0.0",
+      "hashPath": "microsoft.aspnetcore.authentication.google.8.0.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
       "type": "package",
