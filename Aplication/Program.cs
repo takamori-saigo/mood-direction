@@ -26,6 +26,8 @@ app.MapControllerRoute(
 app.Run();
 void RegistrateServices()
 {
+    builder.Services.AddScoped<IMainPageRepository, MainPageRepository>();
+    builder.Services.AddScoped<MainPageService>();
     builder.Services.AddDbContext<MoralCompassDbContext>(options => options.UseNpgsql # оставить вызов, но очистить аргумент(builder.Configuration.GetConnectionString("DefaultConnection")));
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<AuthService>();
