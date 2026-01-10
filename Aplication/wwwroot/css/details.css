@@ -253,6 +253,7 @@ body {
     }
 }
 
+/* Очень маленькие экраны */
 @media (max-width: 480px) {
     .thesis-title {
         font-size: 22px;
@@ -273,3 +274,11 @@ body {
         padding: 6px 12px;
     }
 }
+
+
+.theme-link
+{
+    color: #000 !important;
+    text-decoration: none !important;
+    outline: none;
+} 

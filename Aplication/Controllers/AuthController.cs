@@ -109,9 +109,7 @@ public class AuthController : Controller
     [HttpGet]
     public async Task<IActionResult> ExternalLoginCallback()
     {
-        var result = await HttpContext.AuthenticateAsync(
-            IdentityConstants.ExternalScheme
-        );
+        var result = await HttpContext.AuthenticateAsync();
 
         if (!result.Succeeded || result.Principal == null)
             return RedirectToAction("Login");
@@ -145,9 +143,7 @@ public class AuthController : Controller
                 ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
                 IsPersistent = true
             });
-
-        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
+        
         return RedirectToAction("Index", "Index");
     }
     

@@ -163,13 +163,15 @@ body {
 
 .comment-item {
     min-height: 100px;
-    max-width: 580px;
+    /*max-width: 580px;*/
     margin: 20px 0;
     padding: 12px 20px;
     background-color: white;
     border-left: 2px solid #eee;
     word-break: break-word;
     overflow-wrap: break-word;
+    border: 1px solid rgba(0, 0, 0, 0.14);        
+    border-radius: 8px;
 }
 
 .comment-text {

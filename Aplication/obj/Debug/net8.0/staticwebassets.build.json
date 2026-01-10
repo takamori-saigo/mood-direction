@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2EQoilvro4AZKBszVGcJGdM/2LfxoUXJUAtHj0Fe9vE=",
+  "Hash": "CUh9TiyPBh2FG9RyO4d4EiaRslX2YAAdhD1OoZz7i/0=",
   "Source": "Aplication",
   "BasePath": "_content/Aplication",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ceu6y6q68n",
-      "Integrity": "ZDktMT33r9BCJ90HLjpt6wU8GUCfKIeXeio9sJ8R3xw=",
+      "Fingerprint": "mmxabcwcvf",
+      "Integrity": "vmPp+RIfxLhkC1d1PZN6sCMTV2tSn7f0Z1k8fzddfG0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/details.css"
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "y47mxds2qf",
-      "Integrity": "oiLgZKbN3NlZJAfWQxrPJhWFwUrNblrrSHn5ZSSOPec=",
+      "Fingerprint": "fhy0ct3kg5",
+      "Integrity": "k/72IgNPfkAfxOaShi6swBeI5Xu1Asb4HQaYoBpAzTs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/discussion.css"
@@ -178,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "4o1lqo1liz",
-      "Integrity": "TPre4AD2Vx2WpC/KLfqgbfWIEOBKIAtrTE5u+o81ukQ=",
+      "Fingerprint": "5n66nidvo7",
+      "Integrity": "IfaC6X5dFkU6lJpGqZMiGBce2lJ6w8QZinL3qzLkWMk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/theme.css"
@@ -246,6 +246,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/icon.png"
+    },
+    {
+      "Identity": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/dislike.svg",
+      "SourceId": "Aplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/gats/Desktop/projects/Aplication/wwwroot/",
+      "BasePath": "_content/Aplication",
+      "RelativePath": "svg/dislike#[.{fingerprint}]?.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ffglrqj4u5",
+      "Integrity": "axkx283YYJUaBrxFQNxYgOB7GUN8aGRoUgxEDkW9NnE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/svg/dislike.svg"
+    },
+    {
+      "Identity": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/like.svg",
+      "SourceId": "Aplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/gats/Desktop/projects/Aplication/wwwroot/",
+      "BasePath": "_content/Aplication",
+      "RelativePath": "svg/like#[.{fingerprint}]?.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eenxpzc7c9",
+      "Integrity": "SmZ6v+hW4kr4h/Sn1pnKJO4oHpIfSJ2lyuBZ/+uEBeA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/svg/like.svg"
     }
   ],
   "Endpoints": [
@@ -414,51 +456,6 @@
       ]
     },
     {
-      "Route": "css/details.ceu6y6q68n.css",
-      "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/css/details.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4243"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZDktMT33r9BCJ90HLjpt6wU8GUCfKIeXeio9sJ8R3xw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 09 Jan 2026 15:56:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ceu6y6q68n"
-        },
-        {
-          "Name": "label",
-          "Value": "css/details.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZDktMT33r9BCJ90HLjpt6wU8GUCfKIeXeio9sJ8R3xw="
-        }
-      ]
-    },
-    {
       "Route": "css/details.css",
       "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/css/details.css",
       "Selectors": [],
@@ -469,7 +466,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4243"
+          "Value": "4396"
         },
         {
           "Name": "Content-Type",
@@ -477,11 +474,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZDktMT33r9BCJ90HLjpt6wU8GUCfKIeXeio9sJ8R3xw=\""
+          "Value": "\"vmPp+RIfxLhkC1d1PZN6sCMTV2tSn7f0Z1k8fzddfG0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 09 Jan 2026 15:56:09 GMT"
+          "Value": "Fri, 09 Jan 2026 21:33:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -491,7 +488,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZDktMT33r9BCJ90HLjpt6wU8GUCfKIeXeio9sJ8R3xw="
+          "Value": "sha256-vmPp+RIfxLhkC1d1PZN6sCMTV2tSn7f0Z1k8fzddfG0="
+        }
+      ]
+    },
+    {
+      "Route": "css/details.mmxabcwcvf.css",
+      "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/css/details.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4396"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vmPp+RIfxLhkC1d1PZN6sCMTV2tSn7f0Z1k8fzddfG0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 Jan 2026 21:33:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mmxabcwcvf"
+        },
+        {
+          "Name": "label",
+          "Value": "css/details.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-vmPp+RIfxLhkC1d1PZN6sCMTV2tSn7f0Z1k8fzddfG0="
         }
       ]
     },
@@ -506,7 +548,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5680"
+          "Value": "5759"
         },
         {
           "Name": "Content-Type",
@@ -514,11 +556,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"oiLgZKbN3NlZJAfWQxrPJhWFwUrNblrrSHn5ZSSOPec=\""
+          "Value": "\"k/72IgNPfkAfxOaShi6swBeI5Xu1Asb4HQaYoBpAzTs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 09 Jan 2026 15:56:09 GMT"
+          "Value": "Fri, 09 Jan 2026 20:37:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -528,12 +570,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-oiLgZKbN3NlZJAfWQxrPJhWFwUrNblrrSHn5ZSSOPec="
+          "Value": "sha256-k/72IgNPfkAfxOaShi6swBeI5Xu1Asb4HQaYoBpAzTs="
         }
       ]
     },
     {
-      "Route": "css/discussion.y47mxds2qf.css",
+      "Route": "css/discussion.fhy0ct3kg5.css",
       "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/css/discussion.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -543,7 +585,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5680"
+          "Value": "5759"
         },
         {
           "Name": "Content-Type",
@@ -551,11 +593,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"oiLgZKbN3NlZJAfWQxrPJhWFwUrNblrrSHn5ZSSOPec=\""
+          "Value": "\"k/72IgNPfkAfxOaShi6swBeI5Xu1Asb4HQaYoBpAzTs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 09 Jan 2026 15:56:09 GMT"
+          "Value": "Fri, 09 Jan 2026 20:37:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -565,7 +607,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "y47mxds2qf"
+          "Value": "fhy0ct3kg5"
         },
         {
           "Name": "label",
@@ -573,7 +615,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-oiLgZKbN3NlZJAfWQxrPJhWFwUrNblrrSHn5ZSSOPec="
+          "Value": "sha256-k/72IgNPfkAfxOaShi6swBeI5Xu1Asb4HQaYoBpAzTs="
         }
       ]
     },
@@ -824,7 +866,7 @@
       ]
     },
     {
-      "Route": "css/theme.4o1lqo1liz.css",
+      "Route": "css/theme.5n66nidvo7.css",
       "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/css/theme.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -834,7 +876,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4546"
+          "Value": "4638"
         },
         {
           "Name": "Content-Type",
@@ -842,11 +884,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TPre4AD2Vx2WpC/KLfqgbfWIEOBKIAtrTE5u+o81ukQ=\""
+          "Value": "\"IfaC6X5dFkU6lJpGqZMiGBce2lJ6w8QZinL3qzLkWMk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 09 Jan 2026 15:56:09 GMT"
+          "Value": "Fri, 09 Jan 2026 21:18:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -856,7 +898,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4o1lqo1liz"
+          "Value": "5n66nidvo7"
         },
         {
           "Name": "label",
@@ -864,7 +906,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-TPre4AD2Vx2WpC/KLfqgbfWIEOBKIAtrTE5u+o81ukQ="
+          "Value": "sha256-IfaC6X5dFkU6lJpGqZMiGBce2lJ6w8QZinL3qzLkWMk="
         }
       ]
     },
@@ -879,7 +921,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4546"
+          "Value": "4638"
         },
         {
           "Name": "Content-Type",
@@ -887,11 +929,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TPre4AD2Vx2WpC/KLfqgbfWIEOBKIAtrTE5u+o81ukQ=\""
+          "Value": "\"IfaC6X5dFkU6lJpGqZMiGBce2lJ6w8QZinL3qzLkWMk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 09 Jan 2026 15:56:09 GMT"
+          "Value": "Fri, 09 Jan 2026 21:18:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -901,7 +943,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-TPre4AD2Vx2WpC/KLfqgbfWIEOBKIAtrTE5u+o81ukQ="
+          "Value": "sha256-IfaC6X5dFkU6lJpGqZMiGBce2lJ6w8QZinL3qzLkWMk="
         }
       ]
     },
@@ -1148,6 +1190,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-vI1bjSQYqVzVyZa/nGncE8r5iJK5dzLC4jM6fE6I/fU="
+        }
+      ]
+    },
+    {
+      "Route": "svg/dislike.ffglrqj4u5.svg",
+      "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/dislike.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1440"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"axkx283YYJUaBrxFQNxYgOB7GUN8aGRoUgxEDkW9NnE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 Jan 2026 20:27:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ffglrqj4u5"
+        },
+        {
+          "Name": "label",
+          "Value": "svg/dislike.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-axkx283YYJUaBrxFQNxYgOB7GUN8aGRoUgxEDkW9NnE="
+        }
+      ]
+    },
+    {
+      "Route": "svg/dislike.svg",
+      "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/dislike.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1440"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"axkx283YYJUaBrxFQNxYgOB7GUN8aGRoUgxEDkW9NnE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 Jan 2026 20:27:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-axkx283YYJUaBrxFQNxYgOB7GUN8aGRoUgxEDkW9NnE="
+        }
+      ]
+    },
+    {
+      "Route": "svg/like.eenxpzc7c9.svg",
+      "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/like.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1736"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SmZ6v+hW4kr4h/Sn1pnKJO4oHpIfSJ2lyuBZ/+uEBeA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 Jan 2026 20:28:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eenxpzc7c9"
+        },
+        {
+          "Name": "label",
+          "Value": "svg/like.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SmZ6v+hW4kr4h/Sn1pnKJO4oHpIfSJ2lyuBZ/+uEBeA="
+        }
+      ]
+    },
+    {
+      "Route": "svg/like.svg",
+      "AssetFile": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/like.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1736"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SmZ6v+hW4kr4h/Sn1pnKJO4oHpIfSJ2lyuBZ/+uEBeA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 Jan 2026 20:28:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SmZ6v+hW4kr4h/Sn1pnKJO4oHpIfSJ2lyuBZ/+uEBeA="
         }
       ]
     }

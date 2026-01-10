@@ -79,6 +79,9 @@ body {
     max-width: 900px;
     width: 100%;
     padding: 0 20px;
+    word-wrap: break-word;     
+    overflow-wrap: break-word;  
+    white-space: normal;
 }
 
 .scroll {
@@ -283,3 +286,4 @@ body {
         padding: 4px 8px;
     }
 }
+

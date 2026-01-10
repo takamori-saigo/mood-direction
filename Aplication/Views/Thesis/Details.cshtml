@@ -59,14 +59,14 @@
     <main class="topics-scroll">
         @foreach (var topicGroup in Model.Topics)
         {
-            <div class="theme-item">
-                <p class="theme-title">@topicGroup.Topic.Title</p>
-                <div class="icon">
-                    <a href="@Url.Action("Details", "Topic", new { id = topicGroup.Topic.Id })">
+            <a href="@Url.Action("Details", "Topic", new { id = topicGroup.Topic.Id })" class="theme-link">
+                <div class="theme-item">
+                    <p class="theme-title">@topicGroup.Topic.Title</p>
+                    <div class="icon">
                         <img src="~/images/arrow_right.png" alt="→">
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
         }
     </main>
 

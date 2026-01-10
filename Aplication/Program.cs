@@ -31,7 +31,6 @@ void RegistrateServices()
     builder.Services.AddDbContext<MoralCompassDbContext>(options => options.UseNpgsql # оставить вызов, но очистить аргумент(builder.Configuration.GetConnectionString("DefaultConnection")));
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<AuthService>();
-    // builder.Services.AddScoped<AuthService>(sp => new AuthService( sp.GetRequiredService<IUserRepository>(), sp.GetRequiredService<IPasswordHasher<User>>() ));
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddControllersWithViews();
 }
@@ -54,14 +53,6 @@ void RegistrateAuthAndAouth()
             options.Cookie.HttpOnly = true;
             options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;        // Для локальной разработки (без HTTPS) → используйте SameAsRequest
             options.Cookie.SameSite = SameSiteMode.Lax; // ← SameSiteMode.None + SecurePolicy.Always требует HTTPS
-        })
-        .AddCookie(IdentityConstants.ExternalScheme, options =>
-        {
-            options.Cookie.Name = ".AspNetCore.Identity.External";
-            options.ExpireTimeSpan = TimeSpan.FromMinutes(5); // короткое время жизни
-            options.Cookie.IsEssential = true; // важно для работы без согласия (GDPR и т.п.)
-            options.Cookie.SameSite = SameSiteMode.Lax;
-            options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
         })
         .AddGoogle("Google", options =>
         {

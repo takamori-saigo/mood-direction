@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ceu6y6q68n</Fingerprint>
-      <Integrity>ZDktMT33r9BCJ90HLjpt6wU8GUCfKIeXeio9sJ8R3xw=</Integrity>
+      <Fingerprint>mmxabcwcvf</Fingerprint>
+      <Integrity>vmPp+RIfxLhkC1d1PZN6sCMTV2tSn7f0Z1k8fzddfG0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\details.css'))</OriginalItemSpec>
@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>y47mxds2qf</Fingerprint>
-      <Integrity>oiLgZKbN3NlZJAfWQxrPJhWFwUrNblrrSHn5ZSSOPec=</Integrity>
+      <Fingerprint>fhy0ct3kg5</Fingerprint>
+      <Integrity>k/72IgNPfkAfxOaShi6swBeI5Xu1Asb4HQaYoBpAzTs=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\discussion.css'))</OriginalItemSpec>
@@ -138,8 +138,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>4o1lqo1liz</Fingerprint>
-      <Integrity>TPre4AD2Vx2WpC/KLfqgbfWIEOBKIAtrTE5u+o81ukQ=</Integrity>
+      <Fingerprint>5n66nidvo7</Fingerprint>
+      <Integrity>IfaC6X5dFkU6lJpGqZMiGBce2lJ6w8QZinL3qzLkWMk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\theme.css'))</OriginalItemSpec>
@@ -197,6 +197,42 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\icon.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\svg\dislike.svg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Aplication</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Aplication</BasePath>
+      <RelativePath>svg/dislike.svg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>ffglrqj4u5</Fingerprint>
+      <Integrity>axkx283YYJUaBrxFQNxYgOB7GUN8aGRoUgxEDkW9NnE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\svg\dislike.svg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\svg\like.svg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Aplication</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Aplication</BasePath>
+      <RelativePath>svg/like.svg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>eenxpzc7c9</Fingerprint>
+      <Integrity>SmZ6v+hW4kr4h/Sn1pnKJO4oHpIfSJ2lyuBZ/+uEBeA=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\svg\like.svg'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

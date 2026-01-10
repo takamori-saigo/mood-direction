@@ -45,6 +45,14 @@
       "PackagePath": "staticwebassets/images/icon.png"
     },
     {
+      "Id": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/dislike.svg",
+      "PackagePath": "staticwebassets/svg/dislike.svg"
+    },
+    {
+      "Id": "/Users/gats/Desktop/projects/Aplication/wwwroot/svg/like.svg",
+      "PackagePath": "staticwebassets/svg/like.svg"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Aplication.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

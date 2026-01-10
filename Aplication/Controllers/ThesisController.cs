@@ -88,6 +88,9 @@ public class ThesisController : Controller
     [Authorize]
     public async Task<IActionResult> CreateTopic(Guid thesisId, string title)
     {
+        var nameId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        Console.WriteLine($"NameIdentifier: '{nameId}'");
+        
         if (string.IsNullOrWhiteSpace(title))
         {
             ModelState.AddModelError("", "Название темы обязательно");
