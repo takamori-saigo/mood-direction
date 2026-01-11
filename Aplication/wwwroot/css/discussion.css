@@ -21,7 +21,7 @@ body {
     max-width: 1200px;
     padding: 0 16px;
     margin-top: 20px;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
 }
 
 .auth-btn {
@@ -313,5 +313,9 @@ body {
     }
     .comment-input {
         flex: 1 1;
+    }
+
+    .nav{
+        padding: 0 0 0 40px;
     }
 }

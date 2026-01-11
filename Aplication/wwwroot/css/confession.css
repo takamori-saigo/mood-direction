@@ -41,7 +41,7 @@ body {
     max-width: 1200px;
     padding: 0 16px;
     margin-top: 20px;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
 }
 
 .auth-btn {
@@ -273,7 +273,18 @@ body {
     flex-wrap: wrap;
 }
 
+@media (max-width: 1024px) {
+    .header{
+        margin-bottom: 20px;
+    }
+}
+
 @media (max-width: 768px) {
+    
+    .header{
+        margin-bottom: 0;    
+    }
+    
     .nav {
         gap: 16px;
         margin-top: 15px;
@@ -334,6 +345,15 @@ body {
 }
 
 @media (max-width: 480px) {
+
+    .header{
+        margin-bottom: 0;    
+    }
+    
+    .nav{
+        padding: 0 0 0 40px;
+    }
+    
     .section-title {
         font-size: 24px;
     }

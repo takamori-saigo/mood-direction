@@ -183,6 +183,10 @@ body {
 }
 
 @media (max-width: 1024px) {
+    .header {
+        margin-bottom: 20px;    
+    }
+    
     .thesis-title {
         font-size: 28px;
     }
@@ -254,6 +258,11 @@ body {
 
 /* Очень маленькие экраны */
 @media (max-width: 480px) {
+
+    .nav{
+        padding: 0 0 0 40px;
+    }
+    
     .thesis-title {
         font-size: 22px;
     }

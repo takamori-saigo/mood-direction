@@ -203,6 +203,12 @@ body {
 }
 
 @media (max-width: 480px) {
+
+    .nav{
+        padding: 0 0 0 40px;
+    }
+
+    
     .header-section {
         margin: 24px 0 20px 0;
     }
