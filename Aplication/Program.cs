@@ -3,6 +3,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using MoralCompass.Infrastructure.Domain;
 
@@ -14,16 +15,10 @@ RegistrateServices();
 
 var app = builder.Build();
 
-app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Index}/{action=Index}/{id?}");
-
+ConfigureApp();
 app.Run();
+
+
 void RegistrateServices()
 {
     builder.Services.AddScoped<IMainPageRepository, MainPageRepository>();
@@ -33,6 +28,28 @@ void RegistrateServices()
     builder.Services.AddScoped<AuthService>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddControllersWithViews();
+}
+
+
+void ConfigureApp()
+{
+    app.Use((context, next) =>
+    {
+        if (context.Request.Host.Host.EndsWith(".twc1.net"))
+        {
+            context.Request.Scheme = "https";
+        }
+        return next();
+    });
+
+    app.UseStaticFiles();
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Index}/{action=Index}/{id?}");
 }
 
 void RegistrateAuthAndAouth()

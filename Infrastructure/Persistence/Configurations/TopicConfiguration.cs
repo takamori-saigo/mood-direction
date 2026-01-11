@@ -11,8 +11,7 @@ public class TopicConfiguration : IEntityTypeConfiguration<Topic>
         builder.HasKey(t => t.Id);
 
         builder.Property(t => t.Title)
-            .IsRequired()
-            .HasMaxLength(200);
+            .IsRequired();
 
         builder.HasOne(t => t.CoreThesis)
             .WithMany(c => c.Topics)

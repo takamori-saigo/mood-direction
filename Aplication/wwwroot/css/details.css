@@ -128,13 +128,12 @@ body {
 
 .theme-title {
     font-size: 20px;
-    text-align: center;
+    text-align: left;
     margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    word-break: break-word;
     flex: 1 1 auto;
-    padding: 0 20px;
+    padding: 12px 20px 12px 0;
 }
 
 .empty-state {
@@ -194,7 +193,7 @@ body {
 
     .theme-title {
         font-size: 18px;
-        padding: 0 15px;
+        padding: 10px 0 10px 0;
     }
 
     .topics-scroll {
@@ -245,7 +244,7 @@ body {
 
     .theme-title {
         font-size: 16px;
-        padding: 0 10px;
+        padding: 10px 8px 10px 0;
     }
 
     .icon img {
@@ -266,7 +265,7 @@ body {
 
     .theme-title {
         font-size: 15px;
-        padding: 0 8px;
+        padding: 5px 0 5px 0;
     }
 
     .btn {

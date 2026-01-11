@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoralCompass.Infrastructure.Domain;
-using MoralCompass.Infrastructure.Domain.Enums;
 
 namespace MoralCompass.Web.Controllers;
 
 public class ThesisController : Controller
 {
+    private readonly MoralCompassDbContext _context;
+
     public class ThesisDetailModel
     {
         public CoreThesis Thesis { get; set; } = null!;
@@ -20,15 +21,7 @@ public class ThesisController : Controller
     {
         public Topic Topic { get; set; } = null!;
     }
-
-    public class DiscussionItemWithComments
-    {
-        public DiscussionItem Item { get; set; } = null!;
-        public List<Comment> Comments { get; set; } = new(); // ← только для дилемм!
-    }
-
-    private readonly MoralCompassDbContext _context;
-
+    
     public ThesisController(MoralCompassDbContext context)
     {
         _context = context;
