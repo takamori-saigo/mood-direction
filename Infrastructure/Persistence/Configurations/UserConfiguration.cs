@@ -28,5 +28,13 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
 
         builder.HasIndex(u => u.Email).IsUnique();
+        
+        builder.HasMany(u => u.FavoriteTopics)
+            .WithMany(t => t.FavoritedByUsers)
+            .UsingEntity<Dictionary<string, object>>(
+                "UserFavoriteTopic", // имя промежуточной таблицы в БД
+                j => j.HasOne<Topic>().WithMany().HasForeignKey("TopicId"),
+                j => j.HasOne<User>().WithMany().HasForeignKey("UserId")
+            );
     }
 }

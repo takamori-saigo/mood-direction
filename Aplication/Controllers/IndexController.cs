@@ -36,7 +36,7 @@ namespace Aplication.Controllers
             public string Email { get; set; } = string.Empty;
             public string? Phone { get; set; }
             public string? Nickname { get; set; }
-            public Gender Gender { get; set; }
+            public string? Gender { get; set; } 
             public int? Age { get; set; }
         }
         
@@ -72,7 +72,7 @@ namespace Aplication.Controllers
                 Email = user.Email,
                 Phone = user.Phone,
                 Nickname = user.Nickname,
-                Gender = user.Gender,
+                Gender = user.Gender.ToString(),
                 Age = user.Age
             };
 
@@ -80,7 +80,7 @@ namespace Aplication.Controllers
         }
         
         [HttpPost]
-        [ValidateAntiForgeryToken] // ← рекомендуется добавить
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Profile(UserProfileModel model)
         {
             if (!ModelState.IsValid)
@@ -94,12 +94,18 @@ namespace Aplication.Controllers
             if (user == null)
                 return NotFound();
 
-            // Обновляем поля
             user.Nickname = model.Nickname ?? user.Nickname;
-            user.Phone = model.Phone; // может быть null
+            user.Phone = model.Phone;
 
-            // Обработка Gender
-
+            // 🔑 Преобразуем строку в enum
+            if (!string.IsNullOrWhiteSpace(model.Gender))
+            {
+                if (Enum.TryParse<Gender>(model.Gender, true, out var gender))
+                {
+                    user.Gender = gender;
+                }
+                // Если не удалось распарсить — оставляем старое значение
+            }
 
             user.Age = model.Age;
 

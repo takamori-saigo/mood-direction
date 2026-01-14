@@ -18,16 +18,11 @@
             <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
             <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
             <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
-            <a href="@Url.Action("Profile", "Index")" class="nav-link">Профиль</a>
         </nav>
 
         @if (User.Identity?.IsAuthenticated == true)
-        {
-        <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
-            <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
-                Выйти
-            </button>
-        </form>
+        { 
+            <a href="@Url.Action("Profile", "Index")" class="nav-link">Профиль</a>
         }
         else
         {

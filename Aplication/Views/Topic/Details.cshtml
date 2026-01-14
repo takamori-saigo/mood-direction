@@ -27,16 +27,12 @@
         </nav>
 
         @if (User.Identity?.IsAuthenticated == true)
-        {
-        <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
-            <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
-                Выйти
-            </button>
-        </form>
+        { 
+            <a href="@Url.Action("Profile", "Index")" class="nav-link">Профиль</a>
         }
         else
         {
-        <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
+            <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
         }
     </header>
 

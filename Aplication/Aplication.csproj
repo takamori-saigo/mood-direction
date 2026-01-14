@@ -37,4 +37,8 @@
       <_ContentIncludedByDefault Remove="Views\DiscussionItem\Details.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Views\Shared\" />
+    </ItemGroup>
+
 </Project>

@@ -1,0 +1,181 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+/* === Форма редактирования === */
+.form-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 40px 20px 20px;
+}
+
+.form-title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.edit-form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 15px;
+    border: 2px solid black;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.form-label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #000;
+}
+
+.form-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #d32f2f;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+/* === Кнопки в стиле проекта === */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #555;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-primary {
+    border-color: #000;
+    color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    color: white;
+}
+
+.btn-secondary {
+    border-color: #aaa;
+    color: #777;
+}
+
+.btn-secondary:hover {
+    background-color: #eee;
+}
+
+/* === Адаптивность === */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 30px 16px 10px;
+    }
+
+    .form-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+    }
+
+    .edit-form {
+        padding: 20px;
+    }
+
+    .form-label {
+        font-size: 16px;
+    }
+
+    .form-control {
+        font-size: 16px;
+        padding: 10px 14px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 15px;
+    }
+
+    .form-actions {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px 16px 10px;
+    }
+
+    .form-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .edit-form {
+        padding: 16px;
+    }
+
+    .form-label {
+        font-size: 15px;
+    }
+
+    .form-control {
+        font-size: 15px;
+        padding: 8px 12px;
+    }
+
+    .btn {
+        padding: 6px 14px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}

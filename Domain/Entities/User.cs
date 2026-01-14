@@ -15,4 +15,6 @@ public class User : AuditableEntity
     public ICollection<Topic> Topics { get; set; } = new List<Topic>();
 
     public string PasswordHash { get; set; } = null!;
+    
+    public ICollection<Topic> FavoriteTopics { get; set; } = new List<Topic>();
 }

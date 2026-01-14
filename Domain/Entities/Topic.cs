@@ -13,4 +13,6 @@ public class Topic : AuditableEntity
     public CoreThesis CoreThesis { get; set; }
     
     public User Author { get; set; }
+    
+    public ICollection<User> FavoritedByUsers { get; set; } = new List<User>();
 }

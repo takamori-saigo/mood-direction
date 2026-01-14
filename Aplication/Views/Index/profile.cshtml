@@ -56,21 +56,7 @@
             <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
             <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
             <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
-            <a href="@Url.Action("Profile", "Index")" class="nav-link">Профиль</a>
         </nav>
-
-        @if (User.Identity?.IsAuthenticated == true)
-        {
-            <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
-                <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
-                    Выйти
-                </button>
-            </form>
-        }
-        else
-        {
-            <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
-        }
     </header>
 
     <div class="profile-form">
@@ -83,7 +69,7 @@
 
         <form asp-action="Profile" method="post">
             <div class="form-group">
-                <label>Email (нельзя изменить)</label>
+                <label>Email </label>
                 <input type="email" value="@Model.Email" disabled />
             </div>
 
@@ -101,7 +87,12 @@
 
             <div class="form-group">
                 <label>Пол</label>
-                <input asp-for="Gender" placeholder="М / Ж / Другое" />
+                <select asp-for="Gender" class="form-control">
+                    <option value="">-- Выберите --</option>
+                    <option value="Male">Мужской</option>
+                    <option value="Female">Женский</option>
+                    <option value="Other">Другое</option>
+                </select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
 
@@ -111,7 +102,12 @@
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn">Сохранить</button>
+            <button type="submit" class="btn">Сохранить</button> 
+        </form>
+        <form asp-controller="Auth" asp-action="Logout" method="post" class="auth-form">
+            <button type="submit" class="auth-btn" onclick="return confirm('Выйти из аккаунта?')">
+                Выйти
+            </button>
         </form>
     </div>
 </body>

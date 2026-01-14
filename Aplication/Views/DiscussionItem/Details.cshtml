@@ -97,19 +97,18 @@
                             <button type="submit" class="auth-btn" style="padding:4px 10px; font-size:0.9em;">Сохранить</button>
                             <button type="button" class="auth-btn" style="padding:4px 10px; font-size:0.9em; margin-left:6px;" onclick="cancelEdit('@c.Comment.Id')">Отмена</button>
                         </form>
-
-                        <!-- Кнопки действий -->
+                        
                         @if (c.CanEdit)
                         {
-                            <div style="margin-top:4px; font-size:0.85em;">
-                                <button type="button" class="edit-link" style="background:none; border:none; color:#555; text-decoration:underline; cursor:pointer;" 
+                            <div class="comment-actions" id="actions-@c.Comment.Id">
+                                <button type="button" class="edit-link" 
                                         onclick="startEdit('@c.Comment.Id')">
                                     Редактировать
                                 </button>
                                 <form method="post" asp-action="DeleteComment" style="display:inline-block; margin-left:12px;"
                                       onsubmit="return confirm('Удалить комментарий?');">
                                     <input type="hidden" name="commentId" value="@c.Comment.Id" />
-                                    <button type="submit" class="edit-link" style="color:#d00; text-decoration:underline; background:none; border:none; cursor:pointer;">
+                                    <button type="submit" class="edit-link" style="color:#d00;">
                                         Удалить
                                     </button>
                                 </form>
@@ -118,22 +117,18 @@
 
                         <!-- Реакции -->
                         <div class="reactions">
-                            <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="1">
+                            <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
+                                  asp-route-value="@(c.UserReaction == 1 ? 0 : 1)">
                                 <button type="submit" class="reaction-btn @(c.UserReaction == 1 ? "liked" : "")">
                                     <img src="~/svg/like.svg" alt="Лайк" width="16" height="16" /> @c.Likes
                                 </button>
                             </form>
-                            <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="-1">
+                            <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
+                                  asp-route-value="@(c.UserReaction == -1 ? 0 : -1)">
                                 <button type="submit" class="reaction-btn @(c.UserReaction == -1 ? "disliked" : "")">
                                     <img src="~/svg/dislike.svg" alt="Дизлайк" width="16" height="16" /> @c.Dislikes
                                 </button>
                             </form>
-                            @if (c.UserReaction != 0)
-                            {
-                                <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="0">
-                                    <button type="submit" class="reaction-btn cancel">✕</button>
-                                </form>
-                            }
                         </div>
                     </div>
                 }
@@ -141,15 +136,19 @@
             </div>
     </main>
     <script>
-    function startEdit(commentId) {
-        document.getElementById('text-' + commentId).style.display = 'none';
-        document.getElementById('form-' + commentId).style.display = 'block';
-    }
+        function startEdit(commentId) {
+            document.getElementById('text-' + commentId).style.display = 'none';
+            document.getElementById('form-' + commentId).style.display = 'block';
+            const actions = document.getElementById('actions-' + commentId);
+            if (actions) actions.style.display = 'none';
+        }
 
-    function cancelEdit(commentId) {
-        document.getElementById('form-' + commentId).style.display = 'none';
-        document.getElementById('text-' + commentId).style.display = 'block';
-    }
-</script>
+        function cancelEdit(commentId) {
+            document.getElementById('form-' + commentId).style.display = 'none';
+            document.getElementById('text-' + commentId).style.display = 'block';
+            const actions = document.getElementById('actions-' + commentId);
+            if (actions) actions.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
