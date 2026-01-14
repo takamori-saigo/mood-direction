@@ -28,6 +28,8 @@ void RegistrateServices()
     builder.Services.AddScoped<AuthService>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddControllersWithViews();
+    builder.Services.AddAuthorization(options => { options.AddPolicy("AdminOnly", policy => 
+            policy.RequireClaim("IsAdmin", "true")); });
 }
 
 

@@ -43,9 +43,15 @@ public class AuthController : Controller
                 new Claim(ClaimTypes.Name, user.Nickname),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim("Age", user.Age.ToString()),
-                new Claim("Gender", user.Gender.ToString())
+                new Claim("Gender", user.Gender.ToString()),
+                new Claim("IsAdmin", user.IsAdmin.ToString()) // ← ДОБАВЬТЕ ЗДЕСЬ
             };
 
+            if (user.IsAdmin)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            }
+            
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 
@@ -126,9 +132,15 @@ public class AuthController : Controller
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Nickname),
-            new Claim(ClaimTypes.Email, user.Email)
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim("IsAdmin", user.IsAdmin.ToString()) 
         };
 
+        if (user.IsAdmin)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+        }
+        
         var identity = new ClaimsIdentity(
             claims,
             CookieAuthenticationDefaults.AuthenticationScheme

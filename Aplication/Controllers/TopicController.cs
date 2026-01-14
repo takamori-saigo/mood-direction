@@ -135,4 +135,114 @@ public class TopicController : Controller
 
         return RedirectToAction("Details", new { id });
     }
+    
+
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditTopic(Guid id, string title)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var topic = await _context.Topics
+            .Include(t => t.CoreThesis)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (topic == null)
+            return NotFound();
+
+        // Проверяем: либо автор, либо админ
+        if (topic.AuthorId != userId && !IsAdmin())
+            return Forbid();
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            ModelState.AddModelError("Title", "Название темы не может быть пустым.");
+            return View(topic);
+        }
+
+        topic.Title = title.Trim();
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Details", "Thesis", new { id = topic.CoreThesisId });
+    }
+    
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> EditTopic(Guid id)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var topic = await _context.Topics
+            .Include(t => t.CoreThesis)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (topic == null)
+            return NotFound();
+
+        // Проверяем: либо автор, либо админ
+        if (topic.AuthorId != userId && !IsAdmin())
+            return Forbid();
+
+        return View(topic); // Показываем форму редактирования
+    }
+    
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteTopic(Guid id)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var topic = await _context.Topics
+            .Include(t => t.DiscussionItems)
+            .Include(t => t.Author)
+            .Include(t => t.CoreThesis)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (topic == null)
+            return NotFound();
+
+        // Проверяем: либо автор, либо админ
+        if (topic.AuthorId != userId && !IsAdmin())
+            return Forbid();
+
+        // Админ может удалять даже если есть дилеммы
+        if (topic.DiscussionItems?.Any() == true && !IsAdmin())
+        {
+            TempData["Error"] = "Невозможно удалить тему, так как в ней есть дилеммы. " +
+                                "Только администратор может удалить тему с дилеммами.";
+            return RedirectToAction("Details", new { id });
+        }
+
+        var thesisId = topic.CoreThesisId;
+        var authorName = topic.Author?.Nickname ?? "неизвестен";
+        
+        _context.Topics.Remove(topic);
+        await _context.SaveChangesAsync();
+
+        if (IsAdmin() && topic.AuthorId != userId)
+        {
+            TempData["Success"] = $"Тема успешно удалена администратором (автор: {authorName})";
+        }
+        else
+        {
+            TempData["Success"] = "Тема успешно удалена.";
+        }
+
+        return RedirectToAction("Details", "Thesis", new { id = thesisId });
+    }
+    
+    private bool IsAdmin()
+    {
+        return User.IsInRole("Admin") || 
+               (User.Identity?.IsAuthenticated == true && 
+                bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var isAdmin) && isAdmin);
+    }
 }

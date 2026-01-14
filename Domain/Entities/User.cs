@@ -9,7 +9,7 @@ public class User : AuditableEntity
     public string? Phone { get; set; }
     public string Nickname { get; set; } = null!;
     public Gender Gender { get; set; }
-    public int Age { get; set; }
+    public int? Age { get; set; }
     public bool IsAdmin { get; set; }
     
     public ICollection<Topic> Topics { get; set; } = new List<Topic>();

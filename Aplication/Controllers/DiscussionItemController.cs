@@ -16,7 +16,11 @@ public class DiscussionItemController : Controller
         public string AuthorNickname { get; set; } = "Аноним";
         public int Likes { get; set; }
         public int Dislikes { get; set; }
-        public int UserReaction { get; set; } // 1, -1, 0
+        public int UserReaction { get; set; } 
+        
+        public bool CanEdit { get; set; }
+        public bool IsEditing { get; set; } 
+        public bool CanDelete { get; set; }
     }
 
     public class DiscussionItemDetailModel
@@ -29,6 +33,8 @@ public class DiscussionItemController : Controller
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
         public int? UserReactionValue { get; set; }
+        public bool IsAdmin { get; set; }
+
     }
 
     private readonly MoralCompassDbContext _context;
@@ -47,6 +53,14 @@ public class DiscussionItemController : Controller
             .FirstOrDefaultAsync(di => di.Id == id);
         if (item == null) return NotFound();
 
+        Guid? editCommentId = null;
+        if (Guid.TryParse(Request.Query["editCommentId"], out var parsedEditId))
+        {
+            editCommentId = parsedEditId;
+        }
+        
+        
+        
         var author = await _context.Users.FindAsync(item.AuthorId);
         var topic = item.TopicId != Guid.Empty
             ? await _context.Topics
@@ -60,6 +74,7 @@ public class DiscussionItemController : Controller
             .OrderBy(c => c.CreatedAt)
             .ToListAsync();
 
+        
         var commentIds = comments.Select(c => c.Id).ToList();
 
         var reactions = await _context.Reactions
@@ -87,13 +102,41 @@ public class DiscussionItemController : Controller
             }
         }
 
+        Guid? currentUserId = null;
+
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdStr) && Guid.TryParse(userIdStr, out var parsedUserId))
+            {
+                currentUserId = parsedUserId;
+                
+                var userReactions = await _context.Reactions
+                    .Where(r => r.UserId == parsedUserId &&
+                                r.TargetType == ReactionTargetType.Comment &&
+                                commentIds.Contains(r.TargetId))
+                    .ToDictionaryAsync(r => r.TargetId, r => r.Value);
+                userReactionMap = userReactions;
+            }
+        }
+
+        bool isAdmin = false;
+        if (currentUserId.HasValue)
+        {
+            var user = await _context.Users.FindAsync(currentUserId.Value);
+            isAdmin = user?.IsAdmin == true;
+        }
+
         var commentViewModels = comments.Select(c => new CommentViewModel
         {
             Comment = c,
             AuthorNickname = c.Author?.Nickname ?? "Аноним",
             Likes = reactionsByComment.GetValueOrDefault(c.Id, new { Likes = 0, Dislikes = 0 }).Likes,
             Dislikes = reactionsByComment.GetValueOrDefault(c.Id, new { Likes = 0, Dislikes = 0 }).Dislikes,
-            UserReaction = userReactionMap.GetValueOrDefault(c.Id, 0)
+            UserReaction = userReactionMap.GetValueOrDefault(c.Id, 0),
+            CanEdit = currentUserId.HasValue && (c.AuthorId == currentUserId.Value || isAdmin),
+            CanDelete = currentUserId.HasValue && (c.AuthorId == currentUserId.Value || isAdmin),
+            IsEditing = editCommentId == c.Id && currentUserId.HasValue && (c.AuthorId == currentUserId.Value || isAdmin)
         }).ToList();
 
         var dilemmaReactions = await _context.Reactions
@@ -253,5 +296,62 @@ public class DiscussionItemController : Controller
 
         var comment = await _context.Comments.FindAsync(commentId);
         return RedirectToAction("Details", new { id = comment?.DiscussionItemId ?? Guid.Empty });
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> EditCommentInline(Guid itemId, Guid commentId, string content)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var comment = await _context.Comments.FindAsync(commentId);
+        if (comment == null) return NotFound();
+
+        // Проверка прав
+        if (comment.AuthorId != userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null || !user.IsAdmin)
+                return Forbid();
+        }
+
+        if (!string.IsNullOrWhiteSpace(content))
+        {
+            comment.Content = content.Trim();
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToAction("Details", new { id = itemId });
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> DeleteComment(Guid commentId)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var comment = await _context.Comments
+            .Include(c => c.Author)
+            .FirstOrDefaultAsync(c => c.Id == commentId);
+
+        if (comment == null)
+            return NotFound();
+
+        // Проверка: автор или админ
+        if (comment.AuthorId != userId)
+        {
+            var currentUser = await _context.Users.FindAsync(userId);
+            if (currentUser == null || !currentUser.IsAdmin)
+                return Forbid();
+        }
+
+        _context.Comments.Remove(comment);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Details", new { id = comment.DiscussionItemId });
     }
 }

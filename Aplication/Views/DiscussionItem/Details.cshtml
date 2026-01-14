@@ -83,22 +83,49 @@
             {
                 @foreach (var c in Model.Comments)
                 {
-                    <div class="comment-item">
+                    <div class="comment-item" data-comment-id="@c.Comment.Id">
                         <p class="login-info">@c.AuthorNickname · @c.Comment.CreatedAt.ToString("dd.MM HH:mm")</p>
-                        <p class="comment-text">@c.Comment.Content</p>
 
-                        <!-- 🔹 Реакции -->
+                        <!-- Текст комментария (по умолчанию виден) -->
+                        <p class="comment-text" id="text-@c.Comment.Id">@c.Comment.Content</p>
+
+                        <!-- Форма редактирования (изначально скрыта) -->
+                        <form method="post" asp-action="EditCommentInline" id="form-@c.Comment.Id" style="display:none; margin-top:8px;">
+                            <input type="hidden" name="itemId" value="@Model.Item.Id" />
+                            <input type="hidden" name="commentId" value="@c.Comment.Id" />
+                            <textarea name="content" rows="3" style="width:100%; padding:6px; margin-bottom:6px;">@c.Comment.Content</textarea>
+                            <button type="submit" class="auth-btn" style="padding:4px 10px; font-size:0.9em;">Сохранить</button>
+                            <button type="button" class="auth-btn" style="padding:4px 10px; font-size:0.9em; margin-left:6px;" onclick="cancelEdit('@c.Comment.Id')">Отмена</button>
+                        </form>
+
+                        <!-- Кнопки действий -->
+                        @if (c.CanEdit)
+                        {
+                            <div style="margin-top:4px; font-size:0.85em;">
+                                <button type="button" class="edit-link" style="background:none; border:none; color:#555; text-decoration:underline; cursor:pointer;" 
+                                        onclick="startEdit('@c.Comment.Id')">
+                                    Редактировать
+                                </button>
+                                <form method="post" asp-action="DeleteComment" style="display:inline-block; margin-left:12px;"
+                                      onsubmit="return confirm('Удалить комментарий?');">
+                                    <input type="hidden" name="commentId" value="@c.Comment.Id" />
+                                    <button type="submit" class="edit-link" style="color:#d00; text-decoration:underline; background:none; border:none; cursor:pointer;">
+                                        Удалить
+                                    </button>
+                                </form>
+                            </div>
+                        }
+
+                        <!-- Реакции -->
                         <div class="reactions">
                             <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="1">
                                 <button type="submit" class="reaction-btn @(c.UserReaction == 1 ? "liked" : "")">
-                                    <img src="~/svg/like.svg" alt="Лайк" width="16" height="16" />
-                                    @c.Likes
+                                    <img src="~/svg/like.svg" alt="Лайк" width="16" height="16" /> @c.Likes
                                 </button>
                             </form>
                             <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id" asp-route-value="-1">
                                 <button type="submit" class="reaction-btn @(c.UserReaction == -1 ? "disliked" : "")">
-                                    <img src="~/svg/dislike.svg" alt="Дизлайк" width="16" height="16" />
-                                    @c.Dislikes
+                                    <img src="~/svg/dislike.svg" alt="Дизлайк" width="16" height="16" /> @c.Dislikes
                                 </button>
                             </form>
                             @if (c.UserReaction != 0)
@@ -111,8 +138,18 @@
                     </div>
                 }
             }
-        </div>
+            </div>
     </main>
+    <script>
+    function startEdit(commentId) {
+        document.getElementById('text-' + commentId).style.display = 'none';
+        document.getElementById('form-' + commentId).style.display = 'block';
+    }
 
+    function cancelEdit(commentId) {
+        document.getElementById('form-' + commentId).style.display = 'none';
+        document.getElementById('text-' + commentId).style.display = 'block';
+    }
+</script>
 </body>
 </html>

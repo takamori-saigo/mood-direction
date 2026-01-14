@@ -710,12 +710,6 @@ D:/mood-direction-main/Aplication/obj/Debug/net8.0/Aplication.sourcelink.json
 /Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets.build.json
 /Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets.development.json
 /Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets.build.endpoints.json
-/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets/msbuild.Aplication.Microsoft.AspNetCore.StaticWebAssets.props
-/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets/msbuild.Aplication.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets/msbuild.build.Aplication.props
-/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.Aplication.props
-/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Aplication.props
-/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets.pack.json
 /Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/Aplication.csproj.Up2Date
 /Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/Aplication.dll
 /Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/refint/Aplication.dll
@@ -724,3 +718,8 @@ D:/mood-direction-main/Aplication/obj/Debug/net8.0/Aplication.sourcelink.json
 /Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/ref/Aplication.dll
 /Users/gats/Desktop/projects/Aplication/bin/Debug/net8.0/AspNet.Security.OAuth.Yandex.dll
 /Users/gats/Desktop/projects/Aplication/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.Google.dll
+/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/rpswa.dswa.cache.json
+/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/rjimswa.dswa.cache.json
+/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/rjsmrazor.dswa.cache.json
+/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
+/Users/gats/Desktop/projects/Aplication/obj/Debug/net8.0/staticwebassets.build.json.cache
