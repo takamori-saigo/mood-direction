@@ -47,7 +47,7 @@ public class TopicController : Controller
             .FirstOrDefaultAsync(t => t.Id == id);
         
         if (topic == null) return NotFound();
-
+        
         var dilemmas = await _context.DiscussionItems
             .Where(di => di.TopicId == id && di.Type == DiscussionItemType.Dilemma)
             .Include(di => di.Author)
@@ -244,5 +244,31 @@ public class TopicController : Controller
         return User.IsInRole("Admin") || 
                (User.Identity?.IsAuthenticated == true && 
                 bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var isAdmin) && isAdmin);
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> ToggleFavorite(Guid topicId)
+    {
+        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+    
+        var user = await _context.Users
+            .Include(u => u.FavoriteTopics)
+            .FirstAsync(u => u.Id == userId);
+
+        var topic = await _context.Topics.FindAsync(topicId);
+        if (topic == null) return NotFound();
+
+        if (user.FavoriteTopics.Any(t => t.Id == topicId))
+        {
+            user.FavoriteTopics.Remove(topic);
+        }
+        else
+        {
+            user.FavoriteTopics.Add(topic);
+        }
+
+        await _context.SaveChangesAsync();
+        return Ok();
     }
 }

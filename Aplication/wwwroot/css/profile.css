@@ -1,0 +1,248 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+/* === Навигация === */
+.header {
+    display: flex;
+    align-items: end;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    padding: 0 16px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #737373;
+    text-decoration: none;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+/* === Профиль === */
+.profile-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+.profile-title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.profile-form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 15px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-control,
+.form-control-disabled {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #000;
+}
+
+.form-control-disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.text-danger {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #d32f2f;
+}
+
+/* === Уведомления === */
+.alert {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* === Кнопки === */
+.form-actions,
+.logout-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #555;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-primary {
+    border-color: #000;
+    color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    color: white;
+}
+
+.btn-secondary {
+    border-color: #aaa;
+    color: #777;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #eee;
+}
+
+/* === Адаптивность === */
+@media (max-width: 768px) {
+    .header {
+        margin-bottom: 30px;
+    }
+
+    .nav {
+        gap: 16px;
+        margin-top: 15px;
+    }
+
+    .profile-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+    }
+
+    .profile-form {
+        padding: 20px;
+    }
+
+    .form-label {
+        font-size: 16px;
+    }
+
+    .form-control,
+    .form-control-disabled {
+        font-size: 16px;
+        padding: 10px 14px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        margin-bottom: 20px;
+    }
+
+    .nav {
+        padding: 0 0 0 40px;
+    }
+
+    .profile-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .profile-form {
+        padding: 16px;
+    }
+
+    .form-label {
+        font-size: 15px;
+    }
+
+    .form-control,
+    .form-control-disabled {
+        font-size: 15px;
+        padding: 8px 12px;
+    }
+
+    .btn {
+        padding: 6px 14px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .form-actions,
+    .logout-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-secondary {
+        margin-top: 20px;
+    }
+}

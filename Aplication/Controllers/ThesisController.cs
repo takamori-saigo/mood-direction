@@ -27,17 +27,21 @@ public class ThesisController : Controller
         _context = context;
     }
 
-   
     public async Task<IActionResult> Details(Guid id)
     {
         var thesis = await _context.CoreTheses
             .FirstOrDefaultAsync(ct => ct.Id == id && ct.IsActive);
         if (thesis == null) return NotFound();
 
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var currentUserId = userIdStr != null ? Guid.Parse(userIdStr) : (Guid?)null;
+
         var topics = await _context.Topics
             .Where(t => t.CoreThesisId == id)
             .Include(t => t.Author)
-            .OrderByDescending(t => t.CreatedAt)
+            .Include(t => t.FavoritedByUsers) // важно!
+            .OrderByDescending(t => t.FavoritedByUsers.Any(u => u.Id == currentUserId)) // избранные — true → выше
+            .ThenByDescending(t => t.CreatedAt)
             .ToListAsync();
 
         var model = new ThesisDetailModel
@@ -48,6 +52,8 @@ public class ThesisController : Controller
 
         return View(model);
     }
+   
+    
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> AttachToTopic(Guid discussionItemId, Guid topicId)
@@ -107,5 +113,40 @@ public class ThesisController : Controller
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Details", new { id = thesisId });
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> ToggleFavorite(Guid topicId)
+    {
+        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value 
+                                ?? throw new InvalidOperationException("Пользователь не аутентифицирован"));
+
+        var topic = await _context.Topics
+            .Include(t => t.FavoritedByUsers)
+            .FirstOrDefaultAsync(t => t.Id == topicId);
+
+        if (topic == null)
+            return NotFound();
+
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null)
+            return NotFound();
+
+        if (topic.FavoritedByUsers.Any(u => u.Id == userId))
+        {
+            // Удалить из избранного
+            topic.FavoritedByUsers.Remove(user);
+            TempData["Success"] = "Тема удалена из избранного.";
+        }
+        else
+        {
+            // Добавить в избранное
+            topic.FavoritedByUsers.Add(user);
+            TempData["Success"] = "Тема добавлена в избранное!";
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Details", new { id = topic.CoreThesisId });
     }
 }

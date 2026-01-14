@@ -13,6 +13,21 @@ body {
     padding-bottom: 20px;
 }
 
+.favorite-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    padding: 6px; /* увеличивает зону клика */
+    border-radius: 50%;
+}
+
+.favorite-btn:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
 /* === Уведомления === */
 .alert {
     padding: 12px 20px;
