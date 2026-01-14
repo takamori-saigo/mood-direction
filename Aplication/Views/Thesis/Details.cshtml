@@ -78,62 +78,73 @@ bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var admin) && admin);
         <div class="theme-container">
             <a href="@Url.Action("Details", "Topic", new { id = topicGroup.Topic.Id })" class="theme-link">
                 <div class="theme-item">
-                    <p class="theme-title">@topicGroup.Topic.Title</p>
-                    <div class="theme-meta">
-                        @if (isAdmin)
-                        {
-                            <span class="author">@topicGroup.Topic.Author.Nickname</span>
-                        }
-                    </div>
-                    
-                    <!-- Иконки/текст для редактирования и удаления -->
-                    @if (User.Identity?.IsAuthenticated == true &&
-                         (isAdmin || userIdStr == topicGroup.Topic.AuthorId.ToString()))
-                    {
+                    <div class="theme-content">
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" style="margin-left: 8px;">
+                        <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" class="favorite-form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="topicId" value="@topicGroup.Topic.Id" />
+                            @{
+                            var isFavorited = topicGroup.Topic.FavoritedByUsers.Any(u => u.Id.ToString() == userIdStr);
+                            var iconSrc = isFavorited ? "~/images/trueheart.png" : "~/images/heart.png";
+                            var altText = isFavorited ? "Убрать из избранного" : "Добавить в избранное";
+                            }
+                            <button type="submit" class="favorite-btn" title="@altText">
+                                <img src="@Url.Content(iconSrc)" alt="@altText" width="20" height="20" />
+                            </button>
+                        </form>
+                        }
+                        <p class="theme-title">@topicGroup.Topic.Title</p>
+                    </div>
+
+                    <!-- Действия (редактирование/удаление) -->
+                    @if (User.Identity?.IsAuthenticated == true &&
+                    (isAdmin || userIdStr == topicGroup.Topic.AuthorId.ToString()))
+                    {
+                    <div class="theme-actions-inline">
+                        <!-- Десктоп: иконки -->
+                        <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })"
+                           class="icon-btn edit-icon desktop-only" title="Редактировать">
+                            <img src="~/images/pencil.png" alt="✏️">
+                        </a>
+
+                        <form asp-controller="Topic" asp-action="DeleteTopic" method="post"
+                              onsubmit="return confirm('Удалить тему? Это действие нельзя отменить.');"
+                              class="delete-inline-form desktop-only">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@topicGroup.Topic.Id"/>
+                            <button type="submit" class="icon-btn delete-icon" title="Удалить">
+                                <img src="~/images/delete.png" alt="🗑️">
+                            </button>
+                        </form>
+                        
+                        <!-- Мобильные: текстовые кнопки -->
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" class="favorite-form">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="topicId" value="@topicGroup.Topic.Id" />
                                 @{
                                     var isFavorited = topicGroup.Topic.FavoritedByUsers.Any(u => u.Id.ToString() == userIdStr);
-                                    var iconSrc = isFavorited ? "~/images/star-filled.png" : "~/images/star-outline.png";
+                                    var iconSrc = isFavorited ? "~/images/trueheart.png" : "~/images/heart.png";
                                     var altText = isFavorited ? "Убрать из избранного" : "Добавить в избранное";
                                 }
-                                <button type="submit" class="favorite-btn" title="@altText">
-                                    <img src="@Url.Content(iconSrc)" alt="@altText" width="20" height="20" />
+                                <button type="submit" class="mobile-favorite-btn @(isFavorited ? "favorited" : "")" title="@altText">
+                                    @(isFavorited ? "В избранном" : "В избранное")
                                 </button>
                             </form>
                         }
-                        <div class="theme-actions-inline">
-                            <!-- Десктоп: иконки -->
-                            <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })"
-                               class="icon-btn edit-icon desktop-only" title="Редактировать">
-                                <img src="~/images/pencil.png" alt="✏️">
-                            </a>
+                        <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })"
+                           class="mobile-btn mobile-only">Редактировать</a>
 
-                            <form asp-controller="Topic" asp-action="DeleteTopic" method="post"
-                                  onsubmit="return confirm('Удалить тему? Это действие нельзя отменить.');"
-                                  class="delete-inline-form desktop-only">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="id" value="@topicGroup.Topic.Id"/>
-                                <button type="submit" class="icon-btn delete-icon" title="Удалить">
-                                    <img src="~/images/delete.png" alt="🗑️">
-                                </button>
-                            </form>
-
-                            <!-- Мобильные: текстовые кнопки -->
-                            <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })"
-                               class="mobile-btn mobile-only">Редактировать</a>
-
-                            <form asp-controller="Topic" asp-action="DeleteTopic" method="post"
-                                  onsubmit="return confirm('Удалить тему? Это действие нельзя отменить.');"
-                                  class="delete-inline-form mobile-only">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="id" value="@topicGroup.Topic.Id"/>
-                                <button type="submit" class="mobile-btn mobile-delete">Удалить</button>
-                            </form>
-                        </div>
+                        <form asp-controller="Topic" asp-action="DeleteTopic" method="post"
+                              onsubmit="return confirm('Удалить тему? Это действие нельзя отменить.');"
+                              class="delete-inline-form mobile-only">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@topicGroup.Topic.Id"/>
+                            <button type="submit" class="mobile-btn mobile-delete">Удалить</button>
+                        </form>
+                    </div>
                     }
                 </div>
             </a>

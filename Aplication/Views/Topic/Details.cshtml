@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @model MoralCompass.Web.Controllers.TopicController.TopicDetailModel
 @{
     ViewData["Title"] = Model.Topic?.Title ?? "Тема";
@@ -96,6 +97,13 @@
         {
             @foreach (var dilemma in Model.Dilemmas)
             {
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                    var isAuthor = dilemma.Item.AuthorId.ToString() == currentUserId;
+                    var isAdmin = User.IsInRole("Admin") || 
+                                  (bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var a) && a);
+                }
                 <div class="card">
                     <p class="login-info">
                         @dilemma.Author.Nickname · @dilemma.Item.CreatedAt.ToString("dd.MM.yyyy")

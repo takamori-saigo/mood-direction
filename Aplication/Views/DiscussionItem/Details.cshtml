@@ -47,7 +47,20 @@
             @Model.Author.Nickname · @Model.Item?.CreatedAt.ToString("dd.MM.yyyy HH:mm")
         </p>
         <p class="discussion-content">@Model.Item?.Content</p>
+        @if (Model.CanEditOrDelete)
+        {
+            <div class="mt-3 mb-4" style="display: flex; gap: 10px;">
+                <a href="@Url.Action("EditDilemma", "DiscussionItem", new { id = Model.Item.Id })"
+                   class="btn btn-sm btn-outline-secondary">✎ Редактировать дилемму</a>
 
+                <form asp-action="DeleteDilemma" asp-controller="DiscussionItem" method="post" style="display:inline;" 
+                      onsubmit="return confirm('Вы уверены, что хотите удалить эту дилемму? Все комментарии также будут удалены.')">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.Item.Id" />
+                    <button type="submit" class="btn btn-sm btn-outline-danger">🗑 Удалить дилемму</button>
+                </form>
+            </div>
+        }
         <h2 class="comments-title">Комментарии (@Model.Comments.Count)</h2>
 
         <!-- 🔸 Скролл-контейнер -->

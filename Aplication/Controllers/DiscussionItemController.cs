@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
@@ -34,6 +35,8 @@ public class DiscussionItemController : Controller
         public int DislikeCount { get; set; }
         public int? UserReactionValue { get; set; }
         public bool IsAdmin { get; set; }
+        public bool CanEditOrDelete { get; set; } 
+
 
     }
 
@@ -142,7 +145,8 @@ public class DiscussionItemController : Controller
         var dilemmaReactions = await _context.Reactions
             .Where(r => r.TargetType == ReactionTargetType.DiscussionItem && r.TargetId == id)
             .ToListAsync();
-
+        var canEditOrDelete = currentUserId.HasValue && 
+                              (item.AuthorId == currentUserId.Value || isAdmin);
         var likeCount = dilemmaReactions.Count(r => r.Value == 1);
         var dislikeCount = dilemmaReactions.Count(r => r.Value == -1);
         var userDilemmaReaction = dilemmaReactions
@@ -157,7 +161,8 @@ public class DiscussionItemController : Controller
             Comments = commentViewModels,
             LikeCount = likeCount,
             DislikeCount = dislikeCount,
-            UserReactionValue = userDilemmaReaction
+            UserReactionValue = userDilemmaReaction,
+            CanEditOrDelete = canEditOrDelete
         };
 
         return View(model);
@@ -353,5 +358,81 @@ public class DiscussionItemController : Controller
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Details", new { id = comment.DiscussionItemId });
+    }
+    
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> EditDilemma(Guid id)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .FirstOrDefaultAsync(di => di.Id == id && di.Type == DiscussionItemType.Dilemma);
+
+        if (dilemma == null) return NotFound();
+        if (dilemma.AuthorId != userId && !IsAdmin()) return Forbid();
+
+        return View(dilemma);
+    }
+
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditDilemma(Guid id, string title, string content)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .FirstOrDefaultAsync(di => di.Id == id && di.Type == DiscussionItemType.Dilemma);
+
+        if (dilemma == null) return NotFound();
+        if (dilemma.AuthorId != userId && !IsAdmin()) return Forbid();
+
+        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+        {
+            ModelState.AddModelError("", "Заголовок и содержание обязательны.");
+            return View(dilemma);
+        }
+
+        dilemma.Title = title.Trim();
+        dilemma.Content = content.Trim();
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Details", new { id });
+    }
+    
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteDilemma(Guid id)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .Include(di => di.Topic)
+            .FirstOrDefaultAsync(di => di.Id == id && di.Type == DiscussionItemType.Dilemma);
+
+        if (dilemma == null) return NotFound();
+        if (dilemma.AuthorId != userId && !IsAdmin()) return Forbid();
+
+        var topicId = dilemma.TopicId;
+        _context.DiscussionItems.Remove(dilemma);
+        await _context.SaveChangesAsync();
+
+        TempData["Success"] = "Дилемма успешно удалена.";
+        return RedirectToAction("Details", "Topic", new { id = topicId });
+    }
+    
+    private bool IsAdmin()
+    {
+        return User.IsInRole("Admin") || 
+               (User.Identity?.IsAuthenticated == true && 
+                bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var isAdmin) && isAdmin);
     }
 }

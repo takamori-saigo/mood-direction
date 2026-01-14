@@ -137,13 +137,11 @@ public class ThesisController : Controller
         {
             // Удалить из избранного
             topic.FavoritedByUsers.Remove(user);
-            TempData["Success"] = "Тема удалена из избранного.";
         }
         else
         {
             // Добавить в избранное
             topic.FavoritedByUsers.Add(user);
-            TempData["Success"] = "Тема добавлена в избранное!";
         }
 
         await _context.SaveChangesAsync();

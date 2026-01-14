@@ -1,0 +1,24 @@
+@model MoralCompass.Infrastructure.Domain.DiscussionItem
+
+@{
+    ViewData["Title"] = "Редактировать дилемму";
+}
+
+<div class="container mt-4" style="max-width: 700px;">
+    <h2>Редактировать дилемму</h2>
+
+    <form asp-action="EditDilemma" asp-controller="DiscussionItem" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+        <div class="mb-3">
+            <label class="form-label">Заголовок</label>
+            <input name="title" class="form-control" value="@Model.Title" required maxlength="200" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Содержание</label>
+            <textarea name="content" class="form-control" rows="6" required maxlength="3000">@Model.Content</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="@Url.Action("Details", "DiscussionItem", new { id = Model.Id })" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>

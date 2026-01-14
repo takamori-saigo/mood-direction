@@ -40,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGlzY3Vzc2lvbkl0ZW0vRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/gats/Desktop/projects/Aplication/Views/DiscussionItem/EditDilemma.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGlzY3Vzc2lvbkl0ZW0vRWRpdERpbGVtbWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/gats/Desktop/projects/Aplication/Views/Index/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kZXgvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -62,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/gats/Desktop/projects/Aplication/Views/Topic/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVG9waWMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gats/Desktop/projects/Aplication/Views/Topic/EditDilemma.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVG9waWMvRWRpdERpbGVtbWEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/gats/Desktop/projects/Aplication/Views/Topic/EditTopic.cshtml]

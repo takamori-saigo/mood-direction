@@ -13,15 +13,30 @@ body {
     padding-bottom: 20px;
 }
 
+.theme-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .favorite-btn {
     width: 24px;
     height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 8px;
+    margin-right: 20px;
     padding: 6px; /* увеличивает зону клика */
     border-radius: 50%;
+    border: none
+}
+
+.mobile-favorite-btn{
+    width: 0px;
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+    display: none;
 }
 
 .favorite-btn:hover {
@@ -256,7 +271,6 @@ body {
     display: flex;
     gap: 8px;
     align-items: center;
-    margin-right: 12px;
 }
 
 /* Иконки (десктоп) */
@@ -342,6 +356,37 @@ body {
 @media (max-width: 768px) {
     .desktop-only {
         display: none !important;
+    }
+
+    .favorite-btn{
+        display: none;
+        width: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-favorite-btn {
+        display: inline-block;
+        width: auto;
+        min-width: 90px;
+        height: 27px;
+        padding: 4px 8px;
+        border: none;
+        border-radius: 4px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        background-color: #f0f0f0; /* обычный фон */
+        color: #333;
+        cursor: pointer;
+    }
+
+    .mobile-favorite-btn.favorited {
+        border: 1px solid orange; /* жёлтый цвет */
+    }
+
+    .mobile-favorite-btn:hover {
+        opacity: 0.9;
     }
 
     .mobile-only {

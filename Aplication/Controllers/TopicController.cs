@@ -271,4 +271,86 @@ public class TopicController : Controller
         await _context.SaveChangesAsync();
         return Ok();
     }
+    
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> EditDilemma(Guid dilemmaId)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .Include(di => di.Author)
+            .FirstOrDefaultAsync(di => di.Id == dilemmaId);
+
+        if (dilemma == null || dilemma.Type != DiscussionItemType.Dilemma)
+            return NotFound();
+
+        if (dilemma.AuthorId != userId && !IsAdmin())
+            return Forbid();
+
+        return View("EditDilemma", dilemma);
+    }
+
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditDilemma(Guid dilemmaId, string title, string content)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .FirstOrDefaultAsync(di => di.Id == dilemmaId && di.Type == DiscussionItemType.Dilemma);
+
+        if (dilemma == null)
+            return NotFound();
+
+        if (dilemma.AuthorId != userId && !IsAdmin())
+            return Forbid();
+
+        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+        {
+            ModelState.AddModelError("", "Заголовок и содержание обязательны.");
+            return View("EditDilemma", dilemma);
+        }
+
+        dilemma.Title = title.Trim();
+        dilemma.Content = content.Trim();
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Details", new { id = dilemma.TopicId });
+    }
+
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteDilemma(Guid dilemmaId)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .Include(di => di.Topic)
+            .FirstOrDefaultAsync(di => di.Id == dilemmaId && di.Type == DiscussionItemType.Dilemma);
+
+        if (dilemma == null)
+            return NotFound();
+
+        if (dilemma.AuthorId != userId && !IsAdmin())
+            return Forbid();
+
+        var topicId = dilemma.TopicId;
+        _context.DiscussionItems.Remove(dilemma);
+        await _context.SaveChangesAsync();
+
+        TempData["Success"] = IsAdmin() && dilemma.AuthorId != userId
+            ? $"Дилемма удалена администратором."
+            : "Ваша дилемма успешно удалена.";
+
+        return RedirectToAction("Details", new { id = topicId });
+    }
 }
