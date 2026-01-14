@@ -1,24 +1,56 @@
 @model MoralCompass.Infrastructure.Domain.DiscussionItem
 
 @{
-    ViewData["Title"] = "Редактировать дилемму";
+ViewData["Title"] = "Редактировать дилемму";
 }
 
-<div class="container mt-4" style="max-width: 700px;">
-    <h2>Редактировать дилемму</h2>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/edit-dilemma.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/icon.png" />
+</head>
+<body>
 
-    <form asp-action="EditDilemma" asp-controller="DiscussionItem" method="post">
+<main class="form-container">
+    <h1 class="form-title">Редактировать дилемму</h1>
+
+    <form asp-action="EditDilemma" asp-controller="DiscussionItem" method="post" class="edit-form">
         @Html.AntiForgeryToken()
         <input type="hidden" name="id" value="@Model.Id" />
-        <div class="mb-3">
-            <label class="form-label">Заголовок</label>
-            <input name="title" class="form-control" value="@Model.Title" required maxlength="200" />
+
+        <div class="form-group">
+            <label for="title" class="form-label">Заголовок</label>
+            <input type="text"
+                   id="title"
+                   name="title"
+                   value="@Model.Title"
+                   class="form-control"
+                   required
+                   maxlength="200" />
+            <span asp-validation-for="Title" class="text-danger form-error"></span>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Содержание</label>
-            <textarea name="content" class="form-control" rows="6" required maxlength="3000">@Model.Content</textarea>
+
+        <div class="form-group">
+            <label for="content" class="form-label">Содержание</label>
+            <textarea id="content"
+                      name="content"
+                      class="form-control"
+                      rows="6"
+                      required
+                      maxlength="3000">@Model.Content</textarea>
+            <span asp-validation-for="Content" class="text-danger form-error"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-        <a href="@Url.Action("Details", "DiscussionItem", new { id = Model.Id })" class="btn btn-secondary">Отмена</a>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="@Url.Action("Details", "DiscussionItem", new { id = Model.Id })" class="btn btn-secondary">Отмена</a>
+        </div>
     </form>
-</div>
+</main>
+
+</body>
+</html>

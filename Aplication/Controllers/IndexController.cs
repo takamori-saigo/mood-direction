@@ -3,6 +3,7 @@ using Aplication.Services;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MoralCompass.Infrastructure.Domain;
 using MoralCompass.Infrastructure.Domain.Enums;
 
@@ -44,11 +45,22 @@ namespace Aplication.Controllers
         {
             var theses = await _pageService.GetAllThesesByActive();
 
-            var topDilemmaIds = await _pageService.GetTopDilemmsIdAsync();
-            
-            var topDilemmas = await _pageService.GetTopDilemmasById(topDilemmaIds);
+            // var topDilemmaIds = await _pageService.GetTopDilemmsIdAsync();
+    
+            // var topDilemmas = await _pageService.GetTopDilemmasById(topDilemmaIds);
+    
+            var allDilemmas = await _context.DiscussionItems
+                .Include(di => di.Author) // обязательно, чтобы отображался Nickname
+                .ToListAsync();
 
-            var model = new HomeIndexModel { Theses = theses, TopDilemmas = topDilemmas };
+            var random = new Random();
+            var randomDilemmas = allDilemmas
+                .OrderBy(_ => random.Next())
+                .Take(7)
+                .ToList();
+
+    
+            var model = new HomeIndexModel { Theses = theses, TopDilemmas = randomDilemmas };
 
             return View(model);
         }
