@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cuNKal1/6Z+rB5iFi1ZOG72CLTSW27FpfEl2UTB0Mgc=",
+  "Hash": "P0KQrF3XrTyvy1En9rXF7lBTbrIEUBRqcwnzSojZUv4=",
   "Source": "Aplication",
   "BasePath": "_content/Aplication",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "zzvq6mvqtm",
-      "Integrity": "gY2+ePUtuHSzcCZ3T06dbUQ7fPJZf0P1W5HfyPuiPFk=",
+      "Fingerprint": "ao69777qi0",
+      "Integrity": "9qL94hMTOyLL83xD0bbALcmSSnPri+8pjtJ1tc2jeow=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\confession.css"
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "d41no5z0uq",
-      "Integrity": "kx7uheswCyejDhzHLmNmV90FHiCDv2SRc+ioVcQ5NbU=",
+      "Fingerprint": "ioyqe3m6kp",
+      "Integrity": "EswidPSAektnrR1Nld8U24/G2P3ZtBfzcIvWY77sY9E=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\create-topic.css"
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "j6u7rajoh6",
-      "Integrity": "ddgutQIQsoGosRVL22aA0Rs5HxwZsCqNUL8qnMYzeOI=",
+      "Fingerprint": "o8klvm365r",
+      "Integrity": "uKCnHTIr4fNdtNTyEkYzY5EoWX09uD2URZCSQcvND0U=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\details.css"
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1m7mu1nxs4",
-      "Integrity": "9/1XiPrwlLzaapBnKqu1EEXOztz9CdnjZlpcsUTmH88=",
+      "Fingerprint": "9rss2zq3bl",
+      "Integrity": "a3ESDX+hIn7T5W4RU6B/zbW4FUkYYLqR0ED7hO/5/XI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\discussion.css"
@@ -157,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "cx024vz16h",
-      "Integrity": "0L42ttf3tZG143ArDGbyf4dYtM+gs4jn5/tVJaW1/4o=",
+      "Fingerprint": "6pl5agx605",
+      "Integrity": "5uhWy6+UjBbBogkjRO4jQfNK2pgE8/BlBqpG6JBTcgM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\index.css"
@@ -178,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "zryffmnryt",
-      "Integrity": "Met4w0G446zwi2MMgojAbOlc8fNH0XXeuvV8dfcYizY=",
+      "Fingerprint": "lx6egdkdqt",
+      "Integrity": "mf7yznPC5vYrSdY5CyNSXuRWSZn+Qb0YGgtOTyS4jd0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\profile.css"
@@ -220,8 +220,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "mnc75yrvfr",
-      "Integrity": "Lmflj7E/XFnSZly5k5SkmyzKRS2ummylh9phmLnJ5/0=",
+      "Fingerprint": "03in7utj9n",
+      "Integrity": "TOqrBMTnGAxLScqw3DHRCu8btnot+ekdlw1v49kxnHo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\stats.css"
@@ -241,8 +241,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "43s2q23zen",
-      "Integrity": "UHOEpYSaqhm8NC+1xxsLAgJ9LuiqI7GPRswFqJ/tW/k=",
+      "Fingerprint": "8hirim5ju8",
+      "Integrity": "TBBjzOrVv0hb4p4TLGdhdUmawaCzRCL3xKh6TUcK/L4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\theme.css"
@@ -439,6 +439,51 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/confession.ao69777qi0.css",
+      "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\confession.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6587"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9qL94hMTOyLL83xD0bbALcmSSnPri+8pjtJ1tc2jeow=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ao69777qi0"
+        },
+        {
+          "Name": "label",
+          "Value": "css/confession.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9qL94hMTOyLL83xD0bbALcmSSnPri+8pjtJ1tc2jeow="
+        }
+      ]
+    },
+    {
       "Route": "css/confession.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\confession.css",
       "Selectors": [],
@@ -449,7 +494,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6592"
+          "Value": "6587"
         },
         {
           "Name": "Content-Type",
@@ -457,11 +502,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gY2+ePUtuHSzcCZ3T06dbUQ7fPJZf0P1W5HfyPuiPFk=\""
+          "Value": "\"9qL94hMTOyLL83xD0bbALcmSSnPri+8pjtJ1tc2jeow=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -471,52 +516,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-gY2+ePUtuHSzcCZ3T06dbUQ7fPJZf0P1W5HfyPuiPFk="
-        }
-      ]
-    },
-    {
-      "Route": "css/confession.zzvq6mvqtm.css",
-      "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\confession.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "6592"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"gY2+ePUtuHSzcCZ3T06dbUQ7fPJZf0P1W5HfyPuiPFk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "zzvq6mvqtm"
-        },
-        {
-          "Name": "label",
-          "Value": "css/confession.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-gY2+ePUtuHSzcCZ3T06dbUQ7fPJZf0P1W5HfyPuiPFk="
+          "Value": "sha256-9qL94hMTOyLL83xD0bbALcmSSnPri+8pjtJ1tc2jeow="
         }
       ]
     },
@@ -531,7 +531,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3723"
+          "Value": "3753"
         },
         {
           "Name": "Content-Type",
@@ -539,11 +539,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"kx7uheswCyejDhzHLmNmV90FHiCDv2SRc+ioVcQ5NbU=\""
+          "Value": "\"EswidPSAektnrR1Nld8U24/G2P3ZtBfzcIvWY77sY9E=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -553,12 +553,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-kx7uheswCyejDhzHLmNmV90FHiCDv2SRc+ioVcQ5NbU="
+          "Value": "sha256-EswidPSAektnrR1Nld8U24/G2P3ZtBfzcIvWY77sY9E="
         }
       ]
     },
     {
-      "Route": "css/create-topic.d41no5z0uq.css",
+      "Route": "css/create-topic.ioyqe3m6kp.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\create-topic.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -568,7 +568,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3723"
+          "Value": "3753"
         },
         {
           "Name": "Content-Type",
@@ -576,11 +576,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"kx7uheswCyejDhzHLmNmV90FHiCDv2SRc+ioVcQ5NbU=\""
+          "Value": "\"EswidPSAektnrR1Nld8U24/G2P3ZtBfzcIvWY77sY9E=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -590,7 +590,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "d41no5z0uq"
+          "Value": "ioyqe3m6kp"
         },
         {
           "Name": "label",
@@ -598,7 +598,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-kx7uheswCyejDhzHLmNmV90FHiCDv2SRc+ioVcQ5NbU="
+          "Value": "sha256-EswidPSAektnrR1Nld8U24/G2P3ZtBfzcIvWY77sY9E="
         }
       ]
     },
@@ -613,7 +613,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8659"
+          "Value": "8689"
         },
         {
           "Name": "Content-Type",
@@ -621,11 +621,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ddgutQIQsoGosRVL22aA0Rs5HxwZsCqNUL8qnMYzeOI=\""
+          "Value": "\"uKCnHTIr4fNdtNTyEkYzY5EoWX09uD2URZCSQcvND0U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:11:55 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -635,12 +635,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ddgutQIQsoGosRVL22aA0Rs5HxwZsCqNUL8qnMYzeOI="
+          "Value": "sha256-uKCnHTIr4fNdtNTyEkYzY5EoWX09uD2URZCSQcvND0U="
         }
       ]
     },
     {
-      "Route": "css/details.j6u7rajoh6.css",
+      "Route": "css/details.o8klvm365r.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\details.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -650,7 +650,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8659"
+          "Value": "8689"
         },
         {
           "Name": "Content-Type",
@@ -658,11 +658,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ddgutQIQsoGosRVL22aA0Rs5HxwZsCqNUL8qnMYzeOI=\""
+          "Value": "\"uKCnHTIr4fNdtNTyEkYzY5EoWX09uD2URZCSQcvND0U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:11:55 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -672,7 +672,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "j6u7rajoh6"
+          "Value": "o8klvm365r"
         },
         {
           "Name": "label",
@@ -680,12 +680,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ddgutQIQsoGosRVL22aA0Rs5HxwZsCqNUL8qnMYzeOI="
+          "Value": "sha256-uKCnHTIr4fNdtNTyEkYzY5EoWX09uD2URZCSQcvND0U="
         }
       ]
     },
     {
-      "Route": "css/discussion.1m7mu1nxs4.css",
+      "Route": "css/discussion.9rss2zq3bl.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\discussion.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -695,7 +695,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6459"
+          "Value": "6489"
         },
         {
           "Name": "Content-Type",
@@ -703,11 +703,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9/1XiPrwlLzaapBnKqu1EEXOztz9CdnjZlpcsUTmH88=\""
+          "Value": "\"a3ESDX+hIn7T5W4RU6B/zbW4FUkYYLqR0ED7hO/5/XI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:18:31 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -717,7 +717,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1m7mu1nxs4"
+          "Value": "9rss2zq3bl"
         },
         {
           "Name": "label",
@@ -725,7 +725,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-9/1XiPrwlLzaapBnKqu1EEXOztz9CdnjZlpcsUTmH88="
+          "Value": "sha256-a3ESDX+hIn7T5W4RU6B/zbW4FUkYYLqR0ED7hO/5/XI="
         }
       ]
     },
@@ -740,7 +740,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6459"
+          "Value": "6489"
         },
         {
           "Name": "Content-Type",
@@ -748,11 +748,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9/1XiPrwlLzaapBnKqu1EEXOztz9CdnjZlpcsUTmH88=\""
+          "Value": "\"a3ESDX+hIn7T5W4RU6B/zbW4FUkYYLqR0ED7hO/5/XI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:18:31 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -762,7 +762,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-9/1XiPrwlLzaapBnKqu1EEXOztz9CdnjZlpcsUTmH88="
+          "Value": "sha256-a3ESDX+hIn7T5W4RU6B/zbW4FUkYYLqR0ED7hO/5/XI="
         }
       ]
     },
@@ -931,6 +931,51 @@
       ]
     },
     {
+      "Route": "css/index.6pl5agx605.css",
+      "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\index.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4735"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5uhWy6+UjBbBogkjRO4jQfNK2pgE8/BlBqpG6JBTcgM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Jan 2026 19:02:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6pl5agx605"
+        },
+        {
+          "Name": "label",
+          "Value": "css/index.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5uhWy6+UjBbBogkjRO4jQfNK2pgE8/BlBqpG6JBTcgM="
+        }
+      ]
+    },
+    {
       "Route": "css/index.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\index.css",
       "Selectors": [],
@@ -941,7 +986,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4862"
+          "Value": "4735"
         },
         {
           "Name": "Content-Type",
@@ -949,11 +994,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0L42ttf3tZG143ArDGbyf4dYtM+gs4jn5/tVJaW1/4o=\""
+          "Value": "\"5uhWy6+UjBbBogkjRO4jQfNK2pgE8/BlBqpG6JBTcgM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:02:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -963,52 +1008,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-0L42ttf3tZG143ArDGbyf4dYtM+gs4jn5/tVJaW1/4o="
-        }
-      ]
-    },
-    {
-      "Route": "css/index.cx024vz16h.css",
-      "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\index.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4862"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0L42ttf3tZG143ArDGbyf4dYtM+gs4jn5/tVJaW1/4o=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "cx024vz16h"
-        },
-        {
-          "Name": "label",
-          "Value": "css/index.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-0L42ttf3tZG143ArDGbyf4dYtM+gs4jn5/tVJaW1/4o="
+          "Value": "sha256-5uhWy6+UjBbBogkjRO4jQfNK2pgE8/BlBqpG6JBTcgM="
         }
       ]
     },
@@ -1023,7 +1023,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4168"
+          "Value": "4198"
         },
         {
           "Name": "Content-Type",
@@ -1031,11 +1031,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Met4w0G446zwi2MMgojAbOlc8fNH0XXeuvV8dfcYizY=\""
+          "Value": "\"mf7yznPC5vYrSdY5CyNSXuRWSZn+Qb0YGgtOTyS4jd0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1045,12 +1045,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Met4w0G446zwi2MMgojAbOlc8fNH0XXeuvV8dfcYizY="
+          "Value": "sha256-mf7yznPC5vYrSdY5CyNSXuRWSZn+Qb0YGgtOTyS4jd0="
         }
       ]
     },
     {
-      "Route": "css/profile.zryffmnryt.css",
+      "Route": "css/profile.lx6egdkdqt.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\profile.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1060,7 +1060,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4168"
+          "Value": "4198"
         },
         {
           "Name": "Content-Type",
@@ -1068,11 +1068,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Met4w0G446zwi2MMgojAbOlc8fNH0XXeuvV8dfcYizY=\""
+          "Value": "\"mf7yznPC5vYrSdY5CyNSXuRWSZn+Qb0YGgtOTyS4jd0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1082,7 +1082,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zryffmnryt"
+          "Value": "lx6egdkdqt"
         },
         {
           "Name": "label",
@@ -1090,7 +1090,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Met4w0G446zwi2MMgojAbOlc8fNH0XXeuvV8dfcYizY="
+          "Value": "sha256-mf7yznPC5vYrSdY5CyNSXuRWSZn+Qb0YGgtOTyS4jd0="
         }
       ]
     },
@@ -1177,6 +1177,51 @@
       ]
     },
     {
+      "Route": "css/stats.03in7utj9n.css",
+      "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\stats.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3407"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TOqrBMTnGAxLScqw3DHRCu8btnot+ekdlw1v49kxnHo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "03in7utj9n"
+        },
+        {
+          "Name": "label",
+          "Value": "css/stats.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TOqrBMTnGAxLScqw3DHRCu8btnot+ekdlw1v49kxnHo="
+        }
+      ]
+    },
+    {
       "Route": "css/stats.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\stats.css",
       "Selectors": [],
@@ -1187,7 +1232,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3377"
+          "Value": "3407"
         },
         {
           "Name": "Content-Type",
@@ -1195,11 +1240,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Lmflj7E/XFnSZly5k5SkmyzKRS2ummylh9phmLnJ5/0=\""
+          "Value": "\"TOqrBMTnGAxLScqw3DHRCu8btnot+ekdlw1v49kxnHo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1209,57 +1254,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Lmflj7E/XFnSZly5k5SkmyzKRS2ummylh9phmLnJ5/0="
+          "Value": "sha256-TOqrBMTnGAxLScqw3DHRCu8btnot+ekdlw1v49kxnHo="
         }
       ]
     },
     {
-      "Route": "css/stats.mnc75yrvfr.css",
-      "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\stats.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3377"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Lmflj7E/XFnSZly5k5SkmyzKRS2ummylh9phmLnJ5/0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "mnc75yrvfr"
-        },
-        {
-          "Name": "label",
-          "Value": "css/stats.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Lmflj7E/XFnSZly5k5SkmyzKRS2ummylh9phmLnJ5/0="
-        }
-      ]
-    },
-    {
-      "Route": "css/theme.43s2q23zen.css",
+      "Route": "css/theme.8hirim5ju8.css",
       "AssetFile": "C:\\Users\\Admin\\RiderProjects\\mood-direction4\\Aplication\\wwwroot\\css\\theme.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1269,7 +1269,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5814"
+          "Value": "5844"
         },
         {
           "Name": "Content-Type",
@@ -1277,11 +1277,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"UHOEpYSaqhm8NC+1xxsLAgJ9LuiqI7GPRswFqJ/tW/k=\""
+          "Value": "\"TBBjzOrVv0hb4p4TLGdhdUmawaCzRCL3xKh6TUcK/L4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1291,7 +1291,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "43s2q23zen"
+          "Value": "8hirim5ju8"
         },
         {
           "Name": "label",
@@ -1299,7 +1299,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-UHOEpYSaqhm8NC+1xxsLAgJ9LuiqI7GPRswFqJ/tW/k="
+          "Value": "sha256-TBBjzOrVv0hb4p4TLGdhdUmawaCzRCL3xKh6TUcK/L4="
         }
       ]
     },
@@ -1314,7 +1314,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5814"
+          "Value": "5844"
         },
         {
           "Name": "Content-Type",
@@ -1322,11 +1322,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"UHOEpYSaqhm8NC+1xxsLAgJ9LuiqI7GPRswFqJ/tW/k=\""
+          "Value": "\"TBBjzOrVv0hb4p4TLGdhdUmawaCzRCL3xKh6TUcK/L4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Jan 2026 20:07:13 GMT"
+          "Value": "Thu, 15 Jan 2026 19:03:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1336,7 +1336,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-UHOEpYSaqhm8NC+1xxsLAgJ9LuiqI7GPRswFqJ/tW/k="
+          "Value": "sha256-TBBjzOrVv0hb4p4TLGdhdUmawaCzRCL3xKh6TUcK/L4="
         }
       ]
     },

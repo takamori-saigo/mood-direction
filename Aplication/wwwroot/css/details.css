@@ -69,7 +69,6 @@ body {
     align-items: end;
     width: 100%;
     max-width: 1200px;
-    padding: 0 16px;
     margin-top: 20px;
     margin-bottom: 70px;
 }
@@ -481,5 +480,9 @@ body {
 
     .mobile-favorite-btn{
         font-size: 12px;
+    }
+
+    .nav-link {
+        font-size: 13px;
     }
 }

@@ -11,12 +11,10 @@ public class DiscussionItemConfiguration : IEntityTypeConfiguration<DiscussionIt
         builder.HasKey(d => d.Id);
 
         builder.Property(d => d.Title)
-            .IsRequired()
-            .HasMaxLength(200);
+            .IsRequired();
 
         builder.Property(d => d.Content)
-            .IsRequired()
-            .HasMaxLength(3000);
+            .IsRequired();
 
         builder.HasOne(d => d.Topic)
             .WithMany(t => t.DiscussionItems)

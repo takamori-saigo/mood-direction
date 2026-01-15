@@ -19,7 +19,6 @@ body {
     align-items: end;
     width: 100%;
     max-width: 1200px;
-    padding: 0 16px;
     margin-top: 20px;
     margin-bottom: 40px;
 }
@@ -244,5 +243,9 @@ body {
 
     .btn-secondary {
         margin-top: 20px;
+    }
+
+    .nav-link {
+        font-size: 13px;
     }
 }

@@ -18,7 +18,6 @@ body {
     align-items: end;
     width: 100%;
     max-width: 1200px;
-    padding: 0 16px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -127,7 +126,6 @@ body {
     font-size: 18px;
     line-height: 1.4;
     margin: 0 0 12px 0;
-    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
@@ -347,6 +345,10 @@ body {
     .btn {
         font-size: 12px;
         padding: 4px 8px;
+    }
+
+    .nav-link {
+        font-size: 13px;
     }
 }
 

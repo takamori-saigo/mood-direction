@@ -39,7 +39,6 @@ body {
     align-items: center;
     width: 100%;
     max-width: 1200px;
-    padding: 0 16px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -374,7 +373,6 @@ body {
 
     /* Дилеммы */
     .confession-title {
-        flex-direction: column;
         align-items: flex-start;
     }
 
@@ -391,5 +389,8 @@ body {
     .confession-form {
         border-radius: 12px;
         padding: 18px;
+    }
+    .nav-link {
+        font-size: 13px;
     }
 }
