@@ -40,6 +40,12 @@
             <p class="thesis-description">@Model.Item.Title</p>
         </div>
     }
+    else
+    {
+        <div class="thesis-header">
+            <p class="thesis-title">@Model.Item.Title</p>
+        </div>
+    }
 
     <!-- 🔹 Дилемма -->
     <main class="discussion-main">
@@ -86,7 +92,6 @@
                     <a href="@Url.Action("Login", "Auth")" class="auth-link">войдите</a>.
                 </p>
             }
-
             <!-- 🔹 Комментарии -->
             @if (!Model.Comments.Any())
             {
@@ -127,7 +132,6 @@
                                 </form>
                             </div>
                         }
-
                         <!-- Реакции -->
                         <div class="reactions">
                             <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
@@ -146,7 +150,7 @@
                     </div>
                 }
             }
-            </div>
+        </div>
     </main>
     <script>
         function startEdit(commentId) {
@@ -163,5 +167,5 @@
             if (actions) actions.style.display = 'block';
         }
     </script>
-</body>
-</html>
+    </body>
+    </html>

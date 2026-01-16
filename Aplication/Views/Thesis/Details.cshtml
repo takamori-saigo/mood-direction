@@ -1,9 +1,9 @@
 @model MoralCompass.Web.Controllers.ThesisController.ThesisDetailModel
 @{
-ViewData["Title"] = Model.Thesis?.Title ?? "Заповедь";
-var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-var isAdmin = User.IsInRole("Admin") || (User.Identity?.IsAuthenticated == true &&
-bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var admin) && admin);
+    ViewData["Title"] = Model.Thesis?.Title ?? "Заповедь";
+    var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+    var isAdmin = User.IsInRole("Admin") || (User.Identity?.IsAuthenticated == true &&
+        bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var admin) && admin);
 }
 
 <!DOCTYPE html>
@@ -20,16 +20,11 @@ bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var admin) && admin);
 <!-- Уведомления -->
 @if (TempData["Success"] != null)
 {
-<div class="alert alert-success">
-    @TempData["Success"]
-</div>
+    <div class="alert alert-success">@TempData["Success"]</div>
 }
-
 @if (TempData["Error"] != null)
 {
-<div class="alert alert-danger">
-    @TempData["Error"]
-</div>
+    <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
 <!-- 🔹 Навигация -->
@@ -39,7 +34,6 @@ bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var admin) && admin);
         <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
         <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
     </nav>
-
     @if (User.Identity?.IsAuthenticated == true)
     { 
         <a href="@Url.Action("Profile", "Index")" class="nav-link">Профиль</a>
@@ -54,18 +48,12 @@ bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var admin) && admin);
 <header class="thesis-header">
     <h1 class="thesis-title">@Model.Thesis?.Title</h1>
     <p class="thesis-description">@Model.Thesis?.Description</p>
-
     <div class="thesis-actions">
         @if (User.Identity?.IsAuthenticated == true)
         {
-        <a href="@Url.Action("CreateTopic", "Thesis", new { thesisId = Model.Thesis?.Id })"
-           class="btn btn-primary">
-            Добавить тему
-        </a>
+            <a href="@Url.Action("CreateTopic", "Thesis", new { thesisId = Model.Thesis?.Id })" class="btn btn-primary">Добавить тему</a>
         }
-        <a href="@Url.Action("Index", "Index")" class="btn btn-secondary">
-            Все заповеди
-        </a>
+        <a href="@Url.Action("Index", "Index")" class="btn btn-secondary">Все заповеди</a>
     </div>
 </header>
 
@@ -73,87 +61,86 @@ bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var admin) && admin);
 <main class="topics-scroll">
     @if (Model.Topics != null && Model.Topics.Any())
     {
-    @foreach (var topicGroup in Model.Topics)
-    {
-        <div class="theme-container">
-            <a href="@Url.Action("Details", "Topic", new { id = topicGroup.Topic.Id })" class="theme-link">
-                <div class="theme-item">
-                    <div class="theme-content">
-                        @if (User.Identity?.IsAuthenticated == true)
-                        {
-                        <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" class="favorite-form">
+        @foreach (var topicGroup in Model.Topics)
+{
+    var isFavorited = topicGroup.Topic.FavoritedByUsers.Any(u => u.Id.ToString() == userIdStr);
+    var iconSrc = isFavorited ? "~/images/trueheart.png" : "~/images/heart.png";
+    var altText = isFavorited ? "Убрать из избранного" : "Добавить в избранное";
+    var mobileFavoriteText = isFavorited ? "В избранном" : "В избранное";
+    var mobileFavoriteClass = isFavorited ? "mobile-favorite-btn favorited" : "mobile-favorite-btn";
+    var isAuthorOrAdmin = User.Identity?.IsAuthenticated == true && (isAdmin || userIdStr == topicGroup.Topic.AuthorId.ToString());
+
+    <div class="theme-container">
+        <a href="@Url.Action("Details", "Topic", new { id = topicGroup.Topic.Id })" class="theme-link">
+            <div class="theme-item">
+                <div class="theme-content">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <!-- Десктопная иконка "в избранное" — для всех -->
+                        <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" class="favorite-form desktop-only">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="topicId" value="@topicGroup.Topic.Id" />
-                            @{
-                            var isFavorited = topicGroup.Topic.FavoritedByUsers.Any(u => u.Id.ToString() == userIdStr);
-                            var iconSrc = isFavorited ? "~/images/trueheart.png" : "~/images/heart.png";
-                            var altText = isFavorited ? "Убрать из избранного" : "Добавить в избранное";
-                            }
                             <button type="submit" class="favorite-btn" title="@altText">
                                 <img src="@Url.Content(iconSrc)" alt="@altText" width="20" height="20" />
                             </button>
                         </form>
-                        }
-                        <p class="theme-title">@topicGroup.Topic.Title</p>
-                    </div>
+                    }
+                    <p class="theme-title">@topicGroup.Topic.Title</p>
+                </div>
 
-                    <!-- Действия (редактирование/удаление) -->
-                    @if (User.Identity?.IsAuthenticated == true &&
-                    (isAdmin || userIdStr == topicGroup.Topic.AuthorId.ToString()))
-                    {
-                    <div class="theme-actions-inline">
-                        <!-- Десктоп: иконки -->
+                <!-- ЕДИНЫЙ БЛОК ДЕЙСТВИЙ НА МОБИЛЬНЫХ -->
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <div class="theme-actions-inline mobile-only">
+                        <!-- Избранное — всегда -->
+                        <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" class="favorite-form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="topicId" value="@topicGroup.Topic.Id" />
+                            <button type="submit" class="@mobileFavoriteClass" title="@altText">@mobileFavoriteText</button>
+                        </form>
+
+                        <!-- Дополнительно: редактировать/удалить, если есть права -->
+                        @if (isAuthorOrAdmin)
+                        {
+                            <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })" class="mobile-btn">Редактировать</a>
+                            <form asp-controller="Topic" asp-action="DeleteTopic" method="post"
+                                  onsubmit="return confirm('Удалить тему? Это действие нельзя отменить.');"
+                                  class="delete-inline-form">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@topicGroup.Topic.Id" />
+                                <button type="submit" class="mobile-btn mobile-delete">Удалить</button>
+                            </form>
+                        }
+                    </div>
+                }
+
+                <!-- ДЕСКТОПНЫЕ ДЕЙСТВИЯ (редактировать/удалить) -->
+                @if (isAuthorOrAdmin)
+                {
+                    <div class="theme-actions-inline desktop-only">
                         <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })"
-                           class="icon-btn edit-icon desktop-only" title="Редактировать">
+                           class="icon-btn edit-icon" title="Редактировать">
                             <img src="~/images/pencil.png" alt="✏️">
                         </a>
-
                         <form asp-controller="Topic" asp-action="DeleteTopic" method="post"
                               onsubmit="return confirm('Удалить тему? Это действие нельзя отменить.');"
-                              class="delete-inline-form desktop-only">
+                              class="delete-inline-form">
                             @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@topicGroup.Topic.Id"/>
+                            <input type="hidden" name="id" value="@topicGroup.Topic.Id" />
                             <button type="submit" class="icon-btn delete-icon" title="Удалить">
                                 <img src="~/images/delete.png" alt="🗑️">
                             </button>
                         </form>
-                        
-                        <!-- Мобильные: текстовые кнопки -->
-                        @if (User.Identity?.IsAuthenticated == true)
-                        {
-                            <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" class="favorite-form">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="topicId" value="@topicGroup.Topic.Id" />
-                                @{
-                                    var isFavorited = topicGroup.Topic.FavoritedByUsers.Any(u => u.Id.ToString() == userIdStr);
-                                    var iconSrc = isFavorited ? "~/images/trueheart.png" : "~/images/heart.png";
-                                    var altText = isFavorited ? "Убрать из избранного" : "Добавить в избранное";
-                                }
-                                <button type="submit" class="mobile-favorite-btn @(isFavorited ? "favorited" : "")" title="@altText">
-                                    @(isFavorited ? "В избранном" : "В избранное")
-                                </button>
-                            </form>
-                        }
-                        <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })"
-                           class="mobile-btn mobile-only">Редактировать</a>
-
-                        <form asp-controller="Topic" asp-action="DeleteTopic" method="post"
-                              onsubmit="return confirm('Удалить тему? Это действие нельзя отменить.');"
-                              class="delete-inline-form mobile-only">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@topicGroup.Topic.Id"/>
-                            <button type="submit" class="mobile-btn mobile-delete">Удалить</button>
-                        </form>
                     </div>
-                    }
-                </div>
-            </a>
-        </div>
-    }
+                }
+            </div>
+        </a>
+    </div>
+}
     }
     else
     {
-    <div class="empty-state">Нет тем. Будьте первым, кто добавит!</div>
+        <div class="empty-state">Нет тем. Будьте первым, кто добавит!</div>
     }
 </main>
 

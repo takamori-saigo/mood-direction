@@ -389,7 +389,9 @@ body {
     }
 
     .mobile-only {
-        display: inline-block;
+        display: flex !important;
+        gap: 8px;
+        align-items: center;
     }
 
     /* Обновление стилей под мобильные */
@@ -429,6 +431,7 @@ body {
 
     .theme-item {
         min-height: 70px;
+        flex-direction: column;
         padding: 0 16px;
         flex-direction: column;
         align-items: start;
