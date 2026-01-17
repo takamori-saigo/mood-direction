@@ -36,12 +36,12 @@
     <!-- 🔸 Заголовок и кнопка -->
     <div class="header-section">
         <h1 class="section-title">Не мудак ли я?</h1>
-        <p class="section-subtitle">Личные дилеммы. Честные вопросы. Поддержка без осуждения.</p>
+        <p class="section-subtitle">Личные дилеммы. Честные вопросы.</p>
     
         <div class="header-buttons">
             @if (User.Identity?.IsAuthenticated == true)
             {
-                <a href="@Url.Action("Create", "Confession")" class="btn btn-primary">Задать свой вопрос</a>
+                <a href="@Url.Action("Create", "Confession")" class="btn btn-primary">Опиши свою дилемму</a>
             }
             else
             {
@@ -70,22 +70,17 @@
         {
             @foreach (var di in confessions)
             {
-                <div class="confession-item">
-                    <div class="confession-title">
-                        <span class="confession-text">@di.Title</span>
-                        <span class="badge">Личное</span>
+                <a href="@Url.Action("Details", "Confession", new { id = di.Id })" class="confession-link">
+                    <div class="confession-item">
+                        <div class="confession-title">
+                            <span class="badge">Личное</span>
+                        </div>
+                        <p class="confession-meta">
+                            @(di.Author?.Nickname ?? "Аноним") · @di.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                        </p>
+                        <p class="confession-content">@di.Content</p>
                     </div>
-                    <p class="confession-meta">
-                        @(di.Author?.Nickname ?? "Аноним") · @di.CreatedAt.ToString("dd.MM.yyyy HH:mm")
-                    </p>
-                    <p class="confession-content">@di.Content</p>
-                    <div class="confession-footer">
-                        <span class="comment-count">@commentCounts.GetValueOrDefault(di.Id, 0) коммент.</span>
-                        <a href="@Url.Action("Details", "Confession", new { id = di.Id })" class="btn btn-outline-primary">
-                            Обсудить
-                        </a>
-                    </div>
-                </div>
+                </a>
             }
         }
     </div>

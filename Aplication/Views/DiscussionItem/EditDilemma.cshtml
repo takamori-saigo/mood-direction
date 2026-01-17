@@ -21,19 +21,6 @@ ViewData["Title"] = "Редактировать дилемму";
     <form asp-action="EditDilemma" asp-controller="DiscussionItem" method="post" class="edit-form">
         @Html.AntiForgeryToken()
         <input type="hidden" name="id" value="@Model.Id" />
-
-        <div class="form-group">
-            <label for="title" class="form-label">Заголовок</label>
-            <input type="text"
-                   id="title"
-                   name="title"
-                   value="@Model.Title"
-                   class="form-control"
-                   required
-                   maxlength="200" />
-            <span asp-validation-for="Title" class="text-danger form-error"></span>
-        </div>
-
         <div class="form-group">
             <label for="content" class="form-label">Содержание</label>
             <textarea id="content"

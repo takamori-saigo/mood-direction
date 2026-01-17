@@ -108,10 +108,6 @@ public class TopicController : Controller
     [Authorize]
     public async Task<IActionResult> AddDilemma(Guid id, string title, string content)
     {
-        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
-        {
-            return RedirectToAction("Details", new { id });
-        }
 
         var topic = await _context.Topics.FindAsync(id);
         if (topic == null) return NotFound();
@@ -123,7 +119,6 @@ public class TopicController : Controller
         {
             Id = Guid.NewGuid(),
             TopicId = id,
-            Title = title.Trim(),
             Content = content.Trim(),
             Type = DiscussionItemType.Dilemma,
             AuthorId = userId,
@@ -133,7 +128,7 @@ public class TopicController : Controller
         _context.DiscussionItems.Add(dilemma);
         await _context.SaveChangesAsync();
 
-        return RedirectToAction("Details", new { id });
+        return RedirectToAction("Details", "DiscussionItem", new { id = dilemma.Id });
     }
     
 

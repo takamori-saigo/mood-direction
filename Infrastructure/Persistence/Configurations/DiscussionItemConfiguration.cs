@@ -11,7 +11,7 @@ public class DiscussionItemConfiguration : IEntityTypeConfiguration<DiscussionIt
         builder.HasKey(d => d.Id);
 
         builder.Property(d => d.Title)
-            .IsRequired();
+            .IsRequired(false);
 
         builder.Property(d => d.Content)
             .IsRequired();

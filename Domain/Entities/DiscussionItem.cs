@@ -8,7 +8,7 @@ public class DiscussionItem : AuditableEntity
     public Guid? TopicId { get; set; }
     public DiscussionItemType Type { get; set; }
 
-    public string Title { get; set; }
+    public string? Title { get; set; }
     public string Content { get; set; }
 
 

@@ -392,13 +392,11 @@ public class DiscussionItemController : Controller
         if (dilemma == null) return NotFound();
         if (dilemma.AuthorId != userId && !IsAdmin()) return Forbid();
 
-        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+        if (string.IsNullOrWhiteSpace(content))
         {
             ModelState.AddModelError("", "Заголовок и содержание обязательны.");
             return View(dilemma);
         }
-
-        dilemma.Title = title.Trim();
         dilemma.Content = content.Trim();
         await _context.SaveChangesAsync();
 

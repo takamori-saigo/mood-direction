@@ -2,6 +2,16 @@
     box-sizing: border-box;
 }
 
+.confession-link {
+    text-decoration: none;
+    color: inherit; /* или укажите нужный цвет */
+    display: block;
+}
+
+.confession-link:hover {
+    text-decoration: none; /* отключить подчеркивание при наведении, если нужно */
+}
+
 body {
     display: flex;
     flex-direction: column;
