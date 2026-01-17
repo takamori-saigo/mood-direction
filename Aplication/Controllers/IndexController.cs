@@ -52,14 +52,20 @@ namespace Aplication.Controllers
             var allDilemmas = await _context.DiscussionItems
                 .Include(di => di.Author) // обязательно, чтобы отображался Nickname
                 .ToListAsync();
-
-            var randomDilemmas = allDilemmas.Where(x => x.TopicId == null)
-                .OrderBy(c  => c.CreatedAt)
-                .Take(7)
+            
+            var random = new Random();
+            var randomDilemmas = allDilemmas.Where(x => x.TopicId != null) 
+                .OrderByDescending(_  => random.Next())
+                .Take(4)
                 .ToList();
 
-    
-            var model = new HomeIndexModel { Theses = theses, TopDilemmas = randomDilemmas };
+            var topConfisacion = allDilemmas.Where(x => x.TopicId == null)
+                .OrderByDescending(c  => c.CreatedAt)
+                .Take(3)
+                .ToList();
+
+            var dilemas = topConfisacion.Concat(randomDilemmas).ToList();
+            var model = new HomeIndexModel { Theses = theses, TopDilemmas = dilemas };
 
             return View(model);
         }

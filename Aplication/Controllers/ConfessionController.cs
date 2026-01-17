@@ -72,7 +72,7 @@ public class ConfessionController : Controller
         _context.DiscussionItems.Add(dilemma);
         await _context.SaveChangesAsync();
 
-        return RedirectToAction("Details", "DiscussionItem", new { id = dilemma.Id });
+        return RedirectToAction("Details", "Confession", new { id = dilemma.Id });
     }
     
     [HttpPost]
@@ -223,5 +223,50 @@ public class ConfessionController : Controller
         };
 
         return View(model);
+    }
+    
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> EditConfession(Guid id)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .FirstOrDefaultAsync(di => di.Id == id && di.Type == DiscussionItemType.Dilemma);
+
+        if (dilemma == null) return NotFound();
+        if (dilemma.AuthorId != userId && !IsAdmin()) return Forbid();
+
+        return View(dilemma);
+    }
+
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditConfession(Guid id, string title, string content)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var dilemma = await _context.DiscussionItems
+            .FirstOrDefaultAsync(di => di.Id == id && di.Type == DiscussionItemType.Dilemma);
+
+        if (dilemma == null) return NotFound();
+        if (dilemma.AuthorId != userId && !IsAdmin()) return Forbid();
+
+        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+        {
+            ModelState.AddModelError("", "Заголовок и содержание обязательны.");
+            return View(dilemma);
+        }
+
+        dilemma.Title = title.Trim();
+        dilemma.Content = content.Trim();
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Details", new { id });
     }
 }

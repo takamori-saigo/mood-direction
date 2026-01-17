@@ -56,7 +56,7 @@ else
     @if (Model.CanEditOrDelete)
     {
     <div style="display: flex; gap: 10px; align-items: center">
-        <a href="@Url.Action("EditDilemma", "DiscussionItem", new { id = Model.Item.Id })"
+        <a href="@Url.Action("EditConfession", "Confession", new { id = Model.Item.Id })"
            class="edit-link">
             Редактировать
         </a>
