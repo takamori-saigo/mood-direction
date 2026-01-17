@@ -124,8 +124,8 @@ body {
 
 .login-info {
     font-size: 18px;
-    color: #898989;
     margin: 0 0 8px 0;
+    color: #898989;
 }
 
 .comment-info {
@@ -309,4 +309,11 @@ body {
     .nav-link {
         font-size: 13px;
     }
+}
+
+
+
+.scroll a {
+    text-decoration: none;
+    color: inherit;
 }

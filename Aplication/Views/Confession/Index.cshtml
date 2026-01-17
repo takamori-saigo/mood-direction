@@ -81,7 +81,7 @@
                     <p class="confession-content">@di.Content</p>
                     <div class="confession-footer">
                         <span class="comment-count">@commentCounts.GetValueOrDefault(di.Id, 0) коммент.</span>
-                        <a href="@Url.Action("Details", "DiscussionItem", new { id = di.Id })" class="btn btn-outline-primary">
+                        <a href="@Url.Action("Details", "Confession", new { id = di.Id })" class="btn btn-outline-primary">
                             Обсудить
                         </a>
                     </div>

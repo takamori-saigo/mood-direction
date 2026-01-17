@@ -53,9 +53,8 @@ namespace Aplication.Controllers
                 .Include(di => di.Author) // обязательно, чтобы отображался Nickname
                 .ToListAsync();
 
-            var random = new Random();
-            var randomDilemmas = allDilemmas
-                .OrderBy(_ => random.Next())
+            var randomDilemmas = allDilemmas.Where(x => x.TopicId == null)
+                .OrderBy(c  => c.CreatedAt)
                 .Take(7)
                 .ToList();
 

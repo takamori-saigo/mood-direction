@@ -50,7 +50,7 @@
     {
         <div style="text-align: center; margin-bottom: 20px;">
             <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDilemmaModal">
-                Добавить дилемму
+                Добавить тезис, делемму, кейс
             </button>
         </div>
 
@@ -97,49 +97,45 @@
         {
             @foreach (var dilemma in Model.Dilemmas)
             {
-                @if (User.Identity?.IsAuthenticated == true)
-                {
-                    var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                    var isAuthor = dilemma.Item.AuthorId.ToString() == currentUserId;
-                    var isAdmin = User.IsInRole("Admin") || 
-                                  (bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var a) && a);
-                }
-                <div class="card">
-                    <p class="login-info">
-                        @dilemma.Author.Nickname · @dilemma.Item.CreatedAt.ToString("dd.MM.yyyy")
-                    </p>
+                <a href="@Url.Action("Details", "DiscussionItem", new { id = dilemma.Item.Id })">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                        var isAuthor = dilemma.Item.AuthorId.ToString() == currentUserId;
+                        var isAdmin = User.IsInRole("Admin") || 
+                                      (bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var a) && a);
+                    }
+                    <div class="card">
+                        <p class="login-info">
+                            @dilemma.Author.Nickname · @dilemma.Item.CreatedAt.ToString("dd.MM.yyyy")
+                        </p>
 
-                    <!-- Текст дилеммы -->
-                    <p class="comment-info">@dilemma.Item.Title</p>
+                        <!-- Текст дилеммы -->
+                        <p class="comment-info">@dilemma.Item.Content</p>
 
-                    <!-- Комментарии -->
-                    <div class="top-comment">
-                        <p class="comment-p">Комментарии (@dilemma.TotalCommentCount)</p>
-                        @if (dilemma.TopComments.Any())
-                        {
-                            @foreach (var c in dilemma.TopComments.Take(2))
+                        <!-- Комментарии -->
+                        <div class="top-comment">
+                            <p class="comment-p">Комментарии (@dilemma.TotalCommentCount)</p>
+                            @if (dilemma.TopComments.Any())
                             {
-                                <div class="comment-card">
-                                    <p class="comment-card-p">@c.Comment.Content</p>
-                                </div>
+                                @foreach (var c in dilemma.TopComments.Take(2))
+                                {
+                                    <div class="comment-card">
+                                        <p class="comment-card-p">@c.Comment.Content</p>
+                                    </div>
+                                }
                             }
-                        }
-                        else
-                        {
-                            <div class="comment-card">
-                                <p class="comment-card-p">Пока нет комментариев.</p>
-                            </div>
-                        }
-                    </div>
+                        </div>
 
-                    <!-- 🔹 Кнопка "Обсудить" — прижмётся к низу благодаря margin-top: auto -->
-                    <div class="card-actions">
-                        <a href="@Url.Action("Details", "DiscussionItem", new { id = dilemma.Item.Id })"
-                           class="btn btn-sm btn-outline-primary">
-                            Обсудить
-                        </a>
+                        <!-- 🔹 Кнопка "Обсудить" — прижмётся к низу благодаря margin-top: auto -->
+                        <div class="card-actions" style="display: none;">
+                            <a href="@Url.Action("Details", "DiscussionItem", new { id = dilemma.Item.Id })"
+                               class="btn btn-sm btn-outline-primary">
+                                
+                            </a>
+                        </div>
                     </div>
-                </div>
+                    </a>
             }
         }
     </div>

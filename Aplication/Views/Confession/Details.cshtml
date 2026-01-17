@@ -1,0 +1,171 @@
+@model MoralCompass.Web.Controllers.DiscussionItemController.DiscussionItemDetailModel
+@{
+ViewData["Title"] = Model.Item?.Title ?? "Дилемма";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/discussion.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/icon.png" />
+</head>
+<body>
+
+<!-- 🔹 Навигация -->
+<header class="header">
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+    <a href="@Url.Action("Profile", "Index")" class="nav-link">Профиль</a>
+    }
+    else
+    {
+    <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
+    }
+</header>
+
+<!-- 🔸 Заголовок заповеди -->
+@if (Model.Topic?.CoreThesis != null)
+{
+<div class="thesis-header">
+    <h1 class="thesis-title">@Model.Topic.CoreThesis.Title</h1>
+    <p class="thesis-description">@Model.Item.Title</p>
+</div>
+}
+else
+{
+<div class="thesis-header">
+    <p class="thesis-title">@Model.Item.Title</p>
+</div>
+}
+
+<!-- 🔹 Дилемма -->
+<main class="discussion-main">
+    <p class="login-info">
+        @Model.Author.Nickname · @Model.Item?.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+    </p>
+    <p class="discussion-content">@Model.Item?.Content</p>
+    @if (Model.CanEditOrDelete)
+    {
+    <div style="display: flex; gap: 10px; align-items: center">
+        <a href="@Url.Action("EditDilemma", "DiscussionItem", new { id = Model.Item.Id })"
+           class="edit-link">
+            Редактировать
+        </a>
+
+        <form asp-action="DeleteCaseConfession" asp-controller="Confession" method="post" style="display:inline-block;"
+              onsubmit="return confirm('Вы уверены, что хотите удалить эту дилемму? Все комментарии также будут удалены.')">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.Item.Id" />
+            <button type="submit" class="edit-link" style="color:#d00;">
+                Удалить
+            </button>
+        </form>
+    </div>
+    }
+    <h2 class="comments-title">Комментарии (@Model.Comments.Count)</h2>
+
+    <!-- 🔸 Скролл-контейнер -->
+    <div class="comments-scroll">
+        <!-- 🔹 Форма комментария -->
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+        <form method="post" asp-action="AddComment" asp-route-id="@Model.Item?.Id" class="comment-form">
+            <div class="comment-input-wrapper">
+                <input type="text" name="content" class="comment-input" placeholder="Оставить комментарий" required />
+                <button type="submit" class="comment-submit-btn">Опубликовать</button>
+            </div>
+        </form>
+        }
+        else
+        {
+        <p class="guest-message">
+            Чтобы участвовать в обсуждении,
+            <a href="@Url.Action("Login", "Auth")" class="auth-link">войдите</a>.
+        </p>
+        }
+        <!-- 🔹 Комментарии -->
+        @if (!Model.Comments.Any())
+        {
+        <p class="empty-comments">Пока никто не прокомментировал. Станьте первым.</p>
+        }
+        else
+        {
+        @foreach (var c in Model.Comments)
+        {
+        <div class="comment-item" data-comment-id="@c.Comment.Id">
+            <p class="login-info">@c.AuthorNickname · @c.Comment.CreatedAt.ToString("dd.MM HH:mm")</p>
+
+            <!-- Текст комментария (по умолчанию виден) -->
+            <p class="comment-text" id="text-@c.Comment.Id">@c.Comment.Content</p>
+
+            <!-- Форма редактирования (изначально скрыта) -->
+            <form method="post" asp-action="EditCommentInline" id="form-@c.Comment.Id" style="display:none; margin-top:8px;">
+                <input type="hidden" name="itemId" value="@Model.Item.Id" />
+                <input type="hidden" name="commentId" value="@c.Comment.Id" />
+                <textarea name="content" rows="3" style="width:100%; padding:6px; margin-bottom:6px;">@c.Comment.Content</textarea>
+                <button type="submit" class="auth-btn" style="padding:4px 10px; font-size:0.9em;">Сохранить</button>
+                <button type="button" class="auth-btn" style="padding:4px 10px; font-size:0.9em; margin-left:6px;" onclick="cancelEdit('@c.Comment.Id')">Отмена</button>
+            </form>
+
+            @if (c.CanEdit)
+            {
+            <div class="comment-actions" id="actions-@c.Comment.Id">
+                <button type="button" class="edit-link"
+                        onclick="startEdit('@c.Comment.Id')">
+                    Редактировать
+                </button>
+                <form method="post" asp-action="DeleteComment" style="display:inline-block; margin-left:12px;"
+                      onsubmit="return confirm('Удалить комментарий?');">
+                    <input type="hidden" name="commentId" value="@c.Comment.Id" />
+                    <button type="submit" class="edit-link" style="color:#d00;">
+                        Удалить
+                    </button>
+                </form>
+            </div>
+            }
+            <!-- Реакции -->
+            <div class="reactions">
+                <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
+                      asp-route-value="@(c.UserReaction == 1 ? 0 : 1)">
+                    <button type="submit" class="reaction-btn @(c.UserReaction == 1 ? "liked" : "")">
+                        <img src="~/svg/like.svg" alt="Лайк" width="16" height="16" /> @c.Likes
+                    </button>
+                </form>
+                <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
+                      asp-route-value="@(c.UserReaction == -1 ? 0 : -1)">
+                    <button type="submit" class="reaction-btn @(c.UserReaction == -1 ? "disliked" : "")">
+                        <img src="~/svg/dislike.svg" alt="Дизлайк" width="16" height="16" /> @c.Dislikes
+                    </button>
+                </form>
+            </div>
+        </div>
+        }
+        }
+    </div>
+</main>
+<script>
+    function startEdit(commentId) {
+        document.getElementById('text-' + commentId).style.display = 'none';
+        document.getElementById('form-' + commentId).style.display = 'block';
+        const actions = document.getElementById('actions-' + commentId);
+        if (actions) actions.style.display = 'none';
+    }
+
+    function cancelEdit(commentId) {
+        document.getElementById('form-' + commentId).style.display = 'none';
+        document.getElementById('text-' + commentId).style.display = 'block';
+        const actions = document.getElementById('actions-' + commentId);
+        if (actions) actions.style.display = 'block';
+    }
+</script>
+</body>
+</html>
