@@ -267,4 +267,99 @@ public class ConfessionController : Controller
 
         return RedirectToAction("Details", new { id });
     }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> AddCommentConfession(Guid id, string content)
+    {
+        if (id == Guid.Empty)
+            return RedirectToAction("Index", "Index");
+
+        if (string.IsNullOrWhiteSpace(content))
+            return RedirectToAction("Details", new { id });
+
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return RedirectToAction("Login", "Auth");
+
+        try
+        {
+            var comment = new Comment
+            {
+                Id = Guid.NewGuid(),
+                DiscussionItemId = id,
+                AuthorId = userId,
+                Content = content.Trim(),
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id });
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"AddComment error: {ex}");
+            ModelState.AddModelError("", "Не удалось добавить комментарий.");
+            return RedirectToAction("Details", new { id });
+        }
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> DeleteCommentConfession(Guid commentId)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var comment = await _context.Comments
+            .Include(c => c.Author)
+            .FirstOrDefaultAsync(c => c.Id == commentId);
+
+        if (comment == null)
+            return NotFound();
+
+        // Проверка: автор или админ
+        if (comment.AuthorId != userId)
+        {
+            var currentUser = await _context.Users.FindAsync(userId);
+            if (currentUser == null || !currentUser.IsAdmin)
+                return Forbid();
+        }
+
+        _context.Comments.Remove(comment);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Details", new { id = comment.DiscussionItemId });
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> EditCommentInlineConfession(Guid itemId, Guid commentId, string content)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var comment = await _context.Comments.FindAsync(commentId);
+        if (comment == null) return NotFound();
+
+        // Проверка прав
+        if (comment.AuthorId != userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null || !user.IsAdmin)
+                return Forbid();
+        }
+
+        if (!string.IsNullOrWhiteSpace(content))
+        {
+            comment.Content = content.Trim();
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToAction("Details", new { id = itemId });
+    }
 }

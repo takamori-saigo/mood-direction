@@ -23,6 +23,9 @@ public class TopicController : Controller
         public User Author { get; set; } = null!;
         public List<CommentWithScore> TopComments { get; set; } = new();
         public int TotalCommentCount { get; set; }
+        public int Likes { get; set; }
+        public int Dislikes { get; set; }
+        public int? UserReactionValue { get; set; } 
     }
 
     public class CommentWithScore
@@ -45,23 +48,25 @@ public class TopicController : Controller
             .Include(t => t.Author)
             .Include(t => t.CoreThesis)
             .FirstOrDefaultAsync(t => t.Id == id);
-        
+
         if (topic == null) return NotFound();
-        
+
         var dilemmas = await _context.DiscussionItems
             .Where(di => di.TopicId == id && di.Type == DiscussionItemType.Dilemma)
             .Include(di => di.Author)
-            .OrderByDescending(di => di.CreatedAt)
-            .ToListAsync();
+            .ToListAsync(); // ← убрали сортировку здесь — будем сортировать позже
 
         var dilemmaIds = dilemmas.Select(di => di.Id).ToList();
 
+        // Загружаем комментарии ко всем дилеммам
         var comments = await _context.Comments
             .Where(c => dilemmaIds.Contains(c.DiscussionItemId))
             .Include(c => c.Author)
             .ToListAsync();
 
         var commentIds = comments.Select(c => c.Id).ToList();
+
+        // Реакции на комментарии (для Score)
         var reactions = await _context.Reactions
             .Where(r => r.TargetType == ReactionTargetType.Comment && commentIds.Contains(r.TargetId))
             .ToListAsync();
@@ -70,6 +75,36 @@ public class TopicController : Controller
             .GroupBy(r => r.TargetId)
             .ToDictionary(g => g.Key, g => g.Sum(r => r.Value));
 
+        // === Реакции на ДИЛЕММЫ ===
+        var dilemmaReactions = await _context.Reactions
+            .Where(r => r.TargetType == ReactionTargetType.DiscussionItem && dilemmaIds.Contains(r.TargetId))
+            .ToListAsync();
+
+        var reactionsByDilemma = dilemmaReactions
+            .GroupBy(r => r.TargetId)
+            .ToDictionary(
+                g => g.Key,
+                g => new { Likes = g.Count(x => x.Value == 1), Dislikes = g.Count(x => x.Value == -1) });
+
+        // === Реакция текущего пользователя на дилеммы ===
+        Guid? currentUserId = null;
+        var userDilemmaReactions = new Dictionary<Guid, int>();
+
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdStr) && Guid.TryParse(userIdStr, out var uid))
+            {
+                currentUserId = uid;
+                userDilemmaReactions = await _context.Reactions
+                    .Where(r => r.UserId == uid &&
+                                r.TargetType == ReactionTargetType.DiscussionItem &&
+                                dilemmaIds.Contains(r.TargetId))
+                    .ToDictionaryAsync(r => r.TargetId, r => r.Value);
+            }
+        }
+
+        // Формируем модели дилемм и сортируем по лайкам
         var dilemmaModels = dilemmas.Select(di =>
         {
             var diComments = comments
@@ -80,19 +115,29 @@ public class TopicController : Controller
                     AuthorNickname = c.Author?.Nickname ?? "Аноним",
                     Score = commentScores.GetValueOrDefault(c.Id, 0)
                 })
-                .OrderByDescending(c => c.Score) // ← самые популярные — первые
-                .ThenBy(c => c.Comment.CreatedAt) // при равных — старые выше
+                .OrderByDescending(c => c.Score)
+                .ThenBy(c => c.Comment.CreatedAt)
                 .Take(5)
                 .ToList();
+
+            var reactionStats = reactionsByDilemma.GetValueOrDefault(di.Id, new { Likes = 0, Dislikes = 0 });
+            var userReaction = userDilemmaReactions.GetValueOrDefault(di.Id, 0);
+            int? userReactionValue = userReaction == 0 ? (int?)null : userReaction;
 
             return new DiscussionItemWithTopComments
             {
                 Item = di,
                 Author = di.Author ?? new User { Nickname = "Аноним" },
                 TopComments = diComments,
-                TotalCommentCount = comments.Count(c => c.DiscussionItemId == di.Id)
+                TotalCommentCount = comments.Count(c => c.DiscussionItemId == di.Id),
+                Likes = reactionStats.Likes,
+                Dislikes = reactionStats.Dislikes,
+                UserReactionValue = userReactionValue
             };
-        }).ToList();
+        })
+        .OrderByDescending(dm => dm.Likes)                 // сначала — больше лайков
+        .ThenByDescending(dm => dm.Item.CreatedAt)        // при равных — новее выше
+        .ToList();
 
         var model = new TopicDetailModel
         {
@@ -103,7 +148,7 @@ public class TopicController : Controller
 
         return View(model);
     }
-
+    
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> AddDilemma(Guid id, string title, string content)

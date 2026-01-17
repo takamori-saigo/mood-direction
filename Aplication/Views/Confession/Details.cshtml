@@ -78,7 +78,7 @@ else
         <!-- 🔹 Форма комментария -->
         @if (User.Identity?.IsAuthenticated == true)
         {
-        <form method="post" asp-action="AddComment" asp-route-id="@Model.Item?.Id" class="comment-form">
+        <form method="post" asp-action="AddCommentConfession" asp-route-id="@Model.Item?.Id" class="comment-form">
             <div class="comment-input-wrapper">
                 <input type="text" name="content" class="comment-input" placeholder="Оставить комментарий" required />
                 <button type="submit" class="comment-submit-btn">Опубликовать</button>
@@ -108,7 +108,7 @@ else
             <p class="comment-text" id="text-@c.Comment.Id">@c.Comment.Content</p>
 
             <!-- Форма редактирования (изначально скрыта) -->
-            <form method="post" asp-action="EditCommentInline" id="form-@c.Comment.Id" style="display:none; margin-top:8px;">
+            <form method="post" asp-action="EditCommentInlineConfession" id="form-@c.Comment.Id" style="display:none; margin-top:8px;">
                 <input type="hidden" name="itemId" value="@Model.Item.Id" />
                 <input type="hidden" name="commentId" value="@c.Comment.Id" />
                 <textarea name="content" rows="3" style="width:100%; padding:6px; margin-bottom:6px;">@c.Comment.Content</textarea>
@@ -123,7 +123,7 @@ else
                         onclick="startEdit('@c.Comment.Id')">
                     Редактировать
                 </button>
-                <form method="post" asp-action="DeleteComment" style="display:inline-block; margin-left:12px;"
+                <form method="post" asp-action="DeleteCommentConfession" style="display:inline-block; margin-left:12px;"
                       onsubmit="return confirm('Удалить комментарий?');">
                     <input type="hidden" name="commentId" value="@c.Comment.Id" />
                     <button type="submit" class="edit-link" style="color:#d00;">

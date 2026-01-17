@@ -251,7 +251,29 @@ public class DiscussionItemController : Controller
             await _context.SaveChangesAsync();
         }
 
-        return RedirectToAction("Details", new { id });
+        // 👇 Новое: если это AJAX — вернуть JSON
+        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            // Пересчитываем лайки/дизлайки
+            var reactions = await _context.Reactions
+                .Where(r => r.TargetType == ReactionTargetType.DiscussionItem && r.TargetId == id)
+                .ToListAsync();
+
+            var likes = reactions.Count(r => r.Value == 1);
+            var dislikes = reactions.Count(r => r.Value == -1);
+            var userReaction = reactions.FirstOrDefault(r => r.UserId == userId)?.Value ?? 0;
+
+            return Json(new
+            {
+                success = true,
+                likes,
+                dislikes,
+                userReaction // 1, -1 или 0
+            });
+        }
+
+        // Старое поведение — для не-AJAX (например, если JS отключён)
+        return RedirectToAction("Details", "DiscussionItem", new { id });
     }
 
     [HttpPost]
