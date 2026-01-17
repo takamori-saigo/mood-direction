@@ -134,13 +134,19 @@ else
             }
             <!-- Реакции -->
             <div class="reactions">
-                <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
+                <form method="post" 
+                      asp-action="ToggleCommentReaction" 
+                      asp-controller="DiscussionItem"
+                      asp-route-commentId="@c.Comment.Id"
                       asp-route-value="@(c.UserReaction == 1 ? 0 : 1)">
                     <button type="submit" class="reaction-btn @(c.UserReaction == 1 ? "liked" : "")">
                         <img src="~/svg/like.svg" alt="Лайк" width="16" height="16" /> @c.Likes
                     </button>
                 </form>
-                <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
+                <form method="post" 
+                      asp-action="ToggleCommentReaction" 
+                      asp-controller="DiscussionItem"
+                      asp-route-commentId="@c.Comment.Id"
                       asp-route-value="@(c.UserReaction == -1 ? 0 : -1)">
                     <button type="submit" class="reaction-btn @(c.UserReaction == -1 ? "disliked" : "")">
                         <img src="~/svg/dislike.svg" alt="Дизлайк" width="16" height="16" /> @c.Dislikes
