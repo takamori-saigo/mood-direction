@@ -81,3 +81,15 @@ C:/Users/Admin/RiderProjects/mood-direction4/Domain/obj/Debug/net8.0/ref/Domain.
 /Users/gats/Desktop/mood-direction/Domain/obj/Debug/net8.0/refint/Domain.dll
 /Users/gats/Desktop/mood-direction/Domain/obj/Debug/net8.0/Domain.pdb
 /Users/gats/Desktop/mood-direction/Domain/obj/Debug/net8.0/ref/Domain.dll
+/Users/gats/Desktop/Projects/mood-direction/Domain/bin/Debug/net8.0/Domain.deps.json
+/Users/gats/Desktop/Projects/mood-direction/Domain/bin/Debug/net8.0/Domain.dll
+/Users/gats/Desktop/Projects/mood-direction/Domain/bin/Debug/net8.0/Domain.pdb
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/Domain.AssemblyInfoInputs.cache
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/Domain.csproj.CoreCompileInputs.cache
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/Domain.sourcelink.json
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/Domain.dll
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/refint/Domain.dll
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/Domain.pdb
+/Users/gats/Desktop/Projects/mood-direction/Domain/obj/Debug/net8.0/ref/Domain.dll

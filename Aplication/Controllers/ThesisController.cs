@@ -39,8 +39,8 @@ public class ThesisController : Controller
         var topics = await _context.Topics
             .Where(t => t.CoreThesisId == id)
             .Include(t => t.Author)
-            .Include(t => t.FavoritedByUsers) // важно!
-            .OrderByDescending(t => t.FavoritedByUsers.Any(u => u.Id == currentUserId)) // избранные — true → выше
+            .Include(t => t.FavoritedByUsers) 
+            .OrderByDescending(t => t.FavoritedByUsers.Any(u => u.Id == currentUserId)) 
             .ThenByDescending(t => t.CreatedAt)
             .ToListAsync();
 
@@ -135,12 +135,10 @@ public class ThesisController : Controller
 
         if (topic.FavoritedByUsers.Any(u => u.Id == userId))
         {
-            // Удалить из избранного
             topic.FavoritedByUsers.Remove(user);
         }
         else
         {
-            // Добавить в избранное
             topic.FavoritedByUsers.Add(user);
         }
 

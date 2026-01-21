@@ -13,7 +13,6 @@ body {
     padding-bottom: 20px;
 }
 
-/* === Навигация === */
 .header {
     display: flex;
     align-items: end;
@@ -44,7 +43,6 @@ body {
     color: #000;
 }
 
-/* === Профиль === */
 .profile-container {
     width: 100%;
     max-width: 600px;
@@ -104,7 +102,6 @@ body {
     color: #d32f2f;
 }
 
-/* === Уведомления === */
 .alert {
     padding: 12px 20px;
     margin-bottom: 20px;
@@ -118,7 +115,6 @@ body {
     border: 1px solid #c3e6cb;
 }
 
-/* === Кнопки === */
 .form-actions,
 .logout-form {
     display: flex;
@@ -164,7 +160,6 @@ body {
     background-color: #eee;
 }
 
-/* === Адаптивность === */
 @media (max-width: 768px) {
     .header {
         margin-bottom: 30px;

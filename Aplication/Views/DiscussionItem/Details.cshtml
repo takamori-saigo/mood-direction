@@ -14,7 +14,6 @@
 </head>
 <body>
 
-    <!-- 🔹 Навигация -->
     <header class="header">
         <nav class="nav">
             <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
@@ -32,7 +31,6 @@
         }
     </header>
 
-    <!-- 🔸 Заголовок заповеди -->
     @if (Model.Topic?.CoreThesis != null)
     {
         <div class="thesis-header">
@@ -41,16 +39,13 @@
         </div>
     }
 
-    <!-- 🔹 Дилемма -->
     <main class="discussion-main">
         <p class="login-info">
             @Model.Author.Nickname · @Model.Item?.CreatedAt.ToString("dd.MM.yyyy HH:mm")
         </p>
         <p class="discussion-content">@Model.Item?.Content</p>
 
-        <!-- 🔥 Реакции + Управление в одной строке -->
         <div style="display: flex; gap: 16px; align-items: center; margin: 12px 0; flex-wrap: wrap;">
-            <!-- Лайк -->
             @if (User.Identity?.IsAuthenticated == true)
             {
                 <form method="post" asp-action="ToggleReaction" asp-controller="DiscussionItem"
@@ -65,7 +60,6 @@
                 </form>
             }
 
-            <!-- Дизлайк -->
             @if (User.Identity?.IsAuthenticated == true)
             {
                 <form method="post" asp-action="ToggleReaction" asp-controller="DiscussionItem"
@@ -80,7 +74,6 @@
                 </form>
             }
 
-            <!-- Редактировать / Удалить (только для автора или админа) -->
             @if (Model.CanEditOrDelete)
             {
                 <a href="@Url.Action("EditDilemma", "DiscussionItem", new { id = Model.Item.Id })"
@@ -101,9 +94,7 @@
 
         <h2 class="comments-title">Комментарии (@Model.Comments.Count)</h2>
 
-        <!-- 🔸 Скролл-контейнер -->
         <div class="comments-scroll">
-            <!-- 🔹 Форма комментария -->
             @if (User.Identity?.IsAuthenticated == true)
             {
                 <form method="post" asp-action="AddComment" asp-route-id="@Model.Item?.Id" class="comment-form">
@@ -121,7 +112,6 @@
                 </p>
             }
 
-            <!-- 🔹 Комментарии -->
             @if (!Model.Comments.Any())
             {
                 <p class="empty-comments">Пока никто не прокомментировал. Станьте первым.</p>
@@ -133,10 +123,8 @@
                     <div class="comment-item" data-comment-id="@c.Comment.Id">
                         <p class="login-info">@c.AuthorNickname · @c.Comment.CreatedAt.ToString("dd.MM HH:mm")</p>
 
-                        <!-- Текст комментария -->
                         <p class="comment-text" id="text-@c.Comment.Id">@c.Comment.Content</p>
 
-                        <!-- Форма редактирования -->
                         <form method="post" asp-action="EditCommentInline" id="form-@c.Comment.Id" style="display:none; margin-top:8px;">
                             <input type="hidden" name="itemId" value="@Model.Item.Id" />
                             <input type="hidden" name="commentId" value="@c.Comment.Id" />
@@ -162,7 +150,6 @@
                             </div>
                         }
 
-                        <!-- Реакции на комментарий -->
                         <div class="reactions">
                             <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@c.Comment.Id"
                                   asp-route-value="@(c.UserReaction == 1 ? 0 : 1)">

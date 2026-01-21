@@ -251,10 +251,8 @@ public class DiscussionItemController : Controller
             await _context.SaveChangesAsync();
         }
 
-        // 👇 Новое: если это AJAX — вернуть JSON
         if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
         {
-            // Пересчитываем лайки/дизлайки
             var reactions = await _context.Reactions
                 .Where(r => r.TargetType == ReactionTargetType.DiscussionItem && r.TargetId == id)
                 .ToListAsync();
@@ -268,11 +266,10 @@ public class DiscussionItemController : Controller
                 success = true,
                 likes,
                 dislikes,
-                userReaction // 1, -1 или 0
+                userReaction
             });
         }
 
-        // Старое поведение — для не-AJAX (например, если JS отключён)
         return RedirectToAction("Details", "DiscussionItem", new { id });
     }
 
@@ -336,7 +333,6 @@ public class DiscussionItemController : Controller
         var comment = await _context.Comments.FindAsync(commentId);
         if (comment == null) return NotFound();
 
-        // Проверка прав
         if (comment.AuthorId != userId)
         {
             var user = await _context.Users.FindAsync(userId);
@@ -368,7 +364,6 @@ public class DiscussionItemController : Controller
         if (comment == null)
             return NotFound();
 
-        // Проверка: автор или админ
         if (comment.AuthorId != userId)
         {
             var currentUser = await _context.Users.FindAsync(userId);

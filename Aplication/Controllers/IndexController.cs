@@ -44,13 +44,9 @@ namespace Aplication.Controllers
         public async Task<IActionResult> Index()
         {
             var theses = await _pageService.GetAllThesesByActive();
-
-            // var topDilemmaIds = await _pageService.GetTopDilemmsIdAsync();
-    
-            // var topDilemmas = await _pageService.GetTopDilemmasById(topDilemmaIds);
     
             var allDilemmas = await _context.DiscussionItems
-                .Include(di => di.Author) // обязательно, чтобы отображался Nickname
+                .Include(di => di.Author) 
                 .ToListAsync();
             
             var random = new Random();
@@ -73,11 +69,10 @@ namespace Aplication.Controllers
         [Authorize]
         public async Task<IActionResult> Profile()
         {
-            // Получаем строку GUID из claims
             var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
             {
-                return Unauthorized(); // Неверный или отсутствующий ID
+                return Unauthorized(); 
             }
 
             var user = await _context.Users.FindAsync(userId);
@@ -114,14 +109,12 @@ namespace Aplication.Controllers
             user.Nickname = model.Nickname ?? user.Nickname;
             user.Phone = model.Phone;
 
-            // 🔑 Преобразуем строку в enum
             if (!string.IsNullOrWhiteSpace(model.Gender))
             {
                 if (Enum.TryParse<Gender>(model.Gender, true, out var gender))
                 {
                     user.Gender = gender;
                 }
-                // Если не удалось распарсить — оставляем старое значение
             }
 
             user.Age = model.Age;

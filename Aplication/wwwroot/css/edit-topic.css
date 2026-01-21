@@ -13,7 +13,6 @@ body {
     padding-bottom: 20px;
 }
 
-/* === Форма редактирования === */
 .form-container {
     width: 100%;
     max-width: 900px;
@@ -72,7 +71,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* === Кнопки в стиле проекта === */
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -110,7 +108,6 @@ body {
     background-color: #eee;
 }
 
-/* === Адаптивность === */
 @media (max-width: 768px) {
     .form-container {
         padding: 30px 16px 10px;

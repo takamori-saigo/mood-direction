@@ -19,7 +19,6 @@ public class ConfessionController : Controller
 
     public async Task<IActionResult> Index()
     {
-        // 🔹 ИЗМЕНЕНО: di.TopicId == null (а не Guid.Empty)
         var confessions = await _context.DiscussionItems
             .Where(di => di.TopicId == null && di.Type == DiscussionItemType.Dilemma)
             .Include(di => di.Author)
@@ -321,7 +320,6 @@ public class ConfessionController : Controller
         if (comment == null)
             return NotFound();
 
-        // Проверка: автор или админ
         if (comment.AuthorId != userId)
         {
             var currentUser = await _context.Users.FindAsync(userId);
@@ -346,7 +344,6 @@ public class ConfessionController : Controller
         var comment = await _context.Comments.FindAsync(commentId);
         if (comment == null) return NotFound();
 
-        // Проверка прав
         if (comment.AuthorId != userId)
         {
             var user = await _context.Users.FindAsync(userId);

@@ -3243,11 +3243,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/gats/Desktop/mood-direction/Aplication/Aplication.csproj",
+      "projectUniqueName": "/Users/gats/Desktop/Projects/mood-direction/Aplication/Aplication.csproj",
       "projectName": "Aplication",
-      "projectPath": "/Users/gats/Desktop/mood-direction/Aplication/Aplication.csproj",
+      "projectPath": "/Users/gats/Desktop/Projects/mood-direction/Aplication/Aplication.csproj",
       "packagesPath": "/Users/gats/.nuget/packages/",
-      "outputPath": "/Users/gats/Desktop/mood-direction/Aplication/obj/",
+      "outputPath": "/Users/gats/Desktop/Projects/mood-direction/Aplication/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/gats/.nuget/NuGet/NuGet.Config"
@@ -3263,11 +3263,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/gats/Desktop/mood-direction/Domain/Domain.csproj": {
-              "projectPath": "/Users/gats/Desktop/mood-direction/Domain/Domain.csproj"
+            "/Users/gats/Desktop/Projects/mood-direction/Domain/Domain.csproj": {
+              "projectPath": "/Users/gats/Desktop/Projects/mood-direction/Domain/Domain.csproj"
             },
-            "/Users/gats/Desktop/mood-direction/Infrastructure/Infrastructure.csproj": {
-              "projectPath": "/Users/gats/Desktop/mood-direction/Infrastructure/Infrastructure.csproj"
+            "/Users/gats/Desktop/Projects/mood-direction/Infrastructure/Infrastructure.csproj": {
+              "projectPath": "/Users/gats/Desktop/Projects/mood-direction/Infrastructure/Infrastructure.csproj"
             }
           }
         }

@@ -32,7 +32,7 @@ public class TopicController : Controller
     {
         public Comment Comment { get; set; } = null!;
         public string AuthorNickname { get; set; } = "Аноним";
-        public int Score { get; set; } // лайки − дизлайки
+        public int Score { get; set; } 
     }
 
     private readonly MoralCompassDbContext _context;
@@ -54,11 +54,10 @@ public class TopicController : Controller
         var dilemmas = await _context.DiscussionItems
             .Where(di => di.TopicId == id && di.Type == DiscussionItemType.Dilemma)
             .Include(di => di.Author)
-            .ToListAsync(); // ← убрали сортировку здесь — будем сортировать позже
+            .ToListAsync(); 
 
         var dilemmaIds = dilemmas.Select(di => di.Id).ToList();
 
-        // Загружаем комментарии ко всем дилеммам
         var comments = await _context.Comments
             .Where(c => dilemmaIds.Contains(c.DiscussionItemId))
             .Include(c => c.Author)
@@ -66,7 +65,6 @@ public class TopicController : Controller
 
         var commentIds = comments.Select(c => c.Id).ToList();
 
-        // Реакции на комментарии (для Score)
         var reactions = await _context.Reactions
             .Where(r => r.TargetType == ReactionTargetType.Comment && commentIds.Contains(r.TargetId))
             .ToListAsync();
@@ -75,7 +73,6 @@ public class TopicController : Controller
             .GroupBy(r => r.TargetId)
             .ToDictionary(g => g.Key, g => g.Sum(r => r.Value));
 
-        // === Реакции на ДИЛЕММЫ ===
         var dilemmaReactions = await _context.Reactions
             .Where(r => r.TargetType == ReactionTargetType.DiscussionItem && dilemmaIds.Contains(r.TargetId))
             .ToListAsync();
@@ -86,7 +83,6 @@ public class TopicController : Controller
                 g => g.Key,
                 g => new { Likes = g.Count(x => x.Value == 1), Dislikes = g.Count(x => x.Value == -1) });
 
-        // === Реакция текущего пользователя на дилеммы ===
         Guid? currentUserId = null;
         var userDilemmaReactions = new Dictionary<Guid, int>();
 
@@ -104,7 +100,6 @@ public class TopicController : Controller
             }
         }
 
-        // Формируем модели дилемм и сортируем по лайкам
         var dilemmaModels = dilemmas.Select(di =>
         {
             var diComments = comments
@@ -135,8 +130,8 @@ public class TopicController : Controller
                 UserReactionValue = userReactionValue
             };
         })
-        .OrderByDescending(dm => dm.Likes)                 // сначала — больше лайков
-        .ThenByDescending(dm => dm.Item.CreatedAt)        // при равных — новее выше
+        .OrderByDescending(dm => dm.Likes)                
+        .ThenByDescending(dm => dm.Item.CreatedAt)        
         .ToList();
 
         var model = new TopicDetailModel
@@ -193,7 +188,6 @@ public class TopicController : Controller
         if (topic == null)
             return NotFound();
 
-        // Проверяем: либо автор, либо админ
         if (topic.AuthorId != userId && !IsAdmin())
             return Forbid();
 
@@ -224,11 +218,10 @@ public class TopicController : Controller
         if (topic == null)
             return NotFound();
 
-        // Проверяем: либо автор, либо админ
         if (topic.AuthorId != userId && !IsAdmin())
             return Forbid();
 
-        return View(topic); // Показываем форму редактирования
+        return View(topic);  
     }
     
     [HttpPost]
@@ -249,11 +242,9 @@ public class TopicController : Controller
         if (topic == null)
             return NotFound();
 
-        // Проверяем: либо автор, либо админ
         if (topic.AuthorId != userId && !IsAdmin())
             return Forbid();
 
-        // Админ может удалять даже если есть дилеммы
         if (topic.DiscussionItems?.Any() == true && !IsAdmin())
         {
             TempData["Error"] = "Невозможно удалить тему, так как в ней есть дилеммы. " +

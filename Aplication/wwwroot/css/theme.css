@@ -81,7 +81,7 @@ body {
     margin-bottom: 60px;
     line-height: 1.4;
     max-width: 900px;
-    width: 100%; /* ← ключевое */
+    width: 100%; 
     padding: 0 20px;
     word-wrap: break-word;
     overflow-wrap: break-word;

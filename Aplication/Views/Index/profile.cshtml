@@ -15,7 +15,6 @@ ViewData["Title"] = "Мой профиль";
 </head>
 <body>
 
-<!-- 🔹 Навигация -->
 <header class="header">
     <nav class="nav">
         <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
@@ -24,7 +23,6 @@ ViewData["Title"] = "Мой профиль";
     </nav>
 </header>
 
-<!-- 🔸 Форма профиля -->
 <main class="profile-container">
     <h1 class="profile-title">Редактировать профиль</h1>
 
@@ -75,7 +73,6 @@ ViewData["Title"] = "Мой профиль";
         </div>
     </form>
 
-    <!-- Кнопка выхода -->
     <form asp-controller="Auth" asp-action="Logout" method="post" class="logout-form">
         <button type="submit" class="btn btn-secondary" onclick="return confirm('Выйти из аккаунта?')">
             Выйти

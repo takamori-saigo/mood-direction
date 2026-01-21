@@ -17,7 +17,7 @@ public class MainPageService
     {
         var comments = await _mainPageRepository.GetAllCommnetAsync();
         return comments
-            .GroupBy(c => c.DiscussionItemId) // ← безопасно, потому что не null
+            .GroupBy(c => c.DiscussionItemId) 
             .Select(g => new { Id = g.Key, Count = g.Count() })
             .OrderByDescending(x => x.Count)
             .ThenByDescending(x => x.Id)

@@ -17,7 +17,6 @@
 </head>
 <body>
 
-<!-- Уведомления -->
 @if (TempData["Success"] != null)
 {
     <div class="alert alert-success">@TempData["Success"]</div>
@@ -27,7 +26,6 @@
     <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
-<!-- 🔹 Навигация -->
 <header class="header">
     <nav class="nav">
         <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
@@ -44,7 +42,6 @@
     }
 </header>
 
-<!-- 🔸 Заголовок и описание -->
 <header class="thesis-header">
     <h1 class="thesis-title">@Model.Thesis?.Title</h1>
     <p class="thesis-description">@Model.Thesis?.Description</p>
@@ -57,7 +54,6 @@
     </div>
 </header>
 
-<!-- 🔹 Список тем -->
 <main class="topics-scroll">
     @if (Model.Topics != null && Model.Topics.Any())
     {
@@ -88,18 +84,15 @@
                     <p class="theme-title">@topicGroup.Topic.Title</p>
                 </div>
 
-                <!-- ЕДИНЫЙ БЛОК ДЕЙСТВИЙ НА МОБИЛЬНЫХ -->
                 @if (User.Identity?.IsAuthenticated == true)
                 {
                     <div class="theme-actions-inline mobile-only">
-                        <!-- Избранное — всегда -->
                         <form asp-action="ToggleFavorite" asp-controller="Thesis" method="post" class="favorite-form">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="topicId" value="@topicGroup.Topic.Id" />
                             <button type="submit" class="@mobileFavoriteClass" title="@altText">@mobileFavoriteText</button>
                         </form>
 
-                        <!-- Дополнительно: редактировать/удалить, если есть права -->
                         @if (isAuthorOrAdmin)
                         {
                             <a href="@Url.Action("EditTopic", "Topic", new { id = topicGroup.Topic.Id })" class="mobile-btn">Редактировать</a>
@@ -114,7 +107,6 @@
                     </div>
                 }
 
-                <!-- ДЕСКТОПНЫЕ ДЕЙСТВИЯ (редактировать/удалить) -->
                 @if (isAuthorOrAdmin)
                 {
                     <div class="theme-actions-inline desktop-only">

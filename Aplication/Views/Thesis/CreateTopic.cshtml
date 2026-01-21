@@ -14,20 +14,17 @@
 </head>
 <body>
 
-<!-- 🔹 Навигация -->
 <nav class="nav">
     <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
     <a href="#" class="nav-link">Поиск</a>
     <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
 </nav>
 
-<!-- 🔸 Заголовок -->
 <div class="header-section">
     <h1 class="page-title">Добавить тему к заповеди:</h1>
     <p class="thesis-title">«@thesis?.Title»</p>
 </div>
 
-<!-- 🔹 Форма -->
 <div class="form-container">
     <form asp-action="CreateTopic" asp-controller="Thesis" method="post">
         <input type="hidden" name="thesisId" value="@thesis?.Id" />

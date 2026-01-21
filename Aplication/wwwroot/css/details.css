@@ -26,7 +26,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-right: 20px;
-    padding: 6px; /* увеличивает зону клика */
+    padding: 6px; 
     border-radius: 50%;
     border: none
 }
@@ -43,7 +43,6 @@ body {
     background-color: rgba(0,0,0,0.05);
 }
 
-/* === Уведомления === */
 .alert {
     padding: 12px 20px;
     margin: 10px 20px;
@@ -63,7 +62,6 @@ body {
     border: 1px solid #f5c6cb;
 }
 
-/* === Шапка навигации === */
 .header {
     display: flex;
     align-items: end;
@@ -126,7 +124,6 @@ body {
     margin-left: auto;
 }
 
-/* === Заголовок заповеди === */
 .thesis-header {
     text-align: center;
     max-width: 900px;
@@ -192,7 +189,6 @@ body {
     background-color: #eee;
 }
 
-/* === Список тем === */
 .topics-scroll {
     display: flex;
     flex-direction: column;
@@ -263,16 +259,13 @@ body {
     opacity: 0.5;
 }
 
-/* === Иконки и кнопки действий === */
 
-/* Общий контейнер */
 .theme-actions-inline {
     display: flex;
     gap: 8px;
     align-items: center;
 }
 
-/* Иконки (десктоп) */
 .icon-btn {
     background: none;
     border: none;
@@ -300,7 +293,6 @@ body {
     display: inline;
 }
 
-/* Мобильные кнопки */
 .mobile-btn {
     padding: 6px 10px;
     font-size: 13px;
@@ -331,7 +323,6 @@ body {
     background-color: #ffcdd2;
 }
 
-/* === Пустое состояние === */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -341,9 +332,6 @@ body {
     max-width: 700px;
 }
 
-/* === Адаптивность === */
-
-/* Скрыть мобильные на десктопе, показать иконки */
 .desktop-only {
     display: inline-flex;
 }
@@ -375,13 +363,13 @@ body {
         border-radius: 4px;
         font-family: Arial, sans-serif;
         font-size: 13px;
-        background-color: #f0f0f0; /* обычный фон */
+        background-color: #f0f0f0; 
         color: #333;
         cursor: pointer;
     }
 
     .mobile-favorite-btn.favorited {
-        border: 1px solid orange; /* жёлтый цвет */
+        border: 1px solid orange;
     }
 
     .mobile-favorite-btn:hover {
@@ -394,7 +382,6 @@ body {
         align-items: center;
     }
 
-    /* Обновление стилей под мобильные */
     .nav {
         gap: 16px;
         margin-top: 15px;

@@ -63,19 +63,19 @@ void RegistrateAuthAndAouth()
     builder.Services.AddAuthentication(options =>
         {
             options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme; // ← основная схема должна быть cookie
+            options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme; 
         })
         .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
         {
             options.LoginPath = "/Auth/Login";
             options.LogoutPath = "/Auth/Logout";
-            options.AccessDeniedPath = "/Auth/Login"; // или отдельная страница "AccessDenied"
+            options.AccessDeniedPath = "/Auth/Login"; 
 
             options.ExpireTimeSpan = TimeSpan.FromDays(30);
             options.SlidingExpiration = true;
             options.Cookie.HttpOnly = true;
-            options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;        // Для локальной разработки (без HTTPS) → используйте SameAsRequest
-            options.Cookie.SameSite = SameSiteMode.Lax; // ← SameSiteMode.None + SecurePolicy.Always требует HTTPS
+            options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;        
+            options.Cookie.SameSite = SameSiteMode.Lax; 
         })
         .AddGoogle("Google", options =>
         {
@@ -89,3 +89,5 @@ void RegistrateAuthAndAouth()
             options.Scope.Add("login:email"); 
         });
 }
+
+

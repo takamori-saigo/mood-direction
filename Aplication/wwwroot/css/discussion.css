@@ -1,4 +1,3 @@
-/* --- Сброс и базовые стили --- */
 * {
     box-sizing: border-box;
 }
@@ -183,7 +182,6 @@ body {
 
 .comment-item {
     min-height: 100px;
-    /*max-width: 580px;*/
     margin: 20px 0 0 20px;
     padding: 12px 20px;
     background-color: white;

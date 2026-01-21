@@ -49,7 +49,7 @@ public class AuthService
         {
             Email = email,
             Nickname = nickname,
-            Age = 0,                 // можно потом заполнить
+            Age = 0,                 
             PasswordHash = string.Empty
         };
 

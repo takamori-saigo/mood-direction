@@ -4,12 +4,12 @@
 
 .confession-link {
     text-decoration: none;
-    color: inherit; /* или укажите нужный цвет */
+    color: inherit;
     display: block;
 }
 
 .confession-link:hover {
-    text-decoration: none; /* отключить подчеркивание при наведении, если нужно */
+    text-decoration: none; 
 }
 
 body {
@@ -367,7 +367,6 @@ body {
         font-size: 24px;
     }
 
-    /* Кнопки в колонку */
     .header-buttons,
     .form-actions {
         flex-direction: column;
@@ -381,7 +380,6 @@ body {
         max-width: 280px;
     }
 
-    /* Дилеммы */
     .confession-title {
         align-items: flex-start;
     }
