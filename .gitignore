@@ -1,0 +1,9 @@
+Aplication/appsettings.Development.json
+Aplication/Program.cs
+Aplication/bin/
+Aplication/bin/
+Aplication/obj/
+Domain/bin/
+Domain/obj/
+Infrastructure/bin/
+Infrastructure/obj/
