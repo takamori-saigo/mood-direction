@@ -27,7 +27,7 @@ void RegistrateServices()
 {
     builder.Services.AddScoped<IMainPageRepository, MainPageRepository>();
     builder.Services.AddScoped<MainPageService>();
-    builder.Services.AddDbContext<MoralCompassDbContext>(options => options.UseNpgsql # оставить вызов, но очистить аргумент(builder.Configuration.GetConnectionString("DefaultConnection")));
+    builder.Services.AddDbContext<MoralCompassDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<AuthService>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
