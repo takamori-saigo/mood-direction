@@ -12,6 +12,82 @@ ViewData["Title"] = "Мой профиль";
     <title>@ViewData["Title"]</title>
     <link href="~/css/profile.css" rel="stylesheet" />
     <link rel="icon" type="image/png" sizes="16x16" href="~/images/icon.png" />
+    <style>
+        /* Стили для админ-панели */
+        .admin-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .admin-btn:hover {
+            background-color: #c82333;
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 50px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .users-table th, .users-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .users-table th {
+            background-color: #f2f2f2;
+        }
+        
+        .users-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .user-count {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,6 +96,12 @@ ViewData["Title"] = "Мой профиль";
         <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
         <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
         <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+        
+        <!-- Проверяем, админ ли текущий пользователь -->
+        @if (ViewBag.IsAdmin == true)
+        {
+            <button class="admin-btn" onclick="showUsers()">Пользователи (@ViewBag.UserCount)</button>
+        }
     </nav>
 </header>
 
@@ -80,5 +162,99 @@ ViewData["Title"] = "Мой профиль";
     </form>
 </main>
 
+<!-- Модальное окно для списка пользователей -->
+<div id="usersModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Список пользователей</h2>
+        <div class="user-count">Всего: <span id="totalCount">0</span></div>
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>Никнейм</th>
+                    <th>Email</th>
+                    <th>Дата регистрации</th>
+                    <th>Админ</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody">
+                <!-- Данные загружаются через JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const isAdmin = @(ViewBag.IsAdmin?.ToString().ToLower() ?? "false");
+    
+    function showUsers() {
+        if (!isAdmin) return;
+        
+        const modal = document.getElementById('usersModal');
+        modal.style.display = 'block';
+        loadUsers();
+    }
+    
+    function closeModal() {
+        const modal = document.getElementById('usersModal');
+        modal.style.display = 'none';
+    }
+    
+    async function loadUsers() {
+        try {
+            const response = await fetch('/Index/GetUsers');
+            
+            if (!response.ok) {
+                if (response.status === 403) {
+                    alert('У вас нет прав администратора');
+                    return;
+                }
+                throw new Error('Ошибка загрузки');
+            }
+            
+            const data = await response.json();
+            
+            document.getElementById('totalCount').textContent = data.count;
+            
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+            
+            data.users.forEach(user => {
+                const row = document.createElement('tr');
+                
+                const nicknameCell = document.createElement('td');
+                nicknameCell.textContent = user.nickname || 'Не указан';
+                row.appendChild(nicknameCell);
+                
+                const emailCell = document.createElement('td');
+                emailCell.textContent = user.email;
+                row.appendChild(emailCell);
+                
+                const dateCell = document.createElement('td');
+                const date = new Date(user.createdAt);
+                dateCell.textContent = date.toLocaleDateString('ru-RU');
+                row.appendChild(dateCell);
+                
+                const adminCell = document.createElement('td');
+                adminCell.textContent = user.isAdmin;
+                adminCell.style.color = user.isAdmin === 'Да' ? 'red' : 'green';
+                row.appendChild(adminCell);
+                
+                tbody.appendChild(row);
+            });
+            
+        } catch (error) {
+            console.error('Ошибка:', error);
+            alert('Не удалось загрузить список пользователей');
+        }
+    }
+    
+    window.onclick = function(event) {
+        const modal = document.getElementById('usersModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+</script>
 </body>
 </html>

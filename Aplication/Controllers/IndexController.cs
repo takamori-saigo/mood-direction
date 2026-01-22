@@ -79,6 +79,13 @@ namespace Aplication.Controllers
             if (user == null)
                 return NotFound();
 
+            ViewBag.IsAdmin = user.IsAdmin;
+    
+            if (user.IsAdmin)
+            {
+                ViewBag.UserCount = await _context.Users.CountAsync();
+            }
+            
             var model = new UserProfileModel
             {
                 Email = user.Email,
@@ -124,6 +131,33 @@ namespace Aplication.Controllers
 
             TempData["SuccessMessage"] = "Профиль успешно обновлён!";
             return RedirectToAction(nameof(Profile));
+        }
+        
+        [Authorize]
+        public async Task<IActionResult> GetUsers()
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+    
+            var currentUser = await _context.Users.FindAsync(userId);
+            if (currentUser == null || !currentUser.IsAdmin)
+                return Forbid();
+    
+            var users = await _context.Users
+                .Select(u => new 
+                {
+                    u.Email,
+                    u.Nickname,
+                    u.CreatedAt,
+                    IsAdmin = u.IsAdmin ? "Да" : "Нет"
+                })
+                .ToListAsync();
+    
+            return Json(new { 
+                Count = users.Count, 
+                Users = users 
+            });
         }
     }
 }
