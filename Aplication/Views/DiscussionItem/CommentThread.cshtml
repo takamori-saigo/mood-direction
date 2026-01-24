@@ -1,0 +1,125 @@
+@model MoralCompass.Web.Controllers.DiscussionItemController.CommentThreadModel
+@{
+    ViewData["Title"] = "Ответы";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/discussion.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/icon.png" />
+</head>
+<body>
+
+<header class="header">
+    <nav class="nav">
+        <a href="@Url.Action("Index", "Confession")" class="nav-link">Не мудак ли я?</a>
+        <a href="@Url.Action("Index", "Index")" class="nav-link">Главная страница</a>
+        <a href="@Url.Action("Stats", "Index")" class="nav-link">Статистика</a>
+    </nav>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <a href="@Url.Action("Profile", "Index")" class="nav-link">Профиль</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Login", "Auth")" class="auth-btn">Войти</a>
+    }
+</header>
+
+@if (Model.Topic?.CoreThesis != null)
+{
+    <div class="thesis-header">
+        <h1 class="thesis-title">@Model.Topic.CoreThesis.Title</h1>
+        <p class="thesis-description">@Model.Topic.Title</p>
+    </div>
+}
+
+<main class="discussion-main">
+    <!-- Дилемма -->
+    <div style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #eee;">
+        <p class="login-info">@Model.DilemmaAuthor.Nickname · @Model.Dilemma.CreatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+        <p class="discussion-content">@Model.Dilemma.Content</p>
+    </div>
+
+    <!-- Цитата комментария -->
+    <div style="background-color: #f9f9f9; padding: 16px; border-radius: 8px; margin-bottom: 24px; border-left: 3px solid #ccc;">
+        <p class="login-info" style="margin-bottom: 8px;">@Model.RootComment.Author?.Nickname ?? "Аноним" · @Model.RootComment.CreatedAt.ToString("dd.MM HH:mm")</p>
+        <p style="font-style: italic; margin: 0;">«@Model.RootComment.Content»</p>
+    </div>
+
+    <h2 class="comments-title">Ответы (@Model.Replies.Count)</h2>
+
+    <div class="comments-scroll">
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form method="post" asp-action="AddReply" asp-controller="DiscussionItem" asp-route-parentCommentId="@Model.RootComment.Id" class="comment-form">
+                <div class="comment-input-wrapper">
+                    <input type="text" name="content" class="comment-input" placeholder="Написать ответ..." required />
+                    <button type="submit" class="comment-submit-btn">Опубликовать</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <p class="guest-message">
+                Чтобы ответить,
+                <a href="@Url.Action("Login", "Auth")" class="auth-link">войдите</a>.
+            </p>
+        }
+
+        @if (!Model.Replies.Any())
+        {
+            <p class="empty-comments">Пока нет ответов.</p>
+        }
+        else
+        {
+            @foreach (var r in Model.Replies)
+            {
+                <div class="comment-item" data-comment-id="@r.Comment.Id">
+                    <p class="login-info">@r.AuthorNickname · @r.Comment.CreatedAt.ToString("dd.MM HH:mm")</p>
+                    <p class="comment-text">@r.Comment.Content</p>
+
+                    @if (r.CanEdit)
+                    {
+                        <div class="comment-actions">
+                            <form method="post" asp-action="EditCommentInline" style="display:inline;">
+                                <input type="hidden" name="itemId" value="@Model.Dilemma.Id" />
+                                <input type="hidden" name="commentId" value="@r.Comment.Id" />
+                                <textarea name="content" rows="2" style="width:100%; padding:6px; margin:6px 0;">@r.Comment.Content</textarea>
+                                <button type="submit" class="auth-btn" style="padding:4px 10px; font-size:0.9em;">Сохранить</button>
+                            </form>
+                            <form method="post" asp-action="DeleteComment" style="display:inline; margin-left:12px;"
+                                  onsubmit="return confirm('Удалить ответ?');">
+                                <input type="hidden" name="commentId" value="@r.Comment.Id" />
+                                <button type="submit" class="edit-link" style="color:#d00;">Удалить</button>
+                            </form>
+                        </div>
+                    }
+
+                    <div class="reactions">
+                        <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@r.Comment.Id"
+                              asp-route-value="@(r.UserReaction == 1 ? 0 : 1)">
+                            <button type="submit" class="reaction-btn @(r.UserReaction == 1 ? "liked" : "")">
+                                <img src="~/svg/like.svg" alt="Лайк" width="16" height="16" /> @r.Likes
+                            </button>
+                        </form>
+                        <form method="post" asp-action="ToggleCommentReaction" asp-route-commentId="@r.Comment.Id"
+                              asp-route-value="@(r.UserReaction == -1 ? 0 : -1)">
+                            <button type="submit" class="reaction-btn @(r.UserReaction == -1 ? "disliked" : "")">
+                                <img src="~/svg/dislike.svg" alt="Дизлайк" width="16" height="16" /> @r.Dislikes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</main>
+
+</body>
+</html>

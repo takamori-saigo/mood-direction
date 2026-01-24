@@ -11,6 +11,17 @@ namespace MoralCompass.Web.Controllers;
 
 public class DiscussionItemController : Controller
 {
+    public class CommentThreadModel
+    {
+        public Comment RootComment { get; set; } = null!;
+        public DiscussionItem Dilemma { get; set; } = null!;
+        public User DilemmaAuthor { get; set; } = null!;
+        public Topic? Topic { get; set; }
+        public List<CommentViewModel> Replies { get; set; } = new();
+        public Guid? CurrentUserId { get; set; }
+        public bool IsAdmin { get; set; }
+    }
+    
     public class CommentViewModel
     {
         public Comment Comment { get; set; } = null!;
@@ -449,5 +460,122 @@ public class DiscussionItemController : Controller
         return User.IsInRole("Admin") || 
                (User.Identity?.IsAuthenticated == true && 
                 bool.TryParse(User.FindFirst("IsAdmin")?.Value, out var isAdmin) && isAdmin);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> CommentThread(Guid commentId)
+    {
+        if (commentId == Guid.Empty) return NotFound();
+
+        var rootComment = await _context.Comments
+            .Include(c => c.DiscussionItem)
+                .ThenInclude(di => di.Topic)
+                    .ThenInclude(t => t!.CoreThesis)
+            .Include(c => c.Author)
+            .FirstOrDefaultAsync(c => c.Id == commentId);
+
+        if (rootComment == null) return NotFound();
+
+        // Получаем дилемму (родительский DiscussionItem)
+        var dilemma = rootComment.DiscussionItem;
+        var author = await _context.Users.FindAsync(dilemma.AuthorId);
+        var topic = dilemma.TopicId != Guid.Empty
+            ? await _context.Topics
+                .Include(t => t.CoreThesis)
+                .FirstOrDefaultAsync(t => t.Id == dilemma.TopicId)
+            : null;
+
+        // Получаем ответы на этот комментарий
+        var replies = await _context.Comments
+            .Where(c => c.ParentCommentId == commentId)
+            .Include(c => c.Author)
+            .OrderBy(c => c.CreatedAt)
+            .ToListAsync();
+
+        var replyIds = replies.Select(r => r.Id).ToList();
+        var reactions = await _context.Reactions
+            .Where(r => r.TargetType == ReactionTargetType.Comment && replyIds.Contains(r.TargetId))
+            .ToListAsync();
+
+        var reactionsByReply = reactions
+            .GroupBy(r => r.TargetId)
+            .ToDictionary(g => g.Key, g => new { Likes = g.Count(x => x.Value == 1), Dislikes = g.Count(x => x.Value == -1) });
+
+        Guid? currentUserId = null;
+        var userReactionMap = new Dictionary<Guid, int>();
+        bool isAdmin = false;
+
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdStr) && Guid.TryParse(userIdStr, out var userId))
+            {
+                currentUserId = userId;
+                var user = await _context.Users.FindAsync(userId);
+                isAdmin = user?.IsAdmin == true;
+
+                var userReactions = await _context.Reactions
+                    .Where(r => r.UserId == userId &&
+                                r.TargetType == ReactionTargetType.Comment &&
+                                replyIds.Contains(r.TargetId))
+                    .ToDictionaryAsync(r => r.TargetId, r => r.Value);
+                userReactionMap = userReactions;
+            }
+        }
+
+        var replyViewModels = replies.Select(r => new CommentViewModel
+        {
+            Comment = r,
+            AuthorNickname = r.Author?.Nickname ?? "Аноним",
+            Likes = reactionsByReply.GetValueOrDefault(r.Id, new { Likes = 0, Dislikes = 0 }).Likes,
+            Dislikes = reactionsByReply.GetValueOrDefault(r.Id, new { Likes = 0, Dislikes = 0 }).Dislikes,
+            UserReaction = userReactionMap.GetValueOrDefault(r.Id, 0),
+            CanEdit = currentUserId.HasValue && (r.AuthorId == currentUserId.Value || isAdmin),
+            CanDelete = currentUserId.HasValue && (r.AuthorId == currentUserId.Value || isAdmin)
+        }).ToList();
+
+        var model = new CommentThreadModel
+        {
+            RootComment = rootComment,
+            Dilemma = dilemma,
+            DilemmaAuthor = author ?? new User { Nickname = "Аноним" },
+            Topic = topic,
+            Replies = replyViewModels,
+            CurrentUserId = currentUserId,
+            IsAdmin = isAdmin
+        };
+
+        ViewData["Title"] = "Ответы на комментарий";
+        return View(model);
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> AddReply(Guid parentCommentId, string content)
+    {
+        if (parentCommentId == Guid.Empty || string.IsNullOrWhiteSpace(content))
+            return BadRequest();
+
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+            return Forbid();
+
+        var parentComment = await _context.Comments.FindAsync(parentCommentId);
+        if (parentComment == null) return NotFound();
+
+        var reply = new Comment
+        {
+            Id = Guid.NewGuid(),
+            DiscussionItemId = parentComment.DiscussionItemId,
+            ParentCommentId = parentCommentId,
+            AuthorId = userId,
+            Content = content.Trim(),
+            CreatedAt = DateTime.UtcNow
+        };
+
+        _context.Comments.Add(reply);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("CommentThread", new { commentId = parentCommentId });
     }
 }

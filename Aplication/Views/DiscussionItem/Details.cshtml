@@ -136,17 +136,16 @@
                         @if (c.CanEdit)
                         {
                             <div class="comment-actions" id="actions-@c.Comment.Id">
-                                <button type="button" class="edit-link"
-                                        onclick="startEdit('@c.Comment.Id')">
-                                    Редактировать
-                                </button>
-                                <form method="post" asp-action="DeleteComment" style="display:inline-block; margin-left:12px;"
-                                      onsubmit="return confirm('Удалить комментарий?');">
-                                    <input type="hidden" name="commentId" value="@c.Comment.Id" />
-                                    <button type="submit" class="edit-link" style="color:#d00;">
-                                        Удалить
-                                    </button>
-                                </form>
+                                <a href="@Url.Action("CommentThread", "DiscussionItem", new { commentId = c.Comment.Id })" class="edit-link">Ответить</a>
+                                @if (c.CanEdit)
+                                {
+                                    <button type="button" class="edit-link" onclick="startEdit('@c.Comment.Id')">Редактировать</button>
+                                    <form method="post" asp-action="DeleteComment" style="display:inline-block; margin-left:12px;"
+                                          onsubmit="return confirm('Удалить комментарий?');">
+                                        <input type="hidden" name="commentId" value="@c.Comment.Id" />
+                                        <button type="submit" class="edit-link" style="color:#d00;">Удалить</button>
+                                    </form>
+                                }
                             </div>
                         }
 
